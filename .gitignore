@@ -1,7 +1,7 @@
 # Python virtual environments (created by uv or standard venv)
 .venv/
 
-# Chunked document snapshot
+# Scraped document snapshot
 data/corpus_snapshot.json
 
 # macOS files
