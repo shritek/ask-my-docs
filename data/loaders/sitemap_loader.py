@@ -3,9 +3,9 @@ import json
 import requests
 from bs4 import BeautifulSoup
 import xml.etree.ElementTree as ET
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 from datetime import datetime, UTC
 import argparse
+import time
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--test", action="store_true", help="Limit to first 5 pages")
@@ -16,8 +16,6 @@ OUTPUT_DIR = "data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "corpus_snapshot.json")
 SITEMAP_URL = "https://fastapi.tiangolo.com/sitemap.xml"
 
-# Set to True to test with a small batch of pages first
-#LIMIT_PAGES = True 
 TEST_LIMIT = 5
 
 def fetch_sitemap_urls(sitemap_url: str) -> list[str]:
@@ -69,23 +67,6 @@ def clean_html_content(html_content: str, url: str) -> dict:
         "content": cleaned_text
     }
 
-def chunk_documents(corpus: list[dict]) -> list[dict]:
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500,
-        chunk_overlap=50
-    )
-    chunks = []
-    for doc in corpus:
-        splits = splitter.split_text(doc["content"])
-        for i, split in enumerate(splits):
-            chunks.append({
-                "title": doc["title"],
-                "source_url": doc["source_url"],
-                "chunk_index": i,
-                "content": split
-            })
-    return chunks
-
 def main():
     urls = fetch_sitemap_urls(SITEMAP_URL)
     if not urls:
@@ -95,7 +76,7 @@ def main():
     urls = [u for u in urls if u.endswith("/")]
 
     if args.test:
-        print(f"⚠️ Test Mode Active: args.help")
+        print(f"⚠️ Test Mode Active: Limiting scrape to first {TEST_LIMIT} pages.")
         urls = urls[:TEST_LIMIT]
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -110,27 +91,23 @@ def main():
                 if doc:
                     corpus.append(doc)
                     print(f" [{i+1}/{len(urls)}] Scraped: {doc['title']}")
+            time.sleep(0.5)  # polite crawling
         except Exception as e:
             print(f"⚠️ Error scraping {url}: {e}")
-
-    chunks = chunk_documents(corpus)
 
     output = {
         "metadata": {
             "source": SITEMAP_URL,
             "total_pages": len(corpus),
-            "total_chunks": len(chunks),
-            "chunk_size": 500,
-            "chunk_overlap": 50,
             "generated_at": datetime.now(UTC).isoformat()
         },
-        "chunks": chunks
+        "pages": corpus
     }
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 
-    print(f"\n✨ Done! Saved {len(chunks)} chunks from {len(corpus)} pages to {OUTPUT_FILE}")
+    print(f"\n✨ Done! Saved {len(corpus)} documents to {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     main()
