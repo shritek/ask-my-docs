@@ -60,8 +60,6 @@ ask-my-docs/
 ├── data/
 │   ├── loaders/
 │   │   ├── sitemap_loader.py       # Web source — FastAPI docs (primary)
-│   │   ├── pdf_loader.py           # Offline — PDF files
-│   │   └── huggingface_loader.py   # Offline — HuggingFace datasets
 │   └── corpus_snapshot.json        # Generated once, not committed to git
 │
 ├── evaluation/
