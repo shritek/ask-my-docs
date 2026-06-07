@@ -2,6 +2,8 @@ import os
 import json
 import argparse
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_experimental.text_splitter import SemanticChunker
+from langchain_ollama import OllamaEmbeddings
 
 DATA_DIR = "data"
 INPUT_FILE = os.path.join(DATA_DIR, "corpus_snapshot.json")
@@ -9,6 +11,7 @@ INPUT_FILE = os.path.join(DATA_DIR, "corpus_snapshot.json")
 STRATEGY_MAPPING = {
     "recursive-500": os.path.join(DATA_DIR, "chunked_corpus_recursive500.json"),
     "recursive-1000": os.path.join(DATA_DIR, "chunked_corpus_recursive1000.json"),
+    "semantic": os.path.join(DATA_DIR, "chunked_corpus_semantic.json"),
 }
 
 # Load the raw corpus from the file
@@ -45,6 +48,7 @@ def get_splitter(strategy: str):
             length_function=len,
             add_start_index=True
         )
+        
     elif strategy == "recursive-1000":
         return RecursiveCharacterTextSplitter(
             chunk_size=1000,
@@ -52,11 +56,60 @@ def get_splitter(strategy: str):
             length_function=len,
             add_start_index=True
         )
+        
+    elif strategy == "semantic":
+        print("🧠 Initializing semantic splitter with 2-pass architecture...")
+        
+        # Pre-split to fit within nomic-embed-text context window (8192 tokens)
+        pre_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=5000,
+            chunk_overlap=500,
+            length_function=len
+        )
+        
+        # Semantic splitter — splits on embedding similarity shifts
+        embeddings = OllamaEmbeddings(model="nomic-embed-text")
+        semantic_splitter = SemanticChunker(
+            embeddings,
+            breakpoint_threshold_type="percentile",
+            breakpoint_threshold_amount=95
+        )
+        
+        # Post-split cap — prevents oversized semantic chunks from exceeding
+        # vector store index limits
+        post_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=3000,
+            chunk_overlap=300,
+            length_function=len
+        )
+        
+        # Returned as a dict — unpacked by chunk_semantic() during processing
+        return {
+            "pre": pre_splitter,
+            "semantic": semantic_splitter,
+            "post": post_splitter
+        }
+    
     else:
         raise ValueError(f"Unknown strategy: {strategy}")
 
+def chunk_semantic(text: str, splitters: dict) -> list[str]:
+    """2-pass semantic chunking: pre-split → semantic → post-cap."""
+    pre_splitter = splitters["pre"]
+    semantic_splitter = splitters["semantic"]
+    post_splitter = splitters["post"]
+
+    chunks = []
+    for segment in pre_splitter.split_text(text):
+        for fragment in semantic_splitter.split_text(segment):
+            if len(fragment) > 3000:
+                chunks.extend(post_splitter.split_text(fragment))
+            else:
+                chunks.append(fragment)
+    return chunks
+
 def chunk_documents(raw_documents: list[dict], splitter, strategy: str) -> list[dict]:
-    """Splits raw pages into chunks using the provided splitter."""
+    """Splits raw pages into chunks using the provided splitter configuration."""
     chunks = []
     chunk_counter = 0
 
@@ -70,7 +123,12 @@ def chunk_documents(raw_documents: list[dict], splitter, strategy: str) -> list[
 
         print(f"Processing: {title} ({url})")
 
-        for chunk_text in splitter.split_text(text):
+        if strategy == "semantic":
+            split_texts = chunk_semantic(text, splitter)
+        else:
+            split_texts = splitter.split_text(text)
+
+        for chunk_text in split_texts:
             chunks.append({
                 "chunk_id": f"id_{chunk_counter}",
                 "text": chunk_text,
