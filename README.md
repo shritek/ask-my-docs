@@ -84,13 +84,13 @@ ask-my-docs/
 │       ├── exp1_architecture.json        # Experiment 1 — retrieval architecture comparison
 │       └── exp2_embedder.json            # Experiment 2 — embedding model comparison
 │
-├── 02_basic_rag/
+├── basic_rag/
 │   └── basic_rag.py
-├── 03_hybrid_retrieval/
+├── hybrid_retrieval/
 │   └── hybrid_rag.py
-├── 04_reranking/
+├── reranking/
 │   └── reranked_rag.py
-└── 05_ci_pipeline/
+└── ci_pipeline/
     └── .github/
         └── workflows/
             └── rag_eval.yml
