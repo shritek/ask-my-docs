@@ -13,8 +13,8 @@ A domain-specific retrieval-augmented generation (RAG) system built with progres
 - [x] Clean HTML and save raw pages to `data/corpus_snapshot.json`
 
 ### Phase 1 · Chunking Pipeline
-- [ ] Implement `chunker.py` with `--strategy` flag
-- [ ] Generate all three chunked corpora (`recursive-500`, `recursive-1000`, `semantic`)
+- [x] Implement `chunker.py` with `--strategy` flag
+- [x] Generate all three chunked corpora (`recursive-500`, `recursive-1000`, `semantic`)
 
 ### Phase 2 · Basic RAG
 - [ ] Build basic vector retrieval pipeline using `nomic-embed-text` and Chroma
