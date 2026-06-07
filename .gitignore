@@ -5,6 +5,7 @@
 data/corpus_snapshot.json
 data/chunked_corpus_recursive500.json
 data/chunked_corpus_recursive1000.json
+data/chunked_corpus_semantic.json
 
 # macOS files
 .DS_Store
