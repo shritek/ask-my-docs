@@ -20,7 +20,7 @@ A domain-specific retrieval-augmented generation (RAG) system built with progres
 - [ ] Build basic vector retrieval pipeline using `nomic-embed-text` and Chroma
 
 ### Phase 3 · Evaluation Setup
-- [ ] Build fixed evaluation test set (25 Q&A pairs from FastAPI docs corpus)
+- [ ] Build fixed evaluation test set (50-100 high-quality Q&A pairs from FastAPI docs corpus)
 - [ ] Implement Ragas evaluation pipeline (`ragas_eval.py`)
 - [ ] Verify scores run end-to-end against basic RAG
 
@@ -31,7 +31,7 @@ A domain-specific retrieval-augmented generation (RAG) system built with progres
 
 ### Phase 5 · Hybrid Retrieval
 - [ ] Add BM25 retriever alongside vector search
-- [ ] Combine via LangChain `EnsembleRetriever`
+- [ ] Optimize retrieval fusion using RRF and weighted scoring via LangChain `EnsembleRetriever`
 - [ ] Evaluate against fixed test set and compare to Phase 2
 
 ### Phase 6 · Cross-Encoder Reranking
@@ -141,29 +141,29 @@ Experiment 2 · Embedding model        → fixed chunking + fixed architecture (
 Fixed architecture: basic RAG · Fixed embedder: `nomic-embed-text` · Fixed test set · Fixed LLM
 *Run in Phase 4 — winning strategy locked for all subsequent experiments.*
 
-| Strategy | Chunk Size | Overlap | Faithfulness | Answer Relevancy | Context Precision |
-|---|---|---|---|---|---|
-| Recursive Character | 500 | 50 | — | — | — |
-| Recursive Character | 1000 | 100 | — | — | — |
-| Semantic Chunking | auto | auto | — | — | — |
+| Strategy | Chunk Size | Overlap | Faithfulness | Answer Relevancy | Context Precision | Context Recall |
+|---|---|---|---|---|---|---|
+| Recursive Character | 500 | 50 | — | — | — | — |
+| Recursive Character | 1000 | 100 | — | — | — | — |
+| Semantic Chunking | auto | auto | — | — | — | — |
 
 ### Experiment 1 — Retrieval architecture
 Fixed embedder: `nomic-embed-text` · Fixed chunking: winner from Exp 0 · Fixed test set · Fixed LLM
 
-| Architecture | Faithfulness | Answer Relevancy | Context Precision |
-|---|---|---|---|
-| Basic RAG | — | — | — |
-| Hybrid Retrieval | — | — | — |
-| Reranking | — | — | — |
+| Architecture | Faithfulness | Answer Relevancy | Context Precision | Context Recall |
+|---|---|---|---|---|
+| Basic RAG | — | — | — | — |
+| Hybrid Retrieval | — | — | — | — |
+| Reranking | — | — | — | — |
 
 ### Experiment 2 — Embedding model
 Fixed architecture: best from Exp 1 · Fixed chunking: winner from Exp 0 · Fixed test set · Fixed LLM
 
-| Embedder | Size | Faithfulness | Answer Relevancy | Context Precision |
-|---|---|---|---|---|
-| `nomic-embed-text` | 274 MB | — | — | — |
-| `Qwen3-Embedding-8B` | ~8 GB | — | — | — |
-| `text-embedding-3-small` | API | — | — | — |
+| Embedder | Size | Faithfulness | Answer Relevancy | Context Precision | Context Recall | Latency (ms) |
+|---|---|---|---|---|---|---|
+| `nomic-embed-text` | 274 MB | — | — | — | — | — |
+| `Qwen3-Embedding-8B` | ~8 GB | — | — | — | — | — |
+| `text-embedding-3-small` | API | — | — | — | — | — |
 
 *Results populated after evaluation runs. See `evaluation/results/` for raw scores.*
 
