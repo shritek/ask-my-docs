@@ -14,8 +14,8 @@ class VectorStore(Enum):
     QDRANT = "qdrant"
 
 CHUNKING_STRATEGY_MAPPING = {
-    "recursive-500": "data/chunked_corpus_recursive500.json",
-    "recursive-1000": "data/chunked_corpus_recursive1000.json",
+    "recursive-500": "data/chunked_corpus_recursive-500.json",
+    "recursive-1000": "data/chunked_corpus_recursive-1000.json",
     "semantic": "data/chunked_corpus_semantic.json",
 }
 
@@ -24,5 +24,5 @@ DEFAULT_EMBEDDING = EmbeddingModel.NOMIC
 DEFAULT_LLM = LLMModel.LLAMA3_8B
 DEFAULT_VECTOR_STORE = VectorStore.CHROMA
 
-# Populated dynamically based on DEFAULT_CHUNK_STRATEGY after Experiment 0
-CHUNKED_CORPUS_PATH = lambda strategy: f"data/chunked_corpus_{strategy}.json"
+# Use the mapping if available, otherwise default to a consistent naming pattern
+CHUNKED_CORPUS_PATH = lambda strategy: CHUNKING_STRATEGY_MAPPING.get(strategy, f"data/chunked_corpus_{strategy}.json")

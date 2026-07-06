@@ -4,7 +4,7 @@ import argparse
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain_ollama import OllamaEmbeddings
-from settings import CHUNKING_STRATEGY_MAPPING
+from config.settings import CHUNKING_STRATEGY_MAPPING
 
 DATA_DIR = "data"
 INPUT_FILE = os.path.join(DATA_DIR, "corpus_snapshot.json")
