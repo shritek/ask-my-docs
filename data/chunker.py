@@ -4,15 +4,10 @@ import argparse
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain_ollama import OllamaEmbeddings
+from config.settings import CHUNKING_STRATEGY_MAPPING
 
 DATA_DIR = "data"
 INPUT_FILE = os.path.join(DATA_DIR, "corpus_snapshot.json")
-
-STRATEGY_MAPPING = {
-    "recursive-500": os.path.join(DATA_DIR, "chunked_corpus_recursive500.json"),
-    "recursive-1000": os.path.join(DATA_DIR, "chunked_corpus_recursive1000.json"),
-    "semantic": os.path.join(DATA_DIR, "chunked_corpus_semantic.json"),
-}
 
 # Load the raw corpus from the file
 def load_raw_corpus(file_path: str) -> list[dict]:
@@ -164,13 +159,13 @@ def main():
     parser = argparse.ArgumentParser(description="Production RAG Pipeline - Chunking Stage")
     parser.add_argument(
         "--strategy", 
-        choices=list(STRATEGY_MAPPING.keys()), 
+        choices=list(CHUNKING_STRATEGY_MAPPING.keys()), 
         required=True,
         help="The text chunking approach to execute."
     )
     args = parser.parse_args()
     
-    output_file = STRATEGY_MAPPING[args.strategy]
+    output_file = CHUNKING_STRATEGY_MAPPING[args.strategy]
     raw_documents = load_raw_corpus(INPUT_FILE)
     splitter = get_splitter(args.strategy)
     
