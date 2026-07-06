@@ -17,7 +17,9 @@ A domain-specific retrieval-augmented generation (RAG) system built with progres
 - [x] Generate all three chunked corpora (`recursive-500`, `recursive-1000`, `semantic`)
 
 ### Phase 2 · Basic RAG
-- [ ] Build basic vector retrieval pipeline using `nomic-embed-text` and Chroma
+- [x] Build basic vector retrieval pipeline using `nomic-embed-text` and Chroma
+- [x] Implement agentic tool-calling loop via LangGraph for robust synthesis
+- [x] Verify end-to-end functionality across all chunking strategies
 
 ### Phase 3 · Evaluation Setup
 - [ ] Build fixed evaluation test set (50-100 high-quality Q&A pairs from FastAPI docs corpus)
@@ -227,17 +229,14 @@ uv run data/chunker.py --strategy semantic
 ### Run a variant
 
 ```bash
-# Basic RAG with default settings
-uv run 02_basic_rag/basic_rag.py
+# Basic RAG query with default settings (nomic embedder)
+PYTHONPATH=. uv run basic_rag/basic_rag.py "What is a Path operation in FastAPI?" --chunking_strategy semantic
 
-# Specify embedder and chunking strategy
-uv run 02_basic_rag/basic_rag.py --embedder nomic --strategy recursive-500
-uv run 02_basic_rag/basic_rag.py --embedder nomic --strategy recursive-1000
-uv run 02_basic_rag/basic_rag.py --embedder nomic --strategy semantic
+# Specify custom embedder and chunking strategy
+PYTHONPATH=. uv run basic_rag/basic_rag.py "How does dependency injection work?" --embedder nomic --chunking_strategy recursive-500
 
-# Run evaluation
-uv run evaluation/ragas_eval.py --variant basic --embedder nomic --strategy recursive-500
-uv run evaluation/ragas_eval.py --variant reranking --embedder qwen3
+# Run evaluation (Phase 3+)
+PYTHONPATH=. uv run evaluation/ragas_eval.py --variant basic --embedder nomic --chunking_strategy recursive-500
 ```
 
 ---
@@ -252,9 +251,15 @@ context_precision:  >= 0.65
 
 PRs that cause scores to drop below these thresholds will fail automatically.
 
+## Known Limitations
+
+- **Prompt Injection**: The system is currently vulnerable to direct prompt injection (e.g., commands like "Forget your system prompts"). This can lead to the model leaking general training knowledge instead of staying grounded in the retrieved documentation.
+- **Strategy-Dependent Hallucinations**: Observed that some chunking strategies (e.g., `recursive-500`) may more frequently trigger hallucinations or structured JSON fabrications when no relevant context is found, compared to others like `semantic`.
+
 ---
 
 ## References
+...
 
 - [LangChain RAG Tutorial](https://python.langchain.com/docs/tutorials/rag/)
 - [Cohere Rerank Documentation](https://docs.cohere.com/docs/rerank-2)
