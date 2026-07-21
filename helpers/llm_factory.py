@@ -13,5 +13,10 @@ def get_llm_model(model: LLMModel):
             "llama3.2:3b",
             model_provider="ollama"
         )
+    elif model == LLMModel.GEMMA4_31B:
+        return init_chat_model(
+            "gemma4:31b-mlx",
+            model_provider="ollama"
+        )
     else:
         raise ValueError(f"Unsupported LLM model: {model}")

@@ -1,12 +1,13 @@
-import json
+import argparse
 import os
+import json
 import random
 from config.settings import DEFAULT_LLM, LLMModel
 from helpers.llm_factory import get_llm_model
 
 INPUT_FILE = "data/corpus_snapshot.json"
 OUTPUT_FILE = "evaluation/test_set.json"
-TARGET_COUNT = 5
+TARGET_COUNT = 50
 
 def generate_qa_pair(llm, page):
     content = page.get("content", "")
@@ -33,7 +34,6 @@ def generate_qa_pair(llm, page):
 
     try:
         response = llm.invoke(prompt)
-        print(f"LLM responded for {title}")
         # Extract JSON from response (handling potential markdown wrappers)
         text = response.content
         if "```json" in text:
@@ -49,6 +49,21 @@ def generate_qa_pair(llm, page):
         return None
 
 def main():
+    parser = argparse.ArgumentParser(description="Production RAG Pipeline - Test Set Generation")
+    parser.add_argument(
+        "--generator",
+        type=str,
+        default=DEFAULT_LLM.value,
+        choices=[e.value for e in LLMModel],
+        help="The model to use for generating the Q&A pairs."
+    )
+    args = parser.parse_args()
+
+    # Load raw corpus
+    if not os.path.exists(INPUT_FILE):
+        print(f"❌ Input file {INPUT_FILE} not found.")
+        return
+
     with open(INPUT_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -61,10 +76,10 @@ def main():
     sample_size = min(len(pages), TARGET_COUNT * 2) # Sample more than needed to filter failures
     sampled_pages = random.sample(pages, sample_size)
 
-    llm = get_llm_model(DEFAULT_LLM)
+    llm = get_llm_model(LLMModel(args.generator))
     test_set = []
 
-    print(f"Generating {TARGET_COUNT} Q&A pairs from {len(pages)} pages...")
+    print(f"Generating {TARGET_COUNT} Q&A pairs using model: {args.generator}...")
 
     for i, page in enumerate(sampled_pages):
         if len(test_set) >= TARGET_COUNT:
