@@ -1,302 +1,302 @@
 [
   {
-    "question": "What type of resources does the FastAPI documentation provide under the 'Resources' section?",
-    "answer": "The FastAPI documentation provides additional resources, external links, and more under the 'Resources' section. This includes but is not limited to, links to other useful pages or websites that can aid in the development process.",
-    "source_url": "https://fastapi.tiangolo.com/resources/",
-    "title": "Resources¶"
-  },
-  {
-    "question": "What is the key difference between how `Depends` works in FastAPI compared to other parameters like `Body` or `Query`?",
-    "answer": "According to the documentation, when using `Depends`, you only give it a single parameter, which must be something like a function. This function takes parameters in the same way that path operation functions do, but you don't call it directly - instead, FastAPI will take care of calling it with the correct parameters and assigning the result to the parameter in your path operation function.",
-    "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
-    "title": "Dependencies¶"
-  },
-  {
-    "question": "What is expected of an application using OAuth2, in terms of encryption for secure communication?",
-    "answer": "According to the documentation, OAuth2 doesn't specify how to encrypt the communication. Instead, it expects you to have your application served with HTTPS.",
-    "source_url": "https://fastapi.tiangolo.com/tutorial/security/",
-    "title": "Security¶"
-  },
-  {
-    "question": "Who has the final decision-making power regarding the FastAPI project?",
-    "answer": "The creator and owner of the repository, @tiangolo, has the final decision-making power as he is the BDFL (Benevolent Dictator For Life) of the project.",
-    "source_url": "https://fastapi.tiangolo.com/management/",
-    "title": "Repository Management¶"
-  },
-  {
-    "question": "How does the authenticate_user function handle the case when the username is not found in the database, and what is the purpose of using a dummy hash?",
-    "answer": "When the authenticate_user function is called with a username that doesn't exist in the database, it still runs verify_password against a dummy hash. This ensures that the endpoint takes roughly the same amount of time to respond whether the username is valid or not, preventing timing attacks that could be used to enumerate existing usernames. The dummy hash is used as a placeholder to prevent the function from returning False immediately when the username is not found in the database.",
-    "source_url": "https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/",
-    "title": "OAuth2 with Password (and hashing), Bearer with JWT tokens¶"
-  },
-  {
-    "question": "How can you execute dependencies without needing their return value inside your path operation function?",
-    "answer": "You can add a list of Depends() to the path operation decorator. This will execute the dependencies, but their value (if they return any) won't be passed to your path operation function.",
-    "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-in-path-operation-decorators/",
-    "title": "Dependencies in path operation decorators¶"
-  },
-  {
-    "question": "How can you restrict query parameters in FastAPI using Pydantic models?",
-    "answer": "You can use Pydantic's model configuration to forbid any extra fields. For example, by setting `model_config = {'extra': 'forbid'}` on the Pydantic model class. This will cause an error response to be sent if a client tries to send some extra data in the query parameters.",
-    "source_url": "https://fastapi.tiangolo.com/tutorial/query-param-models/",
-    "title": "Query Parameter Models¶"
-  },
-  {
-    "question": "What database management system is used in this Full Stack FastAPI Template?",
-    "answer": "The database management system used in this template is PostgreSQL, which is utilized with SQLModel for Python SQL database interactions (ORM).",
-    "source_url": "https://fastapi.tiangolo.com/project-generation/",
-    "title": "Full Stack FastAPI Template¶"
-  },
-  {
-    "question": "What is the purpose of the auto_error parameter in the HTTPBasic class?",
-    "answer": "The auto_error parameter in the HTTPBasic class determines whether to automatically cancel the request and send an error to the client if no HTTP Basic authentication header is provided, or to return None instead. This allows for optional authentication, where the dependency result will be None when authentication is not available, making it useful when you want to have multiple ways of providing authentication (e.g., in a cookie or with an HTTP Bearer token).",
-    "source_url": "https://fastapi.tiangolo.com/reference/security/",
-    "title": "Security Tools¶"
-  },
-  {
-    "question": "Can a Python class be used as a dependency in FastAPI, and how does it work?",
-    "answer": "Yes, a Python class can be used as a dependency in FastAPI. A class is considered a 'callable' in Python if it can be instantiated using the syntax `instance = Class(arguments)`, just like a function. When you use a class as a dependency in FastAPI, the framework will create an instance of that class and pass it to your path operation function. The parameters defined in the class's `__init__` method are used to 'solve' the dependency, which means they are processed by FastAPI for data conversion, validation, documentation on the OpenAPI schema, etc. This is similar to using a function as a dependency, but with classes you can also take advantage of object-oriented programming features and encapsulate your logic within a class.",
-    "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/",
-    "title": "Classes as Dependencies¶"
-  },
-  {
-    "question": "What is the purpose of using a with block when reading a file-like object to ensure it's closed after sending the response in FastAPI?",
-    "answer": "In FastAPI, when working with file-like objects, such as those created by io.BytesIO, it's essential to use a with block to guarantee that the file is properly closed after sending the response. This ensures that system resources are released and prevents potential issues like memory leaks or file descriptor exhaustion. The with block automatically handles closing the file, even if an exception occurs within the block. This pattern is particularly important when dealing with real files on disk or network connections, as it helps maintain a clean and efficient workflow.",
-    "source_url": "https://fastapi.tiangolo.com/advanced/stream-data/",
-    "title": "Stream Data¶"
-  },
-  {
-    "question": "What type of data can be stored in environment variables, and what are the implications for handling application settings?",
-    "answer": "Environment variables can only handle text strings, which means that any value read in Python from an environment variable will be a str. This requires conversion to a different type or validation to be done in code when using environment variables for handling application settings.",
-    "source_url": "https://fastapi.tiangolo.com/environment-variables/",
-    "title": "Environment Variables¶"
-  },
-  {
-    "question": "What happens if a client tries to send some extra headers that are not defined in the Pydantic model, and how does FastAPI handle this situation?",
-    "answer": "If a client tries to send some extra headers that are not defined in the Pydantic model, they will receive an error response. According to the documentation, 'If a client tries to send some extra headers, they will receive an error response.' The error response is an object with a 'detail' key containing an array of error messages, one for each extra header that was received. For example, if the client tries to send a 'tool' header with a value of 'plumbus', they will receive an error response telling them that the header parameter 'tool' is not allowed: `{\"detail\": [{\"type\": \"extra_forbidden\", \"loc\": [\"header\", \"tool\"], \"msg\": \"Extra inputs are not permitted\", \"input\": \"plumbus\"}]}`.",
-    "source_url": "https://fastapi.tiangolo.com/tutorial/header-param-models/",
-    "title": "Header Parameter Models¶"
-  },
-  {
-    "question": "If you're unsure whether a 'how to' guide is relevant to your project, what should you do?",
-    "answer": "You should check if it applies directly to your project. If not, you can probably skip it.",
-    "source_url": "https://fastapi.tiangolo.com/how-to/",
-    "title": "How To - Recipes¶"
-  },
-  {
-    "question": "How do you declare a path parameter with a predefined set of values using Python Enum and FastAPI?",
-    "answer": "You can declare a path parameter with a predefined set of values using Python Enum by creating an Enum class that inherits from str and Enum, and then specifying the available valid values as class attributes. For example, if you want to create a path parameter named model_name with values 'alexnet', 'resnet', and 'lenet', you would create an Enum class ModelName with these values, and then declare the path parameter in your FastAPI route using :ModelName. This allows you to leverage the benefits of data validation and automatic documentation provided by FastAPI.",
-    "source_url": "https://fastapi.tiangolo.com/tutorial/path-params/",
-    "title": "Path Parameters¶"
-  },
-  {
-    "question": "What is the purpose of the `stream` method in the `fastapi.Request` class?",
-    "answer": "The `stream` method in the `fastapi.Request` class is used to read the request body as a stream. It allows for efficient handling of large requests by yielding the request body in chunks, rather than loading it all into memory at once. This can be useful when dealing with requests that have large bodies or are being streamed from a source.",
-    "source_url": "https://fastapi.tiangolo.com/reference/request/",
-    "title": "Request class¶"
-  },
-  {
-    "question": "What is the recommended way to configure the app entrypoint in FastAPI CLI?",
-    "answer": "According to the documentation, it is highly recommended to configure the app entrypoint in pyproject.toml file using the [tool.fastapi] section. This allows tools like VS Code Extension and FastAPI Cloud to find the correct entrypoint, making it easier to manage and run the application.",
-    "source_url": "https://fastapi.tiangolo.com/fastapi-cli/",
-    "title": "FastAPI CLI¶"
-  },
-  {
-    "question": "What happens when an HTTP request for a directory URL is made in HTML mode, and how does StaticFiles handle it?",
-    "answer": "When an HTTP request for a directory URL is made in HTML mode, StaticFiles checks if there is an 'index.html' file in the directory. If found, it redirects the URL to end with a slash. If no 'index.html' file exists, it serves the response as usual.",
-    "source_url": "https://fastapi.tiangolo.com/reference/staticfiles/",
-    "title": "Static Files - StaticFiles¶"
-  },
-  {
-    "question": "What type of functions can be added to the BackgroundTasks instance using its add_task method?",
-    "answer": "The add_task method can accept regular def functions or async def functions as arguments, allowing for asynchronous execution in the background after a response has been sent.",
-    "source_url": "https://fastapi.tiangolo.com/reference/background/",
-    "title": "Background Tasks - BackgroundTasks¶"
-  },
-  {
-    "question": "What are the possible alternatives for migrating from Pydantic v1 to v2, when your tests do not pass with bump-pydantic?",
-    "answer": "According to the documentation, you can use the support for both Pydantic v1 and v2 models in the same app to migrate to Pydantic v2 gradually. This involves upgrading Pydantic to version 2, changing imports to use pydantic.v1 for all your models, and then migrating your models from Pydantic v1 to v2 in groups, in gradual steps.",
-    "source_url": "https://fastapi.tiangolo.com/how-to/migrate-from-pydantic-v1-to-pydantic-v2/",
-    "title": "Migrate from Pydantic v1 to Pydantic v2¶"
-  },
-  {
-    "question": "What inspired the design of FastAPI?",
-    "answer": "FastAPI was designed with a focus on performance and simplicity, influenced by Python's async/await syntax and other successful frameworks like Go's net/http. The design also drew inspiration from API concepts such as type safety, documentation generation, and real-time API interactions.",
-    "source_url": "https://fastapi.tiangolo.com/about/",
-    "title": "About¶"
-  },
-  {
-    "question": "What should be done after installing FastAPI to set up the development server?",
-    "answer": "After installing FastAPI, you should create a virtual environment, activate it, copy one of the provided code blocks into a new file named main.py, and then run the development server using fastapi dev. This will start the Uvicorn server on http://127.0.0.1:8000 and open the interactive documentation at http://127.0.0.1:8000/docs.",
-    "source_url": "https://fastapi.tiangolo.com/tutorial/",
-    "title": "Tutorial - User Guide¶"
-  },
-  {
-    "question": "What are the available HTTP status codes provided by FastAPI's `status` module?",
-    "answer": "FastAPI's `status` module provides a group of named constants (variables) with integer status codes, as listed in the table provided. These include standard HTTP status codes such as `HTTP_200_OK`, `HTTP_403_FORBIDDEN`, and `HTTP_404_NOT_FOUND`, as well as WebSocket status codes such as `WS_1000_NORMAL_CLOSURE` and `WS_1011_INTERNAL_ERROR`. The exact list of available status codes can be found in the provided table.",
-    "source_url": "https://fastapi.tiangolo.com/reference/status/",
-    "title": "Status Codes¶"
-  },
-  {
-    "question": "Do you normally need to use OpenAPI utilities when building a FastAPI application?",
-    "answer": "No, you normally don't need to use them unless you have a specific advanced use case that requires it.",
-    "source_url": "https://fastapi.tiangolo.com/reference/openapi/",
-    "title": "OpenAPI¶"
-  },
-  {
-    "question": "What is the purpose of setting the `--root-path` command line option when running FastAPI behind a proxy?",
-    "answer": "The `--root-path` command line option is used to specify the root path of the application, which is used by FastAPI to create the default server in OpenAPI and to handle redirects. When running FastAPI behind a proxy, this option is necessary to ensure that the proxy correctly forwards requests to the application and that the application generates the correct URLs for redirects. By setting `--root-path`, you can configure FastAPI to use the root path provided by the proxy, allowing it to generate the correct URLs for the OpenAPI schema and handles redirects correctly.",
-    "source_url": "https://fastapi.tiangolo.com/advanced/behind-a-proxy/",
-    "title": "Behind a Proxy¶"
-  },
-  {
-    "question": "What is the approval process for suggesting changes to an existing language-specific LLM prompt?",
-    "answer": "According to the documentation, PRs with suggestions to the language-specific LLM prompt require approval from at least one native speaker. This means that any suggested changes to an existing language's LLM prompt must be reviewed and approved by a native speaker of that language before they can be implemented.",
-    "source_url": "https://fastapi.tiangolo.com/translations/",
-    "title": "Translations¶"
-  },
-  {
-    "question": "What are some effective ways to stay updated about FastAPI, considering I'm not tech-savvy?",
-    "answer": "According to the Help documentation, you can subscribe to the 'FastAPI and friends' newsletter to receive infrequent updates about news, guides, features, breaking changes, tips, and tricks. Additionally, following FastAPI online on platforms like Twitter (@fastapi), Bluesky (@fastapi.tiangolo.com), LinkedIn (@fastapi), or GitHub (by starring the repository) can also help you stay informed. If you prefer to receive notifications about new releases, you can 'watch' the GitHub repository and select 'Releases only'.",
-    "source_url": "https://fastapi.tiangolo.com/help-fastapi/",
-    "title": "Help¶"
-  },
-  {
-    "question": "If I'm using FastAPI version 0.112.0 in my application, how should I pin this version to ensure it works correctly with the rest of my code?",
-    "answer": "To pin the specific version of FastAPI you are using (in this case, 0.112.0), you can specify it exactly in your requirements.txt file like so: `fastapi[standard]==0.112.0`. This ensures that you use exactly this version and no other. Alternatively, you could also pin it with a range of versions that include the current one, for example: `fastapi[standard]>=0.112.0,<0.113.0`, which would mean that you can use any version greater than or equal to 0.112.0 but less than 0.113.0.",
-    "source_url": "https://fastapi.tiangolo.com/deployment/versions/",
-    "title": "About FastAPI versions¶"
-  },
-  {
-    "question": "How can you set SSE fields like event, id, retry, or comment using Server-Sent Event objects in FastAPI?",
-    "answer": "You can set SSE fields like event, id, retry, or comment by yielding ServerSentEvent objects instead of plain data. To do this, import the ServerSentEvent class from fastapi.sse and then use it to create a new object, passing in the desired fields as keyword arguments. For example: `yield ServerSentEvent(comment='stream of item updates')` for setting a comment field or `yield ServerSentEvent(data=item, event='item_update', id=str(i+1), retry=5000)` for setting multiple fields at once.",
-    "source_url": "https://fastapi.tiangolo.com/tutorial/server-sent-events/",
-    "title": "Server-Sent Events (SSE)¶"
-  },
-  {
-    "question": "How does FastAPI provide automatic data model documentation, and what standards is it based on?",
-    "answer": "FastAPI provides automatic data model documentation using JSON Schema, which is a part of OpenAPI. OpenAPI itself is based on JSON Schema, and this allows for automatic client code generation in many languages. The framework is designed around these standards after a meticulous study, ensuring that the data model documentation is accurate and comprehensive. This feature enables developers to easily generate interactive API documentation and exploration web user interfaces, such as Swagger UI or ReDoc.",
-    "source_url": "https://fastapi.tiangolo.com/features/",
-    "title": "Features¶"
-  },
-  {
-    "question": "How can you conditionally configure OpenAPI in FastAPI, including disabling it for certain environments or configurations?",
-    "answer": "You can use Pydantic settings to configure your generated OpenAPI and the docs UIs. For example, by declaring a setting such as `openapi_url` with a default value of `/openapi.json`, you can then use this setting when creating the FastAPI app. To conditionally disable OpenAPI, including the UI docs, you can set an environment variable like `OPENAPI_URL` to an empty string, which will result in a 404 Not Found error for the URLs at `/openapi.json`, `/docs`, and `/redoc`. This approach allows you to easily configure OpenAPI depending on your specific use case or environment.",
-    "source_url": "https://fastapi.tiangolo.com/how-to/conditional-openapi/",
-    "title": "Conditional OpenAPI¶"
-  },
-  {
-    "question": "If I'm comparing web frameworks for building APIs, what's the key factor to keep in mind when evaluating their performance?",
-    "answer": "The key factor to keep in mind is that simpler tools will generally perform better than more feature-rich ones, as most benchmarks don't test additional features. When comparing FastAPI, it's best to compare it against frameworks with integrated automatic data validation, serialization, and documentation.",
+    "question": "Why is comparing the raw benchmark performance of FastAPI directly against Starlette potentially misleading when considering real-world API development?",
+    "answer": "Comparing FastAPI directly to Starlette can be misleading because while FastAPI uses Starlette internally and therefore cannot be faster than it, FastAPI provides essential features for building APIs—such as data validation and serialization—that Starlette does not. If a developer were to use Starlette instead of FastAPI, they would have to manually implement the same data validation and serialization logic within their own code. Since these functions often constitute the largest portion of code written in applications, the final application built with Starlette would still incur the same overhead as one built with FastAPI. Consequently, using FastAPI saves development time and reduces bugs while likely resulting in the same or better performance than a manual implementation in Starlette.",
     "source_url": "https://fastapi.tiangolo.com/benchmarks/",
     "title": "Benchmarks¶"
   },
   {
-    "question": "How does FastAPI handle path operations for sub-applications when mounted in a main application?",
-    "answer": "When a sub-application is mounted in a main application using the `mount` method, FastAPI takes care of handling the path operations for both applications. The main application and each sub-application have their own independent path operations, which are declared in their respective applications. When the `mount` method is used to mount a sub-application at a specific path, such as `/subapi`, FastAPI will automatically communicate this mount path to the sub-application using the ASGI specification's `root_path` mechanism. This ensures that each application knows its own correct path prefix and can handle requests correctly.",
-    "source_url": "https://fastapi.tiangolo.com/advanced/sub-applications/",
-    "title": "Sub Applications - Mounts¶"
+    "question": "What specific technologies and features are included in the Full Stack FastAPI Template for managing security, database interactions, and deployment infrastructure?",
+    "answer": "For security, the template includes secure password hashing by default, JWT (JSON Web Token) authentication, and email-based password recovery. Database management is handled using PostgreSQL as the SQL database, SQLModel for Python SQL database interactions (ORM), and Pydantic for data validation and settings management. For deployment infrastructure, the template utilizes Docker Compose for both development and production, Traefik as a reverse proxy and load balancer (including instructions for setting up a frontend Traefik proxy to handle automatic HTTPS certificates), and GitHub Actions for continuous integration (CI) and continuous deployment (CD).",
+    "source_url": "https://fastapi.tiangolo.com/project-generation/",
+    "title": "Full Stack FastAPI Template¶"
   },
   {
-    "question": "What is the purpose of the 'scope' parameter in the Depends() function, and how does it affect the execution of dependencies with yield?",
-    "answer": "The 'scope' parameter in the Depends() function is used to define when a dependency function should start (the code before yield) and when it should end (the code after yield). By setting the scope to 'function', the dependency function will be executed around the path operation function, starting before the path operation function handles the request and ending after the path operation function ends but before the response is sent back to the client. This means that the dependency function will only run once for the entire request, even if the same dependency is declared multiple times. On the other hand, setting the scope to 'request' allows the dependency function to be executed around the request and response cycle, starting before the path operation function handles the request and ending after the response is sent back to the client. This means that the dependency function will run once for each path operation function in a single request.",
-    "source_url": "https://fastapi.tiangolo.com/reference/dependencies/",
-    "title": "Dependencies - Depends() and Security()¶"
+    "question": "What are the required steps and components for implementing Jinja2 templates in a FastAPI path operation, and how does the url_for() function operate within these templates?",
+    "answer": "To implement Jinja2 templates in FastAPI, you must first install the 'jinja2' dependency. The process involves four primary steps: 1) Import Jinja2Templates and create a reusable templates object specifying the directory where templates are located (e.g., directory=\"templates\"). 2) Declare a Request parameter within the path operation function that will return the template. 3) Use the templates object to render and return a TemplateResponse, providing the request object, the name of the template file, and a 'context' dictionary containing key-value pairs for use inside the template. 4) Optionally, declare response_class=HTMLResponse in the path operation so the docs UI knows the response is HTML.\n\nWithin the templates, the url_for() function is used for generating links in two ways: \n1. For path operations: It takes the same arguments that would be used by the corresponding path operation function (e.g., url_for('read_item', id=id)) to generate the correct URL.\n2. For static files: It uses the name assigned when mounting StaticFiles (e.g., 'static') and a 'path' argument (e.g., url_for('static', path='/styles.css')) to link to assets served by the application.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/templates/",
+    "title": "Templates¶"
   },
   {
-    "question": "What is the difference between reading a file using `file` attribute and using the `read()` method in UploadFile?",
-    "answer": "When you use the `file` attribute, it returns the raw standard Python file object (blocking, not async), which can be useful for non-async code. On the other hand, the `read()` method is awaitable and compatible with async, allowing you to read some bytes from the file in a threadpool.",
-    "source_url": "https://fastapi.tiangolo.com/reference/uploadfile/",
-    "title": "UploadFile class¶"
+    "question": "Explain how FastAPI's Dependency Injection system manages the execution of dependency functions and describe the specific benefit of using 'Annotated' when reusing dependencies across multiple path operations in a large code base.",
+    "answer": "When a new request arrives, FastAPI manages the execution flow by calling the dependency function (the \"dependable\") with the correct parameters, retrieving the result from that function, and assigning it to the parameter in the path operation function. This process is flexible regarding asynchronous programming; dependencies can be defined using either 'async def' or normal 'def', and they can be used interchangeably regardless of whether the path operation function itself is async or sync.\n\nIn large code bases where the same dependencies are required across many path operations, using 'Annotated' provides a significant advantage by allowing developers to create 'type aliases'. By storing the Annotated value (e.g., CommonsDep = Annotated[dict, Depends(common_parameters)]) in a variable, developers can avoid duplicating the full parameter declaration and type annotation in every function. This not only reduces code duplication but also preserves essential type information, ensuring that editors can still provide autocompletion and inline errors, and that tools like mypy continue to work effectively.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+    "title": "Dependencies¶"
   },
   {
-    "question": "What happens when a browser sends an HTTP OPTIONS request to a backend, and how does the CORS middleware respond?",
-    "answer": "When a browser sends an HTTP OPTIONS request to a backend as part of Cross-Origin Resource Sharing (CORS), it is called a CORS preflight request. The CORS middleware intercepts this incoming request, responds with appropriate CORS headers, and returns either a 200 or 400 response for informational purposes.",
-    "source_url": "https://fastapi.tiangolo.com/tutorial/cors/",
-    "title": "CORS (Cross-Origin Resource Sharing)¶"
+    "question": "What automatic measures does FastAPI take to ensure reliable SSE delivery through proxies, and how should developers implement a mechanism to resume a stream after a connection drop?",
+    "answer": "FastAPI implements three built-in best practices to ensure reliable SSE delivery: it sends a 'keep alive' ping comment every 15 seconds when there has been no message to prevent proxies from closing the connection, sets the `Cache-Control: no-cache` header to prevent the stream from being cached, and sets the `X-Accel-Buffering: no` header to prevent buffering in proxies like Nginx.\n\nTo implement stream resumption after a connection drop, developers can leverage the `Last-Event-ID` header that browsers automatically send upon reconnecting. By reading this header as a parameter in the path operation function, the developer can identify where the client left off and use that ID to skip already-sent data and resume the stream from the correct point.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/server-sent-events/",
+    "title": "Server-Sent Events (SSE)¶"
   },
   {
-    "question": "What is the correct way to declare path operation functions when using third-party libraries that support asynchronous code?",
-    "answer": "When using third-party libraries that support asynchronous code, you should declare your path operation functions with 'async def' like this: @app.get('/') async def read_results(): results = await some_library() return results. This is because only 'await' can be used inside of functions created with 'async def'. If the library does not have support for using 'await', you should declare your path operation functions as normally, with just 'def'.",
-    "source_url": "https://fastapi.tiangolo.com/async/",
-    "title": "Concurrency and async / await¶"
+    "question": "How does FastAPI handle request bodies declared as dictionaries with non-string keys (such as int), given that JSON only supports strings as keys?",
+    "answer": "While JSON is limited to using strings for keys, FastAPI leverages Pydantic's automatic data conversion to handle this. If a body is declared as a dict with non-string keys—for example, `dict[int, float]`—Pydantic will convert and validate the incoming string keys provided by API clients, provided those strings contain pure integers. As a result, the dictionary received within the function (e.g., weights) will actually have `int` keys and `float` values.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/body-nested-models/",
+    "title": "Body - Nested Models¶"
   },
   {
-    "question": "What is the purpose of using a Docker cache when building a container image, and how does it save time?",
-    "answer": "A Docker cache is used to speed up the build process by reusing previously built layers. When building an image, Docker reads the instructions in the Dockerfile from top to bottom and creates new layers on top of each other. If a layer hasn't changed since the last build, Docker will reuse the existing layer instead of rebuilding it. By copying only frequently-changing files (like code) near the end of the Dockerfile and placing less-changing files like requirements.txt earlier in the file, you can take advantage of this caching mechanism to save time on subsequent builds.",
+    "question": "What are the functional and performance implications of returning a Response object directly versus utilizing a declared Response Model in FastAPI?",
+    "answer": "Returning a Response (or any sub-class, such as JSONResponse) directly provides greater flexibility because FastAPI passes it as-is without performing any data conversion or validation via Pydantic models. However, this increases the developer's responsibility to ensure the data is in the correct format and can be serialized; for instance, a Pydantic model cannot be placed in a JSONResponse without first being converted to a dict using the jsonable_encoder. \n\nIn contrast, using a declared Response Model offers significantly better performance because serialization is handled by Pydantic in Rust. When a Response Model is used, FastAPI bypasses both the jsonable_encoder and the JSONResponse class entirely; instead, it takes the JSON bytes generated by Pydantic and returns a Response with the 'application/json' media type directly.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/response-directly/",
+    "title": "Return a Response Directly¶"
+  },
+  {
+    "question": "How did the specific limitations of APISpec and NestJS influence the design and implementation goals of FastAPI?",
+    "answer": "FastAPI's design was influenced by the following shortcomings in APISpec and NestJS:\n\n1. **From APISpec:** The author noted that APISpec required defining schemas using YAML format within Python docstrings. This created a 'micro-syntax' inside strings that hindered editor support and risked generating obsolete schemas if the code was modified but the YAML docstring was not. This inspired FastAPI to generate OpenAPI schemas automatically from the same code used for serialization and validation.\n\n2. **From NestJS:** Although NestJS offered good editor support through TypeScript types, those types are lost after compilation to JavaScript. As a result, decorators had to be added in many places to handle validation, serialization, and schema generation, leading to verbose code. Furthermore, NestJS struggled with the documentation and validation of nested JSON models (objects with inner fields that are also objects). These limitations inspired FastAPI to use Python types for editor support and to implement a powerful dependency injection system designed to minimize code repetition.",
+    "source_url": "https://fastapi.tiangolo.com/alternatives/",
+    "title": "Alternatives, Inspiration and Comparisons¶"
+  },
+  {
+    "question": "Under what circumstances should a developer opt for `pydantic.dataclasses` over standard Python `dataclasses` when using FastAPI, and how does this integration function internally?",
+    "answer": "A developer should use `pydantic.dataclasses` as a drop-in replacement for standard Python dataclasses specifically if they encounter errors with the automatically generated API documentation. Internally, because FastAPI is built on top of Pydantic, it utilizes Pydantic's internal support to convert standard dataclasses (or pydantic.dataclasses) into Pydantic's own flavor of dataclasses. This mechanism allows FastAPI to provide the same data validation, serialization, and documentation capabilities for dataclasses as it does for Pydantic models. Notably, even when using `pydantic.dataclasses`, the `field` function is still imported from the standard Python `dataclasses` module.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/dataclasses/",
+    "title": "Using Dataclasses¶"
+  },
+  {
+    "question": "When deploying FastAPI applications via containers, how does the recommended approach to process management and replication differ between a cluster environment (such as Kubernetes) and a single-server setup (such as Docker Compose), and what are the associated implications for memory management?",
+    "answer": "In a cluster environment using systems like Kubernetes or Docker Swarm, replication should be handled at the cluster level rather than using a process manager inside each container. In this scenario, you build an image that runs a single Uvicorn process per container and let the distributed system replicate those identical containers across different cores or machines, utilizing an integrated load balancer to distribute requests. This avoids unnecessary complexity within the container.\n\nConversely, in a single-server setup using Docker Compose, there is no easy way to manage replication while preserving shared networking and load balancing. In this case, it may be more appropriate to have a single container that uses a process manager to run several worker processes internally via the '--workers' command line option.\n\nRegarding memory management, running a single process per container provides a stable, well-defined amount of memory consumption per instance. This allows cluster management systems to effectively replicate containers based on the available memory of the machines in the cluster. If multiple processes are run per container instead, you must manually ensure that the number of started processes does not consume more memory than what is actually available.",
     "source_url": "https://fastapi.tiangolo.com/deployment/docker/",
     "title": "FastAPI in Containers - Docker¶"
   },
   {
-    "question": "What is the main difference between a program and a process, and how does it affect deployments?",
-    "answer": "A program refers to the code written, the Python files, or the file that can be executed by the operating system. On the other hand, a process is the thing that is running in the operating system, specifically referring to the thing being executed and managed by the operating system. This distinction affects deployments because when deploying an application, it's essential to understand whether you're dealing with a program or a process, as processes can be terminated or restarted independently of the program code.",
-    "source_url": "https://fastapi.tiangolo.com/deployment/concepts/",
-    "title": "Deployments Concepts¶"
+    "question": "In FastAPI version 0.122.0 and later, how can a developer revert to using the HTTP 403 Forbidden status code for failed authentications, and what is a critical implementation detail regarding the method used to achieve this?",
+    "answer": "To revert to the old behavior of returning an HTTP 403 Forbidden error instead of the default HTTP 401 Unauthorized (which follows RFC 7235 and RFC 9110), developers must override the `make_not_authenticated_error` method within their security classes. For example, this can be done by creating a subclass of `HTTPBearer` that returns an `HTTPException` with the status code set to `status.HTTP_403_FORBIDDEN`. A critical implementation detail is that the `make_not_authenticated_error` function must return the exception instance rather than raising it, as the actual raising process is handled by the internal FastAPI code.",
+    "source_url": "https://fastapi.tiangolo.com/how-to/authentication-error-status-code/",
+    "title": "Use Old 403 Authentication Error Status Codes¶"
   },
   {
-    "question": "What is the recommended use case for encoding binary data as base64 in JSON?",
-    "answer": "According to the documentation, it's recommended to use base64 encoding of binary data in JSON only if you definitely need to include binary data in JSON and can't use files for that. This is because JSON can only contain UTF-8 encoded strings, so it can't contain raw bytes, and base64 encoding requires more characters than the original binary data.",
-    "source_url": "https://fastapi.tiangolo.com/advanced/json-base64-bytes/",
-    "title": "JSON with Bytes as Base64¶"
+    "question": "When using `Depends()` with a dependency that utilizes `yield`, how do the 'function' and 'request' options for the `scope` parameter differ in their execution timing?",
+    "answer": "The `scope` parameter determines when the code following the `yield` statement (the end of the dependency) is executed:\n\n- **'function'**: The dependency starts before the path operation function and ends after the path operation function finishes, but specifically *before* the response is sent back to the client. This means the dependency executes 'around' the path operation function.\n- **'request'**: The dependency starts before the path operation function (similar to 'function'), but it only ends *after* the response has been sent back to the client. Consequently, the dependency executes 'around' the entire request and response cycle.",
+    "source_url": "https://fastapi.tiangolo.com/reference/dependencies/",
+    "title": "Dependencies - Depends() and Security()¶"
   },
   {
-    "question": "How are datetime objects represented in requests and responses when using Pydantic with FastAPI?",
-    "answer": "When using Pydantic with FastAPI, datetime objects are represented as strings in ISO 8601 format in both requests and responses. For example, a datetime.datetime object would be represented as a string like '2008-09-15T15:53:00+05:00', while a datetime.date object would be represented as a string like '2008-09-15'.",
-    "source_url": "https://fastapi.tiangolo.com/tutorial/extra-data-types/",
-    "title": "Extra Data Types¶"
+    "question": "How does FastAPI's `lifespan` parameter manage application resources, and what are its critical limitations regarding deprecated event handlers and sub-applications?",
+    "answer": "FastAPI manages resources using the `lifespan` parameter, which accepts an async context manager (created using the `@asynccontextmanager` decorator). The logic is split by a `yield` statement: code appearing before the `yield` is executed once during startup before the application begins receiving requests, while code following the `yield` is executed once during shutdown after the application has finished handling requests. This approach is particularly useful for shared resources like machine learning models or database connection pools, as it prevents expensive loading processes from slowing down independent automated tests that would occur if resources were loaded at the top level of a module.\n\nThere are two critical limitations to this mechanism:\n1. **Exclusivity with Event Handlers**: If the `lifespan` parameter is provided, any deprecated `@app.on_event(\"startup\")` or `@app.on_event(\"shutdown\")` handlers will no longer be called; an application must use either lifespan logic or event handlers, but not both.\n2. **Scope**: Lifespan events are only executed for the main application and do not apply to Sub Applications - Mounts.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/events/",
+    "title": "Lifespan Events¶"
   },
   {
-    "question": "Can you use a TestClient to test WebSockets, and if so, how?",
-    "answer": "Yes, you can use the same TestClient to test WebSockets. To do this, you would use the TestClient in a with statement, connecting to the WebSocket by calling websocket_connect on it. For example, in the provided documentation, the function test_websocket() uses client.websocket_connect('/ws') as websocket: ... to establish a connection to the WebSocket and then read data from it using websocket.receive_json().",
-    "source_url": "https://fastapi.tiangolo.com/advanced/testing-websockets/",
-    "title": "Testing WebSockets¶"
+    "question": "When using `APIRouter` to organize a larger FastAPI application, what is the exact sequence of execution for dependencies defined at different levels, and how are tags and responses handled when they are declared in both the `APIRouter` and a specific path operation?",
+    "answer": "Dependencies in a FastAPI application using `APIRouter` are executed in a specific order: first, the router-level dependencies are executed; second, the dependencies defined in the path operation decorator are executed; and third, the normal parameter dependencies are executed.\n\nRegarding tags and responses, when they are declared at both the `APIRouter` level and within an individual path operation, they are combined rather than overwritten. For example, if a router is initialized with the tag 'items' and a specific path operation within that router is given the tag 'custom', the resulting documentation will show a combination of both tags: ['items', 'custom']. Similarly, if the `APIRouter` defines a default response (such as 404) and a specific path operation defines an additional response (such as 403), both responses will be included in the documentation for that specific endpoint.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/bigger-applications/",
+    "title": "Bigger Applications - Multiple Files¶"
   },
   {
-    "question": "What is the difference between using Optional[SomeType] and Union[SomeType, None] in Python type annotations?",
-    "answer": "According to the documentation, Optional[SomeType] implies that the value is optional, whereas Union[SomeType, None] explicitly states that it can be None. The former might lead to a misunderstanding of the parameter's requirement, while the latter clearly conveys its type possibilities.",
-    "source_url": "https://fastapi.tiangolo.com/advanced/advanced-python-types/",
-    "title": "Advanced Python Types¶"
+    "question": "Why are certain Swagger UI configurations, such as the 'presets' settings, unable to be passed directly through the 'swagger_ui_parameters' argument in Python, and what is the recommended solution for implementing them?",
+    "answer": "Certain Swagger UI configurations, specifically those like 'presets' (e.g., SwaggerUIBundle.presets.apis and SwaggerUIBundle.SwaggerUIStandalonePreset), are JavaScript-only objects rather than strings. Because they are JavaScript objects, they cannot be passed directly from Python code via the 'swagger_ui_parameters' dictionary, which FastAPI converts to JSON for compatibility. To implement these JavaScript-only configurations, you must override the Swagger UI path operation and manually write the required JavaScript.",
+    "source_url": "https://fastapi.tiangolo.com/how-to/configure-swagger-ui/",
+    "title": "Configure Swagger UI¶"
   },
   {
-    "question": "What is the total number of FastAPI Experts, considering all time contributions?",
-    "answer": "According to the provided content, the top contributor with the most questions replied in all time is @tiangolo, with a total of 1929 questions replied. However, this value only accounts for the author's own contributions and does not represent the total number of FastAPI Experts. The section 'FastAPI Experts - All Time' lists multiple users who have helped others the most with questions in GitHub through all time, including @tiangolo with 1929 questions, @YuriiMotov with 1178 questions, and other notable contributors such as @github-actions, @Kludex, etc. Therefore, the total number of FastAPI Experts is not explicitly stated but can be inferred to be in the hundreds or possibly thousands based on this data.",
-    "source_url": "https://fastapi.tiangolo.com/fastapi-people/",
-    "title": "FastAPI People¶"
+    "question": "How does FastAPI leverage the standards and libraries of OpenAPI, Pydantic, and Starlette to provide specific advantages in API documentation, data management, and core performance?",
+    "answer": "FastAPI integrates these three foundations to provide the following functional advantages:\n\n1. **OpenAPI**: By basing itself on OpenAPI and JSON Schema, FastAPI provides automatic data model documentation and interactive exploration web user interfaces (specifically Swagger UI and ReDoc). This adherence to open standards also enables the automatic generation of client code in many different languages.\n\n2. **Pydantic**: FastAPI uses Pydantic for all data handling and validation, supporting standard Python types (such as dicts, lists, strings, and numbers) as well as exotic types like URL, Email, and UUID. This allows developers to use hierarchical models to validate complex, deeply nested JSON objects. Because it relies on Pydantic, the framework ensures that IDE features like autocompletion and linting work properly and allows for the direct passing of objects between requests and databases in many scenarios.\n\n3. **Starlette**: Since FastAPI is a sub-class of Starlette, it inherits its core capabilities and high performance (comparable to NodeJS and Go). This includes support for WebSockets, in-process background tasks, startup and shutdown events, session and cookie support, a test client built on HTTPX, and utilities such as CORS, GZip, Static Files, and Streaming responses.",
+    "source_url": "https://fastapi.tiangolo.com/features/",
+    "title": "Features¶"
   },
   {
-    "question": "How does 'mounting' a StaticFiles instance differ from using an APIRouter in FastAPI?",
-    "answer": "Mounting a StaticFiles instance means adding a complete, independent application in a specific path that takes care of handling all sub-paths. This is different from using an APIRouter as the mounted application is completely independent and does not include its routes in the main application's OpenAPI and docs.",
-    "source_url": "https://fastapi.tiangolo.com/tutorial/static-files/",
-    "title": "Static Files¶"
+    "question": "What are the different methods available for configuring the application entrypoint when using the fastapi command, and why is one method recommended over the others?",
+    "answer": "There are three ways to configure or specify the application entrypoint:\n\n1. **Using a pyproject.toml file**: You can add a configuration section `[tool.fastapi]` with an `entrypoint` value (e.g., `entrypoint = \"main:app\"` or `entrypoint = \"backend.main:app\"` if the code is in a subfolder). This tells the fastapi command exactly how to import the app object.\n2. **Passing the file path**: You can provide the path directly to the command, such as `fastapi dev main.py`, and the tool will attempt to guess the FastAPI app object to use.\n3. **Using the --entrypoint CLI option**: You can specify the entrypoint during the command call, for example: `fastapi dev --entrypoint main:app`.\n\nThe recommended method is using the pyproject.toml file because it eliminates the need to remember and pass the correct path or entrypoint every time the fastapi command is called. Additionally, using this configuration ensures that other tools, such as FastAPI Cloud or the VS Code Extension, can successfully find the application.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+    "title": "First Steps¶"
   },
   {
-    "question": "What are the scenarios where you can use an HTTPConnection instead of a Request or WebSocket?",
-    "answer": "According to the documentation, you can define dependencies that should be compatible with both HTTP and WebSockets by using an HTTPConnection. This is particularly useful when you want to provide functionality common to both Request and WebSocket. Specifically, the HTTPConnection class provides a base for incoming HTTP connections, making it suitable for scenarios where you need to handle both HTTP and WebSocket requests.",
-    "source_url": "https://fastapi.tiangolo.com/reference/httpconnection/",
-    "title": "HTTPConnection class¶"
+    "question": "How can the `openapi_extra` parameter be used to document a custom request body schema when bypassing FastAPI's integrated Pydantic validation and JSON parsing, such as in the case of YAML content?",
+    "answer": "The `openapi_extra` parameter allows you to extend or override the automatically generated OpenAPI schema for a path operation by providing a dictionary that is deeply merged with the default schema. To document a custom request body—such as one using YAML instead of JSON—you can define a dictionary in `openapi_extra` that specifies the `requestBody`, including the desired content type (e.g., 'application/x-yaml') and the associated schema. This schema can be manually generated from a Pydantic model using `.model_json_schema()`.\n\nBecause this approach bypasses FastAPI's integrated automatic parsing, the developer must handle the request manually by:\n1. Using the `Request` object to extract the raw body as bytes via `await request.body()`.\n2. Manually parsing the content (e.g., using `yaml.safe_load()`).\n3. Manually validating the resulting data using a Pydantic model's `.model_validate()` method and raising an `HTTPException` with a 422 status code if validation or parsing fails.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/path-operation-advanced-configuration/",
+    "title": "Path Operation Advanced Configuration¶"
   },
   {
-    "question": "What GraphQL library is recommended for use with FastAPI due to its design similarity and type annotations?",
-    "answer": "Strawberry is the recommended library for use with FastAPI because it has the design closest to FastAPI's design, and it's all based on type annotations.",
-    "source_url": "https://fastapi.tiangolo.com/how-to/graphql/",
-    "title": "GraphQL¶"
+    "question": "When implementing query parameter validations in FastAPI using Annotated, what are the constraints regarding the 'default' parameter within Query(), and how should a developer declare a parameter that is required but still allowed to accept a None value?",
+    "answer": "When using Query inside of Annotated, you cannot use the 'default' parameter for Query; instead, you must use the actual default value of the function parameter. This prevents inconsistencies where both the Query metadata and the function signature might specify different default values (for example, having q: Annotated[str, Query(default=\"rick\")] = \"morty\" is not allowed). To declare a query parameter that is required but can still accept None, you should specify that None is a valid type (e.g., using str | None) and simply omit the declaration of a default value for that parameter.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+    "title": "Query Parameters and String Validations¶"
   },
   {
-    "question": "What is the difference between HTTPException and WebSocketException when it comes to sending errors to clients?",
-    "answer": "HTTPException and WebSocketException are both exceptions that can be raised in FastAPI applications to show errors to clients, but they serve different purposes. HTTPException is used for client-side errors such as invalid authentication or data, while WebSocketException is used for closing a WebSocket connection due to a specific reason. The key difference lies in their parameters: HTTPException takes status_code, detail, and headers as parameters, whereas WebSocketException takes code and reason as parameters.",
+    "question": "According to the Reference page, what components of the FastAPI code API are available for use in applications, and what is the recommended resource for those who wish to learn FastAPI?",
+    "answer": "The FastAPI Reference provides access to the code API, which includes all the parts usable in applications such as classes, functions, parameters, and attributes. For those specifically looking to learn FastAPI, the documentation recommends reading the FastAPI Tutorial instead of the reference.",
+    "source_url": "https://fastapi.tiangolo.com/reference/",
+    "title": "Reference¶"
+  },
+  {
+    "question": "What is the technical relationship between Pydantic's Field and FastAPI's Query, Path, and Body tools in terms of their class hierarchy?",
+    "answer": "Pydantic's Field returns an instance of the FieldInfo class. Similarly, FastAPI's Query and Path (along with others) create objects that are subclasses of a common Param class, which is itself a subclass of Pydantic's FieldInfo. Furthermore, Body also returns objects that are direct subclasses of FieldInfo.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/body-fields/",
+    "title": "Body - Fields¶"
+  },
+  {
+    "question": "In FastAPI, where should the 'status_code' parameter be declared when defining a path operation, what data types can it accept, and how does this affect the generated OpenAPI documentation?",
+    "answer": "The 'status_code' parameter must be declared within the decorator method of the path operation (such as @app.get(), @app.post(), @app.put(), or @app.delete()) rather than inside the path operation function itself. It can accept either a number representing the HTTP status code or an IntEnum, such as Python's http.HTTPStatus. When used, FastAPI returns that status code in the response and documents it within the OpenAPI schema; furthermore, if a status code is used that indicates there is no response body, FastAPI automatically produces OpenAPI documentation stating that no response body exists.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/response-status-code/",
+    "title": "Response Status Code¶"
+  },
+  {
+    "question": "Based on the Advanced User Guide, what is the recommended sequence for reading the documentation and how does it characterize the content found in the 'Advanced' sections?",
+    "answer": "The documentation recommends that users read the main Tutorial - User Guide first, as the subsequent sections assume the reader already knows the main ideas and features covered there. Furthermore, it clarifies that the contents of these additional sections are not necessarily 'advanced' and suggests that for certain use cases, the required solution may be found within them.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/",
+    "title": "Advanced User Guide¶"
+  },
+  {
+    "question": "How can a developer customize the metadata for API tags in FastAPI, what specific fields are available for these configurations (including external documentation), and how is their display order determined in the docs UI?",
+    "answer": "To add metadata for tags used to group path operations, developers use the `openapi_tags` parameter when initializing the `FastAPI` application. This parameter takes a list of dictionaries, with one dictionary per tag. Each dictionary can contain the following fields:\n\n1. `name` (Required): A string that must match the tag name used in the path operations and `APIRouters`.\n2. `description`: A string providing a short description for the tag, which supports Markdown rendering.\n3. `externalDocs`: A dictionary describing external documentation, which consists of two fields:\n    - `url` (Required): The URL for the external documentation.\n    - `description`: A short description of the external docs.\n\nThe display order of these tags in the documentation UI is determined by the order of the metadata dictionaries within the list provided to `openapi_tags`.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/metadata/",
+    "title": "Metadata and Docs URLs¶"
+  },
+  {
+    "question": "Under what circumstances should a developer use (or avoid) HTTPException and WebSocketException in FastAPI, and how do these two exception types differ in the parameters they use to communicate errors to the client?",
+    "answer": "HTTPException and WebSocketException should be used when a developer needs to abort a request and show an error to the client; specifically, they are intended for client errors, invalid authentication, or invalid data. They should NOT be used for server errors in the code. \n\nThey differ in their parameters as follows:\n- HTTPException uses 'status_code' (an integer representing the HTTP status), 'detail' (any data to be sent in the JSON response detail key, defaulting to None), and 'headers' (a Mapping of strings to strings for response headers, defaulting to None).\n- WebSocketException uses 'code' (an integer closing code defined in the specification) and 'reason' (UTF-8-encoded data explaining the reason for closing the connection, defaulting to None).",
     "source_url": "https://fastapi.tiangolo.com/reference/exceptions/",
     "title": "Exceptions - HTTPException and WebSocketException¶"
   },
   {
-    "question": "What are some cloud providers that offer guides for deploying FastAPI applications?",
-    "answer": "According to the provided content, the main cloud providers have guides to deploy FastAPI with them. Additionally, it mentions 'some other cloud providers' sponsor FastAPI too, specifically mentioning Render and Railway as options worth considering.",
-    "source_url": "https://fastapi.tiangolo.com/deployment/cloud/",
-    "title": "Deploy FastAPI on Cloud Providers¶"
+    "question": "In the context of testing a FastAPI application with a defined `lifespan` async context manager, how does using the `TestClient` within a `with` statement affect the lifecycle and state of application resources?",
+    "answer": "Using the `TestClient` inside a `with` statement allows you to run the application's lifespan events during tests. The process affects resource states in four stages: \n\n1. **Before the block**: Before entering the `with TestClient(app) as client:` block, the lifespan has not started, and resources (such as an `items` dictionary) remain empty.\n2. **Entering the block**: Once inside the `with` statement, the lifespan starts, triggering any setup code defined in the lifespan manager (e.g., populating the `items` dictionary with data).\n3. **During requests**: While still within the `with` block, after requests are executed, the resources persist and remain available.\n4. **Exiting the block**: The end of the `with TestClient` block simulates the termination of the application, which ends the lifespan and executes any defined cleanup code (e.g., calling `items.clear()` to empty the dictionary).",
+    "source_url": "https://fastapi.tiangolo.com/advanced/testing-events/",
+    "title": "Testing Events: lifespan and startup - shutdown¶"
   },
   {
-    "question": "Where can I find a tutorial that includes information about testing SQL databases using SQLModel with FastAPI?",
-    "answer": "You can find a mini tutorial on using SQLModel with FastAPI, which includes a section about testing SQL databases. This tutorial is available in the official documentation.",
+    "question": "When implementing application settings using Pydantic's BaseSettings in FastAPI, what is the technical purpose of decorating the get_settings dependency function with @lru_cache, and how does this approach benefit both performance and testing compared to simply instantiating a Settings object within each request?",
+    "answer": "Decorating the get_settings dependency function with @lru_cache serves two primary purposes: performance optimization and testability. \n\nFrom a performance standpoint, creating a new Settings object by calling Settings() triggers the application to read environment variables or a .env file from disk. Because reading from disk is a costly and slow operation, doing this for every request would be inefficient. The @lru_cache decorator modifies the function so that it executes its code only once (for each combination of arguments); since get_settings() takes no arguments, it returns the same cached Settings object for all subsequent calls, behaving similarly to a global variable.\n\nFrom a testing standpoint, providing settings via a dependency function rather than as a static global object allows developers to easily override settings during tests. By using app.dependency_overrides[get_settings], a custom settings object (e.g., one with specific testing credentials) can be injected into the application without modifying the actual configuration code.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/settings/",
+    "title": "Settings and Environment Variables¶"
+  },
+  {
+    "question": "How should a developer implement a test for a WebSocket endpoint in FastAPI using the TestClient, and what specific mechanism is used to manage the connection?",
+    "answer": "To test a WebSocket endpoint in FastAPI, you use the `TestClient` instance within a `with` statement. Specifically, you call the `websocket_connect()` method (e.g., `with client.websocket_connect(\"/ws\") as websocket:`) to establish the connection. This context manager allows you to interact with the WebSocket, such as using the `receive_json()` method to retrieve and assert data sent from the server.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/testing-websockets/",
+    "title": "Testing WebSockets¶"
+  },
+  {
+    "question": "How does the recommended approach for process replication differ when deploying FastAPI applications using a custom deployment system versus using Kubernetes, and what mechanism is used to achieve this in a custom setup?",
+    "answer": "In a custom deployment system, you can achieve process replication by using the `--workers` command line option with either the `fastapi` or `uvicorn` commands. This allows the application to run multiple processes in parallel to take advantage of multi-core CPUs and handle more requests. However, when deploying on Kubernetes, the documentation suggests that you would probably not want to use these workers and should instead run a single Uvicorn process per container.",
+    "source_url": "https://fastapi.tiangolo.com/deployment/server-workers/",
+    "title": "Server Workers - Uvicorn with Workers¶"
+  },
+  {
+    "question": "Why is the standard TestClient unsuitable for asynchronous test functions in FastAPI, and what specific steps and tools are required to properly implement async tests?",
+    "answer": "The standard TestClient is unsuitable because it uses internal 'magic' to call the asynchronous FastAPI application within normal synchronous (def) test functions; this magic ceases to work when used inside asynchronous functions. To properly implement async tests, developers should: \n\n1. Use the `@pytest.mark.anyio` marker to notify pytest that the test function must be called asynchronously.\n2. Define the test function as an `async def` rather than a standard `def`.\n3. Utilize the `AsyncClient` from the `HTTPX` library instead of TestClient.\n4. Initialize the `AsyncClient` using `ASGITransport(app=app)` and specify a `base_url` (e.g., \"http://test\").\n5. Use the `await` keyword when making requests with the client, such as `await ac.get(\"/\")`.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/async-tests/",
+    "title": "Async Tests¶"
+  },
+  {
+    "question": "How does FastAPI handle the mapping of request data when dealing with singular values versus Pydantic models, and what specific mechanism is used to wrap a single Pydantic model within a JSON key?",
+    "answer": "FastAPI handles request data mapping based on the type and number of parameters declared in the path operation function:\n\n1. **Singular Values**: By default, singular values are interpreted as query parameters. To instruct FastAPI to treat a singular value as part of the request body instead, you must use the `Body` parameter (e.g., `Annotated[int, Body()]`).\n2. **Pydantic Models**: \n    - If multiple Pydantic models are declared, FastAPI uses the function parameter names as keys in the JSON body and expects the models' data to be nested under those keys.\n    - If only a single Pydantic model is declared, FastAPI expects the body to contain the model's attributes directly (as the root object).\n\nTo change the default behavior for a single Pydantic model so that it is expected inside a specific JSON key rather than as the direct body, you use the `embed` parameter within `Body`, specifically: `Body(embed=True)`.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/body-multiple-params/",
+    "title": "Body - Multiple Parameters¶"
+  },
+  {
+    "question": "In the context of debugging a FastAPI application, how does the use of the `if __name__ == \"__main__\":` block affect the execution of `uvicorn.run()` depending on how the file is invoked, and what advantage does this provide for debugging?",
+    "answer": "The behavior of the `if __name__ == \"__main__\":` block depends on whether the file is executed as a script or imported as a module. If the file (e.g., `myapp.py`) is run directly using the command `python myapp.py`, Python automatically sets the internal variable `__name__` to the string `\"__main__\"`, which triggers the execution of the `uvicorn.run()` section to start the server. Conversely, if the file is imported by another module (e.g., using `from myapp import app`), the `__name__` variable will not be equal to `\"__main__\"`, and the `uvicorn.run()` function will not be executed. The primary advantage of this setup is that it allows developers to call the Python program directly from their editor's debugger (such as Visual Studio Code or PyCharm), enabling them to start the server and utilize breakpoints within their FastAPI code.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/debugging/",
+    "title": "Debugging¶"
+  },
+  {
+    "question": "According to the 'Testing a Database' documentation page, where can a user find information specifically regarding the testing of SQL databases in conjunction with FastAPI?",
+    "answer": "Information on testing SQL databases is located within a section of the mini tutorial that focuses on using SQLModel with FastAPI. For broader study concerning databases, SQL, and SQLModel, users are directed to the SQLModel documentation.",
     "source_url": "https://fastapi.tiangolo.com/how-to/testing-database/",
     "title": "Testing a Database¶"
+  },
+  {
+    "question": "How can a developer achieve cleaner and less redundant method names in a generated TypeScript SDK when utilizing FastAPI tags, and why is it recommended to use both a custom unique ID function and a preprocessing script?",
+    "answer": "To achieve clean method names in a generated TypeScript SDK, developers can follow a two-step process involving application configuration and OpenAPI specification preprocessing:\n\n1. **Custom Unique ID Function**: By default, FastAPI generates operation IDs using the function name, path, and HTTP method to ensure uniqueness, which often results in cumbersome method names like `createItemItemsPost`. To simplify this, developers can pass a custom function to the `generate_unique_id_function` parameter when initializing the `FastAPI` app. For example, a function that combines the first tag of the route and the function name will produce simpler IDs such as `items-get_items`.\n\n2. **Preprocessing the OpenAPI Specification**: While custom ID functions improve names, they may still be redundant because SDK generators (like Hey API) already group methods into services based on tags (e.g., an `ItemsService`). This means a method named `items-get_items` inside an `ItemsService` contains duplicated information. To fix this, developers can use a script to download the `openapi.json` file and programmatically remove the tag prefix from the `operationId` before generating the client. \n\nBy combining these two steps, the final generated SDK will feature clean method names (e.g., `get_items`) organized within logically grouped services, while still maintaining unique operation IDs in the original API definition.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/generate-clients/",
+    "title": "Generating SDKs¶"
+  },
+  {
+    "question": "Based on the provided documentation, describe the inheritance structure and specific attributes of the security scheme models within the fastapi.openapi.models module.",
+    "answer": "The security schemes in the `fastapi.openapi.models` module are organized around a type alias called `SecurityScheme`, which can be any of: `APIKey`, `HTTPBase`, `OAuth2`, `OpenIdConnect`, or `HTTPBearer`. \n\nMost of these models inherit from `SecurityBase`, which provides two common attributes: `type_` (aliased as 'type') and `description`. The specific implementations are as follows:\n\n- **APIKey**: Inherits from `SecurityBase`. Its `type_` defaults to `apiKey` and it includes a `name` attribute and an `in_` attribute (aliased as 'in').\n- **HTTPBase**: Inherits from `SecurityBase`. Its `type_` defaults to `http` and it introduces a `scheme` attribute.\n- **HTTPBearer**: Inherits from `HTTPBase`. It sets the `scheme` to 'bearer', maintains a default `type_` of `http`, and adds a `bearerFormat` attribute.\n- **OAuth2**: Inherits from `SecurityBase`. Its `type_` defaults to `oauth2` and it contains a `flows` attribute (referencing the `OAuthFlows` model).\n- **OpenIdConnect**: Inherits from `SecurityBase`. Its `type_` defaults to `openIdConnect` and it includes an `openIdConnectUrl` attribute.",
+    "source_url": "https://fastapi.tiangolo.com/reference/openapi/models/",
+    "title": "OpenAPI models¶"
+  },
+  {
+    "question": "How does the `get_swagger_ui_html` function determine the final configuration parameters used to initialize the Swagger UI bundle, and what are the specific default settings utilized?",
+    "answer": "The `get_swagger_ui_html` function determines the configuration parameters by first creating a copy of the `swagger_ui_default_parameters` dictionary. If the optional `swagger_ui_parameters` argument is provided (i.e., it is not None), the function updates that copy with the values contained in `swagger_ui_parameters`. \n\nThe specific default settings defined in `swagger_ui_default_parameters` are:\n- `dom_id`: \"#swagger-ui\"\n- `layout`: \"BaseLayout\"\n- `deepLinking`: True\n- `showExtensions`: True\n- `showCommonExtensions`: True",
+    "source_url": "https://fastapi.tiangolo.com/reference/openapi/docs/",
+    "title": "OpenAPI docs¶"
+  },
+  {
+    "question": "Why is it not possible to declare both Form parameters and JSON Body fields within a single FastAPI path operation, and what is the technical reason for this limitation?",
+    "answer": "It is impossible to define both because a request body can only be encoded using one media type. Form data is normally encoded as 'application/x-www-form-urlencoded' (or 'multipart/form-data' when files are included), whereas JSON bodies use 'application/json'. Because the HTTP protocol does not support multiple encodings for the request body simultaneously, you cannot expect to receive both form fields and JSON fields in the same path operation.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/request-forms/",
+    "title": "Form Data¶"
+  },
+  {
+    "question": "What specific process should be followed by someone who wants to contribute code to the FastAPI project?",
+    "answer": "To contribute code to the FastAPI project, individuals must follow the guidelines outlined in tiangolo.com - Contributing.",
+    "source_url": "https://fastapi.tiangolo.com/contributing/",
+    "title": "Contributing¶"
+  },
+  {
+    "question": "What is the technical difference between FastAPI's HTTPException and Starlette's HTTPException, and why is it recommended to register exception handlers specifically for the Starlette version?",
+    "answer": "FastAPI's HTTPException inherits from Starlette's HTTPException. The primary difference between them is that FastAPI's version allows any JSON-able data (such as a dict or list) to be passed into the 'detail' field, whereas Starlette's version only accepts strings for the 'detail' parameter.\n\nIt is recommended to register exception handlers using Starlette's HTTPException because doing so ensures that your handler can catch and process exceptions raised not only by your own code but also by Starlette's internal code, as well as any Starlette extensions or plug-ins.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+    "title": "Handling Errors¶"
+  },
+  {
+    "question": "What is the complete process for self-hosting the API documentation assets in a FastAPI application, and what are the benefits of doing so?",
+    "answer": "Self-hosting JavaScript and CSS assets for API documentation is beneficial when an application needs to function offline, without open internet access, or within a local network. To implement this, follow these steps:\n\n1. **Disable Automatic Docs**: Set `docs_url=None` and `redoc_url=None` when instantiating the `FastAPI` app to prevent it from using the default CDN.\n2. **Prepare Static Files**: Create a directory (e.g., `static/`) and download the required files: `swagger-ui-bundle.js` and `swagger-ui.css` for Swagger UI, and `redoc.standalone.js` for ReDoc.\n3. **Serve Static Files**: Import `StaticFiles` from `fastapi.staticfiles` and mount a `StaticFiles()` instance to a specific path (e.g., `app.mount(\"/static\", StaticFiles(directory=\"static\"), name=\"static\")`).\n4. **Create Custom Path Operations**: Implement custom routes for the documentation using FastAPI's internal helper functions:\n    - Use `get_swagger_ui_html` for Swagger UI, passing the local paths to assets via `swagger_js_url` and `swagger_css_url` (e.g., \"/static/swagger-ui-bundle.js\").\n    - Use `get_redoc_html` for ReDoc, passing the local path via `redoc_js_url` (e.g., \"/static/redoc.standalone.js\").\n    - Create a helper route using `get_swagger_ui_oauth2_redirect_html` to support OAuth2 authentication flows.\n5. **Configure Internal Function Arguments**: Ensure these functions are passed necessary arguments including the `openapi_url` (accessible via `app.openapi_url`), the API `title`, and the `oauth2_redirect_url` (accessible via `app.swagger_ui_oauth2_redirect_url`).",
+    "source_url": "https://fastapi.tiangolo.com/how-to/custom-docs-ui-assets/",
+    "title": "Custom Docs UI Static Assets (Self-Hosting)¶"
+  },
+  {
+    "question": "Why is hiding API documentation user interfaces in production considered an ineffective security measure, and what specific programmatic method is described to conditionally disable OpenAPI and its associated UIs?",
+    "answer": "Hiding API documentation is considered a form of 'security through obscurity' because it does not add any actual security to the API; path operations remain available regardless of whether the docs are hidden, meaning any existing security flaws in the code will still exist. Furthermore, hiding the documentation can make debugging in production more difficult and simply makes it harder for users to understand how to interact with the API. To properly secure an API, the text recommends using well-defined Pydantic models, configuring permissions and roles via dependencies, storing only password hashes, utilizing cryptographic tools like JWT tokens or pwdlib, and adding OAuth2 scopes.\n\nProgrammatically, OpenAPI can be disabled by using a Pydantic `BaseSettings` class to define an `openapi_url` variable (e.g., defaulting to \"/openapi.json\") and passing this setting into the `FastAPI` app initialization (`FastAPI(openapi_url=settings.openapi_url)`). By setting the environment variable `OPENAPI_URL` to an empty string, the OpenAPI schema and documentation UIs are disabled, causing requests to `/openapi.json`, `/docs`, or `/redoc` to return a '404 Not Found' error.",
+    "source_url": "https://fastapi.tiangolo.com/how-to/conditional-openapi/",
+    "title": "Conditional OpenAPI¶"
+  },
+  {
+    "question": "What are the specific requirements and procedural steps for requesting a new language translation that is not yet supported in FastAPI, and how are updates to these translations managed once official?",
+    "answer": "To request a new language translation, a user must first find two other people willing to help review translation PRs, totaling at least three people committed to maintaining the language. The process then involves creating a new discussion using the provided template and tagging the other two collaborators to confirm their participation. After the FastAPI team evaluates the request and makes it official, the documentation is automatically translated by LLMs, which native speakers then review and use to tweak the language-specific prompts. When updates occur or new sections are added, a comment containing the link to the new translation for review will be posted in the original discussion.",
+    "source_url": "https://fastapi.tiangolo.com/translations/",
+    "title": "Translations¶"
+  },
+  {
+    "question": "How did the creator of FastAPI approach the design phase to ensure an optimal developer experience across various Python editors?",
+    "answer": "To provide the best development experience, the creator specifically tested several ideas in PyCharm, VS Code, and Jedi-based editors, which together cover approximately 80% of users according to the last Python Developer Survey. This process allowed the creator to determine the most effective ways to ensure completion, type checks, and error checks while reducing code duplication as much as possible. Additionally, based on these editor tests, the creator contributed to Pydantic to improve its editor support for autocompletion and type checks.",
+    "source_url": "https://fastapi.tiangolo.com/history-design-future/",
+    "title": "History, Design and Future¶"
+  },
+  {
+    "question": "When integrating a third-party ASGI middleware into a FastAPI application, what is the recommended method for adding it and why is this specific approach preferred over manually wrapping the app?",
+    "answer": "The recommended method for adding an ASGI middleware in FastAPI is by using the `app.add_middleware()` method. This function takes the middleware class as its first argument, followed by any additional configuration arguments required by that middleware. This approach is preferred over manually wrapping the application (e.g., creating a `new_app` by passing the app to the middleware class) because it ensures that internal middlewares properly handle server errors and that custom exception handlers function correctly.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/middleware/",
+    "title": "Advanced Middleware¶"
+  },
+  {
+    "question": "Why is it impossible to declare both Body fields expected as JSON and File or Form parameters within the same path operation in FastAPI?",
+    "answer": "It is not possible to combine these because when you declare File and Form parameters, the request body will be encoded using multipart/form-data instead of application/json. This restriction is a limitation of the HTTP protocol itself rather than a limitation of FastAPI.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/request-forms-and-files/",
+    "title": "Request Forms and Files¶"
+  },
+  {
+    "question": "What are the differences between returning a Response subclass directly from a path operation function versus specifying that subclass via the response_class parameter in the decorator, and how can these two approaches be combined?",
+    "answer": "When you return a Response (or any subclass like JSONResponse) directly from a path operation function, the data is not automatically converted—even if a response_model is declared—and the documentation for the response (such as the specific 'media type' in the Content-Type HTTP header) will not be automatically generated in the OpenAPI schema. In contrast, when you declare the Response subclass using the response_class parameter in the path operation decorator, FastAPI puts the contents returned from your function inside that response and uses the class to define and document the media type in the OpenAPI interactive docs.\n\nTo achieve both documentation and custom logic, you can use the response_class parameter AND return a Response object. In this combined scenario, the response_class is used solely to document the media type for OpenAPI, while the actual Response object returned by the function overrides the default FastAPI behavior and is used as the final response.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/custom-response/",
+    "title": "Custom Response - HTML, Stream, File, others¶"
+  },
+  {
+    "question": "How can you configure dependencies in FastAPI such that they are automatically applied to every single path operation in an application, and what is the effect of this configuration?",
+    "answer": "To apply dependencies globally across an entire application, you add them to the 'dependencies' parameter when creating the FastAPI application instance. For example: `app = FastAPI(dependencies=[Depends(verify_token), Depends(verify_key)])`. The effect of this configuration is that these dependencies will be applied to all path operations in the application, following the same logic as adding dependencies to individual path operation decorators, but extending that scope to every single route.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/dependencies/global-dependencies/",
+    "title": "Global Dependencies¶"
+  },
+  {
+    "question": "In the context of mounting sub-applications in FastAPI, how is the correct path prefix managed for a sub-application's automatic API documentation, and what technical mechanism enables this functionality?",
+    "answer": "FastAPI manages the path prefix by utilizing a mechanism from the ASGI specification called `root_path`. When a sub-application is mounted at a specific path (such as `/subapi`), FastAPI uses the `root_path` to communicate that mount path to the sub-application. This ensures that the sub-application knows to use that specific path prefix for its automatic API documentation UI, allowing it to be correctly accessed (for example, at `/subapi/docs`). Because FastAPI handles these `root_path`s automatically, this mechanism also allows a sub-application to have its own mounted sub-applications while maintaining correct functionality.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/sub-applications/",
+    "title": "Sub Applications - Mounts¶"
+  },
+  {
+    "question": "What is the current recommended procedure for mounting a WSGI application (such as Flask or Django) within a FastAPI project, and what dependency must be installed to implement this?",
+    "answer": "The current recommended procedure is to use the `WSGIMiddleware` from the `a2wsgi` package, as the previous method of using `fastapi.middleware.wsgi` is now deprecated. To implement this, you must first install the required dependency by running `pip install a2wsgi`. Once installed, you import `WSGIMiddleware` from `a2wsgi`, wrap your WSGI application (e.g., Flask or Django) with the middleware, and then use FastAPI's `.mount()` method to assign that wrapped application to a specific path. As a result, any requests sent to that specified path will be handled by the WSGI application, while all other requests continue to be handled by FastAPI.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/wsgi/",
+    "title": "Including WSGI - Flask, Django, others¶"
+  },
+  {
+    "question": "When using TestClient to test a FastAPI application, how should different types of request data be passed, and what is the specific limitation regarding Pydantic models?",
+    "answer": "To pass information in a request using TestClient, you should follow these methods:\n- Path or query parameters: Add them directly to the URL.\n- JSON body: Pass a Python object (such as a dictionary) to the 'json' parameter.\n- Form Data: Use the 'data' parameter instead of 'json'.\n- Headers: Provide a dictionary in the 'headers' parameter.\n- Cookies: Provide a dictionary in the 'cookies' parameter.\n\nRegarding Pydantic models, TestClient cannot receive them directly; it only accepts data that can be converted to JSON. If you need to send data from a Pydantic model during testing, you must use the 'jsonable_encoder'.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/testing/",
+    "title": "Testing¶"
   }
 ]
