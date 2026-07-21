@@ -1,0 +1,32 @@
+[
+  {
+    "question": "What was the primary design inspiration behind creating FastAPI?",
+    "answer": "FastAPI's design was inspired by Python type hints, which allow for more developer-friendly and expressive code. This emphasis on clarity and conciseness reflects the project's goal of making API development as simple and intuitive as possible.",
+    "source_url": "https://fastapi.tiangolo.com/about/",
+    "title": "About¶"
+  },
+  {
+    "question": "Is it recommended to read the Tutorial - User Guide: Security before proceeding with the advanced security features?",
+    "answer": "According to the documentation, yes, it is highly recommended to first read the main Tutorial - User Guide: Security as the next sections, which cover advanced security features, are based on the same concepts and provide extra functionalities. Therefore, understanding the foundational security concepts is essential before diving into these advanced topics.",
+    "source_url": "https://fastapi.tiangolo.com/advanced/security/",
+    "title": "Advanced Security¶"
+  },
+  {
+    "question": "How do you use multiple worker processes with Uvicorn when running a FastAPI application using the `fastapi` command?",
+    "answer": "You can start multiple workers with the `--workers` command line option. For example, to run 4 worker processes, you would use the following command: `$ fastapi run --workers 4 main.py`. This tells Uvicorn to start 4 worker processes in addition to the parent process, which manages them. Each worker process will handle incoming requests independently, allowing your application to take advantage of multiple cores in the CPU and serve more requests concurrently.",
+    "source_url": "https://fastapi.tiangolo.com/deployment/server-workers/",
+    "title": "Server Workers - Uvicorn with Workers¶"
+  },
+  {
+    "question": "What happens if you pass a SQLAlchemy object to jsonable_encoder() when sqlalchemy_safe=True?",
+    "answer": "In this case, any fields that start with the name _sa will be excluded from the output. This is done for compatibility with SQLAlchemy objects, which store internal state in attributes named with _sa and cannot (and should not) be serialized to JSON.",
+    "source_url": "https://fastapi.tiangolo.com/reference/encoders/",
+    "title": "Encoders - jsonable_encoder¶"
+  },
+  {
+    "question": "What is the difference between using `data` and `raw_data` fields when creating a Server-Sent Event (SSE) with FastAPI?",
+    "answer": "When creating a Server-Sent Event (SSE) with FastAPI, you can use either the `data` field or the `raw_data` field to send data to the client. The `data` field is used for sending JSON-encoded data, while the `raw_data` field is used for sending raw data without JSON encoding. This means that if you want to send pre-formatted text, log lines, or special 'sentinel' values like `[DONE]`, you should use the `raw_data` field instead of `data`. Note that only one of these fields can be set on each `ServerSentEvent` object.",
+    "source_url": "https://fastapi.tiangolo.com/tutorial/server-sent-events/",
+    "title": "Server-Sent Events (SSE)¶"
+  }
+]
