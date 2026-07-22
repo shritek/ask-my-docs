@@ -22,6 +22,17 @@ logging.getLogger("ollama").setLevel(logging.WARNING)
 DATA_DIR = "data"
 
 
+def get_vector_store_identity(
+    chunking_strategy: str,
+    embedding_model: EmbeddingModel,
+) -> tuple[str, str]:
+    """Return an index name and path unique to a chunking/embedder pair."""
+    index_key = f"{chunking_strategy}__{embedding_model.value}"
+    collection_name = f"ask_my_docs_{index_key}"
+    persist_dir = os.path.join(DATA_DIR, "vector_stores", index_key)
+    return collection_name, persist_dir
+
+
 def load_chunks(corpus_path: str) -> list[dict]:
     """Loads chunked corpus from disk."""
     if not os.path.exists(corpus_path):
@@ -62,8 +73,10 @@ def run(embedding_model: EmbeddingModel, chunking_strategy: str, llm_model: LLMM
     corpus_path = CHUNKED_CORPUS_PATH(chunking_strategy)
     chunks = load_chunks(corpus_path)
 
-    collection_name = f"ask_my_docs_{chunking_strategy}"
-    persist_dir = f"data/vector_stores/{chunking_strategy}"
+    collection_name, persist_dir = get_vector_store_identity(
+        chunking_strategy,
+        embedding_model,
+    )
 
     # Use the vector store if it exists, otherwise build it
     if os.path.exists(persist_dir) and os.listdir(persist_dir):
