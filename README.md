@@ -9,48 +9,73 @@ A domain-specific retrieval-augmented generation (RAG) system built with progres
 ## Roadmap
 
 ### Phase 0 · Data Ingestion ✅
+
 - [x] Scrape FastAPI docs via `SitemapLoader`
 - [x] Clean HTML and save raw pages to `data/corpus_snapshot.json`
 
 ### Phase 1 · Chunking Pipeline
+
 - [x] Implement `chunker.py` with `--strategy` flag
 - [x] Generate all three chunked corpora (`recursive-500`, `recursive-1000`, `semantic`)
 
+
+
 ### Phase 2 · Basic RAG
+
 - [x] Build basic vector retrieval pipeline using `nomic-embed-text` and Chroma
 - [x] Implement agentic tool-calling loop via LangGraph for robust synthesis
 - [x] Verify end-to-end functionality across all chunking strategies
 
+
+
 ### Phase 3 · Evaluation Setup
-- [ ] Build fixed evaluation test set (50-100 high-quality Q&A pairs from FastAPI docs corpus)
+
+- [x] Build fixed evaluation test set (50-100 high-quality Q&A pairs from FastAPI docs corpus)
 - [ ] Implement Ragas evaluation pipeline (`ragas_eval.py`)
 - [ ] Verify scores run end-to-end against basic RAG
 
+
+
 ### Phase 4 · Experiment 0 — Chunking Strategy
+
 - [ ] Evaluate all three chunking strategies using basic RAG + `nomic-embed-text`
 - [ ] Compare Ragas scores across strategies
 - [ ] Lock down winning chunking strategy for all subsequent phases
 
+
+
 ### Phase 5 · Hybrid Retrieval
+
 - [ ] Add BM25 retriever alongside vector search
 - [ ] Optimize retrieval fusion using RRF and weighted scoring via LangChain `EnsembleRetriever`
 - [ ] Evaluate against fixed test set and compare to Phase 2
 
+
+
 ### Phase 6 · Cross-Encoder Reranking
+
 - [ ] Add Cohere Rerank or local `MiniLM-L6-v2`
 - [ ] Evaluate against fixed test set and compare to Phase 5
 
+
+
 ### Phase 7 · Experiments 1 & 2 — 3×3 Evaluation Grid
+
 - [ ] Experiment 1: compare retrieval architectures (fixed embedder, fixed chunking)
 - [ ] Experiment 2: compare embedding models (fixed architecture, fixed chunking)
 - [ ] Document results with before/after metrics
 
+
+
 ### Phase 8 · CI Pipeline
+
 - [ ] Add GitHub Actions workflow
 - [ ] Gate PRs on Ragas score thresholds
 - [ ] Prevent silent retrieval regressions
 
 ---
+
+
 
 ## Project Structure
 
@@ -100,6 +125,8 @@ ask-my-docs/
 
 ---
 
+
+
 ## Design Decisions
 
 **Pluggable dependencies via factory pattern**
@@ -135,64 +162,92 @@ Experiment 2 · Embedding model        → fixed chunking + fixed architecture (
 
 ---
 
+
+
 ## Experiment Design
 
 > **Principle:** Hold everything constant except the one variable under test. Each experiment's winner feeds into the next as a fixed constant — forming a clean dependency chain.
 
+
+
 ### Experiment 0 — Chunking strategy
+
 Fixed architecture: basic RAG · Fixed embedder: `nomic-embed-text` · Fixed test set · Fixed LLM
 *Run in Phase 4 — winning strategy locked for all subsequent experiments.*
 
-| Strategy | Chunk Size | Overlap | Faithfulness | Answer Relevancy | Context Precision | Context Recall |
-|---|---|---|---|---|---|---|
-| Recursive Character | 500 | 50 | — | — | — | — |
-| Recursive Character | 1000 | 100 | — | — | — | — |
-| Semantic Chunking | auto | auto | — | — | — | — |
+
+| Strategy            | Chunk Size | Overlap | Faithfulness | Answer Relevancy | Context Precision | Context Recall |
+| ------------------- | ---------- | ------- | ------------ | ---------------- | ----------------- | -------------- |
+| Recursive Character | 500        | 50      | —            | —                | —                 | —              |
+| Recursive Character | 1000       | 100     | —            | —                | —                 | —              |
+| Semantic Chunking   | auto       | auto    | —            | —                | —                 | —              |
+
+
+
 
 ### Experiment 1 — Retrieval architecture
+
 Fixed embedder: `nomic-embed-text` · Fixed chunking: winner from Exp 0 · Fixed test set · Fixed LLM
 
-| Architecture | Faithfulness | Answer Relevancy | Context Precision | Context Recall |
-|---|---|---|---|---|
-| Basic RAG | — | — | — | — |
-| Hybrid Retrieval | — | — | — | — |
-| Reranking | — | — | — | — |
+
+| Architecture     | Faithfulness | Answer Relevancy | Context Precision | Context Recall |
+| ---------------- | ------------ | ---------------- | ----------------- | -------------- |
+| Basic RAG        | —            | —                | —                 | —              |
+| Hybrid Retrieval | —            | —                | —                 | —              |
+| Reranking        | —            | —                | —                 | —              |
+
+
+
 
 ### Experiment 2 — Embedding model
+
 Fixed architecture: best from Exp 1 · Fixed chunking: winner from Exp 0 · Fixed test set · Fixed LLM
 
-| Embedder | Size | Faithfulness | Answer Relevancy | Context Precision | Context Recall | Latency (ms) |
-|---|---|---|---|---|---|---|
-| `nomic-embed-text` | 274 MB | — | — | — | — | — |
-| `Qwen3-Embedding-8B` | ~8 GB | — | — | — | — | — |
-| `text-embedding-3-small` | API | — | — | — | — | — |
 
-*Results populated after evaluation runs. See `evaluation/results/` for raw scores.*
+| Embedder                 | Size   | Faithfulness | Answer Relevancy | Context Precision | Context Recall | Latency (ms) |
+| ------------------------ | ------ | ------------ | ---------------- | ----------------- | -------------- | ------------ |
+| `nomic-embed-text`       | 274 MB | —            | —                | —                 | —              | —            |
+| `Qwen3-Embedding-8B`     | ~8 GB  | —            | —                | —                 | —              | —            |
+| `text-embedding-3-small` | API    | —            | —                | —                 | —              | —            |
+
+
+*Results populated after evaluation runs. See* `evaluation/results/` *for raw scores.*
 
 ---
+
+
 
 ## Tech Stack (planned)
 
-| Component | Choice | Reason |
-|---|---|---|
-| Framework | LangChain | Industry standard, modular retriever APIs |
-| LLM | `llama3.1:8b` via Ollama | Local, free, no API dependency |
-| Embedders | `nomic-embed-text`, `Qwen3-Embedding-8B`, `text-embedding-3-small` | Experiment variable — injected via factory |
-| Vector store | Chroma → Qdrant | Chroma for prototyping; Qdrant for native hybrid search support |
-| Reranker | Cohere / `MiniLM-L6-v2` | API option vs free local option |
-| Evaluation | Ragas | Reference-free RAG metrics, CI-compatible |
-| Data source | FastAPI docs via `SitemapLoader` | Technical domain, verifiable ground truth |
+
+| Component    | Choice                                                             | Reason                                                          |
+| ------------ | ------------------------------------------------------------------ | --------------------------------------------------------------- |
+| Framework    | LangChain                                                          | Industry standard, modular retriever APIs                       |
+| LLM          | `llama3.1:8b` via Ollama                                           | Local, free, no API dependency                                  |
+| Embedders    | `nomic-embed-text`, `Qwen3-Embedding-8B`, `text-embedding-3-small` | Experiment variable — injected via factory                      |
+| Vector store | Chroma → Qdrant                                                    | Chroma for prototyping; Qdrant for native hybrid search support |
+| Reranker     | Cohere / `MiniLM-L6-v2`                                            | API option vs free local option                                 |
+| Evaluation   | Ragas                                                              | Reference-free RAG metrics, CI-compatible                       |
+| Data source  | FastAPI docs via `SitemapLoader`                                   | Technical domain, verifiable ground truth                       |
+
 
 ---
 
+
+
 ## Setup
 
+
+
 ### Prerequisites
+
 - Python 3.11+
 - [uv](https://docs.astral.sh/uv/) for environment and package management
 - [Ollama](https://ollama.ai) installed and running locally
 - OpenAI API key (optional — for `text-embedding-3-small` in Experiment 2)
 - Cohere API key (optional — for Cohere Rerank in Phase 6)
+
+
 
 ### Installation
 
@@ -212,6 +267,8 @@ ollama pull nomic-embed-text
 cp .env.example .env
 ```
 
+
+
 ### Generate corpus (run once, in order)
 
 ```bash
@@ -225,6 +282,8 @@ uv run data/chunker.py --strategy semantic
 
 # All output files are gitignored — regenerate locally before running experiments
 ```
+
+
 
 ### Run a variant
 
@@ -240,6 +299,8 @@ PYTHONPATH=. uv run evaluation/ragas_eval.py --variant basic --embedder nomic --
 ```
 
 ---
+
+
 
 ## CI Thresholds (planned)
 
@@ -258,10 +319,14 @@ PRs that cause scores to drop below these thresholds will fail automatically.
 
 ---
 
+
+
 ## References
+
 ...
 
 - [LangChain RAG Tutorial](https://python.langchain.com/docs/tutorials/rag/)
 - [Cohere Rerank Documentation](https://docs.cohere.com/docs/rerank-2)
 - [Ragas Documentation](https://docs.ragas.io)
 - [Qdrant Hybrid Search](https://qdrant.tech/documentation/concepts/hybrid-queries/)
+
