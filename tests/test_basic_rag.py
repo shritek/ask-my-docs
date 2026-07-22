@@ -1,3 +1,4 @@
+import json
 import unittest
 from unittest.mock import patch
 
@@ -6,6 +7,7 @@ from langchain_core.messages import AIMessage
 
 from basic_rag.basic_rag import answer_query, get_vector_store_identity
 from config.settings import EmbeddingModel, LLMModel
+from helpers.chunk_ids import create_chunk_id
 from helpers.llm_factory import get_llm_model
 
 
@@ -50,6 +52,12 @@ class DeterministicRagTests(unittest.TestCase):
         )
 
     def test_retrieves_and_generates_exactly_once(self):
+        chunk_id = create_chunk_id(
+            "https://example.com/fastapi",
+            "semantic",
+            "FastAPI uses type hints for validation.",
+        )
+
         class FakeVectorStore:
             def __init__(self):
                 self.calls = []
@@ -59,7 +67,10 @@ class DeterministicRagTests(unittest.TestCase):
                 return [
                     Document(
                         page_content="FastAPI uses type hints for validation.",
-                        metadata={"source_url": "https://example.com/fastapi"},
+                        metadata={
+                            "chunk_id": chunk_id,
+                            "source_url": "https://example.com/fastapi",
+                        },
                     )
                 ]
 
@@ -74,14 +85,37 @@ class DeterministicRagTests(unittest.TestCase):
         vector_store = FakeVectorStore()
         llm = FakeLlm()
 
-        answer = answer_query(
-            llm,
-            vector_store,
-            "How does validation work?",
-            top_k=5,
-        )
+        with patch(
+            "basic_rag.basic_rag.perf_counter",
+            side_effect=[10.0, 10.025, 20.0, 20.075],
+        ):
+            result = answer_query(
+                llm,
+                vector_store,
+                "How does validation work?",
+                top_k=5,
+            )
 
-        self.assertEqual(answer, "A grounded answer")
+        self.assertEqual(result.question, "How does validation work?")
+        self.assertEqual(result.answer, "A grounded answer")
+        self.assertEqual(
+            result.contexts,
+            ["FastAPI uses type hints for validation."],
+        )
+        self.assertEqual(
+            result.retrieved_chunk_ids,
+            [chunk_id],
+        )
+        self.assertEqual(
+            result.sources,
+            [{
+                "chunk_id": chunk_id,
+                "source_url": "https://example.com/fastapi",
+            }],
+        )
+        self.assertAlmostEqual(result.retrieval_latency_ms, 25.0)
+        self.assertAlmostEqual(result.generation_latency_ms, 75.0)
+        self.assertAlmostEqual(result.total_latency_ms, 100.0)
         self.assertEqual(vector_store.calls, [("How does validation work?", 5)])
         self.assertEqual(len(llm.calls), 1)
 
@@ -89,6 +123,22 @@ class DeterministicRagTests(unittest.TestCase):
         self.assertIn("How does validation work?", prompt_text)
         self.assertIn("FastAPI uses type hints for validation.", prompt_text)
         self.assertIn("https://example.com/fastapi", prompt_text)
+
+        serialized = json.dumps(result.to_dict())
+        self.assertIn('"answer": "A grounded answer"', serialized)
+        self.assertIn(f'"retrieved_chunk_ids": ["{chunk_id}"]', serialized)
+
+    def test_rejects_retrieved_documents_without_stable_ids(self):
+        class FakeVectorStore:
+            def similarity_search(self, query, k):
+                return [Document(page_content="content", metadata={})]
+
+        with self.assertRaisesRegex(ValueError, "missing chunk IDs"):
+            answer_query(
+                llm=object(),
+                vector_store=FakeVectorStore(),
+                query="question",
+            )
 
 
 if __name__ == "__main__":
