@@ -12,3 +12,6 @@ data/vector_stores/
 
 # macOS files
 .DS_Store
+
+# python cache
+__pycache__/
