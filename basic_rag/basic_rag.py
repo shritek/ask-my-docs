@@ -5,10 +5,8 @@ import logging
 from config.settings import EmbeddingModel, DEFAULT_EMBEDDING, DEFAULT_LLM, CHUNKED_CORPUS_PATH, CHUNKING_STRATEGY_MAPPING, LLMModel
 from helpers.embedding_factory import get_embedder
 from helpers.llm_factory import get_llm_model
-from langchain.tools import tool
-from langgraph.prebuilt import ToolNode
-from langgraph.graph import StateGraph, START, END, MessagesState
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.documents import Document
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_chroma import Chroma
 
 # Setup basic logging
@@ -20,6 +18,20 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 logging.getLogger("ollama").setLevel(logging.WARNING)
 
 DATA_DIR = "data"
+RETRIEVAL_TOP_K = 3
+
+RAG_PROMPT = ChatPromptTemplate.from_messages([
+    (
+        "system",
+        "You answer questions using only the supplied documentation context. "
+        "If the context does not contain enough information, say you don't know. "
+        "Do not use outside knowledge.",
+    ),
+    (
+        "human",
+        "Question:\n{question}\n\nDocumentation context:\n{context}",
+    ),
+])
 
 
 def get_vector_store_identity(
@@ -67,6 +79,30 @@ def build_vector_store(chunks: list[dict], embedder, collection_name: str, persi
     return vector_store
 
 
+def retrieve_documents(vector_store, query: str, top_k: int = RETRIEVAL_TOP_K) -> list[Document]:
+    """Retrieve a fixed number of documents exactly once for a query."""
+    return vector_store.similarity_search(query, k=top_k)
+
+
+def format_documents(documents: list[Document]) -> str:
+    """Serialize retrieved documents for the synthesis prompt."""
+    return "\n\n".join(
+        f"Source: {document.metadata}\nContent: {document.page_content}"
+        for document in documents
+    )
+
+
+def answer_query(llm, vector_store, query: str, top_k: int = RETRIEVAL_TOP_K) -> str:
+    """Run deterministic retrieval followed by one grounded LLM invocation."""
+    documents = retrieve_documents(vector_store, query, top_k)
+    messages = RAG_PROMPT.invoke({
+        "question": query,
+        "context": format_documents(documents),
+    })
+    response = llm.invoke(messages)
+    return response.content
+
+
 def run(embedding_model: EmbeddingModel, chunking_strategy: str, llm_model: LLMModel, query: str):
     embedder = get_embedder(embedding_model)
     llm = get_llm_model(llm_model)
@@ -89,55 +125,11 @@ def run(embedding_model: EmbeddingModel, chunking_strategy: str, llm_model: LLMM
     else:
         vector_store = build_vector_store(chunks, embedder, collection_name, persist_dir)
 
-    # Define retrieval tool
-    @tool(response_format="content_and_artifact")
-    def retrieve_context(query_text: str):
-        """Retrieve information to help answer a query from the documented corpus."""
-        retrieved_docs = vector_store.similarity_search(query_text, k=3)
-        serialized = "\n\n".join(
-            (f"Source: {doc.metadata}\nContent: {doc.page_content}")
-            for doc in retrieved_docs
-        )
-        return serialized, retrieved_docs
-
-    tools = [retrieve_context]
-    tool_node = ToolNode(tools)
-
-    # Define a proper ChatPromptTemplate for the Tool Calling Agent
-    prompt = ChatPromptTemplate.from_messages([
-        ("system", "You are a helpful assistant that answers questions based on provided documentation. "
-                   "Use the tools provided to retrieve context from the knowledge base. "
-                   "If the retrieved context does not contain relevant information, say you don't know. "
-                   "Stay grounded in the documents."),
-        MessagesPlaceholder(variable_name="messages"),
-    ])
-
-    # Llama 3.1 tool calling agent logic using a simple state graph (LangGraph)
-    def call_model(state: MessagesState):
-        messages = prompt.invoke({"messages": state["messages"]})
-        response = llm.bind_tools(tools).invoke(messages)
-        return {"messages": [response]}
-
-    def should_continue(state: MessagesState):
-        last_message = state["messages"][-1]
-        if last_message.tool_calls:
-            return "tools"
-        return END
-
-    workflow = StateGraph(MessagesState)
-    workflow.add_node("agent", call_model)
-    workflow.add_node("tools", tool_node)
-    workflow.add_edge(START, "agent")
-    workflow.add_conditional_edges("agent", should_continue)
-    workflow.add_edge("tools", "agent")
-
-    app = workflow.compile()
-
     logger.info(f"\n🔍 Query: {query.strip()}")
     print("=" * 60)
 
-    final_state = app.invoke({"messages": [("user", query)]})
-    print(final_state["messages"][-1].content)
+    answer = answer_query(llm, vector_store, query)
+    print(answer)
     print("\n" + "=" * 60)
 
 

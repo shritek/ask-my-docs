@@ -23,7 +23,7 @@ A domain-specific retrieval-augmented generation (RAG) system built with progres
 ### Phase 2 · Basic RAG
 
 - [x] Build basic vector retrieval pipeline using `nomic-embed-text` and Chroma
-- [x] Implement agentic tool-calling loop via LangGraph for robust synthesis
+- [x] Implement deterministic retrieve-then-generate flow for reproducible evaluation
 - [x] Verify end-to-end functionality across all chunking strategies
 
 
@@ -289,13 +289,13 @@ uv run data/chunker.py --strategy semantic
 
 ```bash
 # Basic RAG query with default settings (nomic embedder)
-PYTHONPATH=. uv run basic_rag/basic_rag.py "What is a Path operation in FastAPI?" --chunking_strategy semantic
+uv run python -m basic_rag.basic_rag "What is a Path operation in FastAPI?" --chunking_strategy semantic
 
 # Specify custom embedder and chunking strategy
-PYTHONPATH=. uv run basic_rag/basic_rag.py "How does dependency injection work?" --embedder nomic --chunking_strategy recursive-500
+uv run python -m basic_rag.basic_rag "How does dependency injection work?" --embedder nomic --chunking_strategy recursive-500
 
 # Run evaluation (Phase 3+)
-PYTHONPATH=. uv run evaluation/ragas_eval.py --variant basic --embedder nomic --chunking_strategy recursive-500
+uv run python -m evaluation.ragas_eval --variant basic --embedder nomic --chunking_strategy recursive-500
 ```
 
 ---
@@ -329,4 +329,3 @@ PRs that cause scores to drop below these thresholds will fail automatically.
 - [Cohere Rerank Documentation](https://docs.cohere.com/docs/rerank-2)
 - [Ragas Documentation](https://docs.ragas.io)
 - [Qdrant Hybrid Search](https://qdrant.tech/documentation/concepts/hybrid-queries/)
-
