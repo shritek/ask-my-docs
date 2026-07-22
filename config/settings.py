@@ -8,6 +8,7 @@ class EmbeddingModel(Enum):
 class LLMModel(Enum):
     LLAMA3_8B = "llama3.1:8b"
     LLAMA3_3B = "llama3.2:3b"
+    GEMMA4_31B = "gemma4:31b-mlx"
 
 class VectorStore(Enum):
     CHROMA = "chroma"
