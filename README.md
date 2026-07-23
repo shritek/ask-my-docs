@@ -148,6 +148,14 @@ Scraping and chunking are intentionally separate steps. The raw corpus is scrape
 sitemap_loader.py → corpus_snapshot.json → chunker.py --strategy X → chunked_corpus_X.json → RAG variants
 ```
 
+**Stable, content-addressed chunk IDs**
+
+Each chunk receives a deterministic SHA-256 ID derived from its source URL,
+chunking strategy, and text. The same ID is stored in corpus metadata and used
+as the vector-store record ID. This makes retrieved chunks traceable across
+evaluation runs and allows an exact chunk to be fetched by ID. Chunk corpora
+and vector indexes must be regenerated when the ID scheme changes.
+
 **Chunking strategy locked down before the 3×3 evaluation grid**
 
 Chunking is evaluated first (Experiment 0) once basic RAG and the evaluation pipeline are in place. The winning strategy is then held constant across Experiments 1 and 2, ensuring the 3×3 grid isolates only the intended variables — retrieval architecture and embedding model.
@@ -276,9 +284,9 @@ cp .env.example .env
 uv run data/loaders/sitemap_loader.py
 
 # Step 2 — chunk into segments (run per strategy)
-uv run data/chunker.py --strategy recursive-500    # default baseline
-uv run data/chunker.py --strategy recursive-1000
-uv run data/chunker.py --strategy semantic
+uv run python -m data.chunker --strategy recursive-500    # default baseline
+uv run python -m data.chunker --strategy recursive-1000
+uv run python -m data.chunker --strategy semantic
 
 # All output files are gitignored — regenerate locally before running experiments
 ```

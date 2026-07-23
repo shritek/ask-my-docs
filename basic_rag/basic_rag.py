@@ -4,6 +4,7 @@ import json
 import logging
 from config.settings import EmbeddingModel, DEFAULT_EMBEDDING, DEFAULT_LLM, CHUNKED_CORPUS_PATH, CHUNKING_STRATEGY_MAPPING, LLMModel
 from helpers.embedding_factory import get_embedder
+from helpers.chunk_ids import is_stable_chunk_id
 from helpers.llm_factory import get_llm_model
 from langchain_core.documents import Document
 from langchain_core.prompts import ChatPromptTemplate
@@ -56,8 +57,23 @@ def load_chunks(corpus_path: str) -> list[dict]:
 
 def build_vector_store(chunks: list[dict], embedder, collection_name: str, persist_dir: str) -> Chroma:
     """Embeds chunks and stores them in Chroma using batching to prevent Ollama crashes."""
+    invalid_ids = [
+        chunk.get("chunk_id")
+        for chunk in chunks
+        if not is_stable_chunk_id(chunk.get("chunk_id"))
+    ]
+    if invalid_ids:
+        raise ValueError(
+            "Chunk corpus contains legacy or missing chunk IDs. "
+            "Regenerate it with `python -m data.chunker` before building the vector index."
+        )
+
     texts = [c["text"] for c in chunks]
-    metadatas = [c["metadata"] for c in chunks]
+    ids = [c["chunk_id"] for c in chunks]
+    metadatas = [
+        {**c["metadata"], "chunk_id": c["chunk_id"]}
+        for c in chunks
+    ]
 
     # Initialize an empty Chroma client with the embedder
     vector_store = Chroma(
@@ -72,7 +88,13 @@ def build_vector_store(chunks: list[dict], embedder, collection_name: str, persi
     for i in range(0, total, batch_size):
         batch_texts = texts[i : i + batch_size]
         batch_metadatas = metadatas[i : i + batch_size]
-        vector_store.add_texts(texts=batch_texts, embeddings=None, metadatas=batch_metadatas)
+        batch_ids = ids[i : i + batch_size]
+        vector_store.add_texts(
+            texts=batch_texts,
+            embeddings=None,
+            metadatas=batch_metadatas,
+            ids=batch_ids,
+        )
         logger.info(f"Indexed batch {i // batch_size + 1}/{(total // batch_size) + 1} ({i + len(batch_texts)}/{total})")
 
     logger.info(f"✅ Vector store built: {total} chunks indexed in {collection_name}")
@@ -82,6 +104,15 @@ def build_vector_store(chunks: list[dict], embedder, collection_name: str, persi
 def retrieve_documents(vector_store, query: str, top_k: int = RETRIEVAL_TOP_K) -> list[Document]:
     """Retrieve a fixed number of documents exactly once for a query."""
     return vector_store.similarity_search(query, k=top_k)
+
+
+def get_document_by_chunk_id(vector_store, chunk_id: str) -> Document | None:
+    """Retrieve the exact stored chunk associated with a logical chunk ID."""
+    if not is_stable_chunk_id(chunk_id):
+        raise ValueError(f"Invalid stable chunk ID: {chunk_id}")
+
+    documents = vector_store.get_by_ids([chunk_id])
+    return documents[0] if documents else None
 
 
 def format_documents(documents: list[Document]) -> str:
