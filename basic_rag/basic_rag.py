@@ -1,7 +1,10 @@
 import argparse
+from dataclasses import asdict, dataclass
 import os
 import json
 import logging
+from time import perf_counter
+from typing import Any
 from config.settings import EmbeddingModel, DEFAULT_EMBEDDING, DEFAULT_LLM, CHUNKED_CORPUS_PATH, CHUNKING_STRATEGY_MAPPING, LLMModel
 from helpers.embedding_factory import get_embedder
 from helpers.chunk_ids import is_stable_chunk_id
@@ -33,6 +36,24 @@ RAG_PROMPT = ChatPromptTemplate.from_messages([
         "Question:\n{question}\n\nDocumentation context:\n{context}",
     ),
 ])
+
+
+@dataclass(frozen=True)
+class RAGResult:
+    """Evaluation-ready output from one RAG query."""
+
+    question: str
+    answer: str
+    contexts: list[str]
+    retrieved_chunk_ids: list[str]
+    sources: list[dict[str, Any]]
+    retrieval_latency_ms: float
+    generation_latency_ms: float
+    total_latency_ms: float
+
+    def to_dict(self) -> dict[str, Any]:
+        """Return a JSON-serializable representation of the result."""
+        return asdict(self)
 
 
 def get_vector_store_identity(
@@ -123,18 +144,50 @@ def format_documents(documents: list[Document]) -> str:
     )
 
 
-def answer_query(llm, vector_store, query: str, top_k: int = RETRIEVAL_TOP_K) -> str:
-    """Run deterministic retrieval followed by one grounded LLM invocation."""
+def answer_query(llm, vector_store, query: str, top_k: int = RETRIEVAL_TOP_K) -> RAGResult:
+    """Run deterministic retrieval and generation with evaluation metadata."""
+    retrieval_started = perf_counter()
     documents = retrieve_documents(vector_store, query, top_k)
+    retrieval_latency_ms = (perf_counter() - retrieval_started) * 1000
+
+    retrieved_chunk_ids = [
+        document.metadata.get("chunk_id")
+        for document in documents
+    ]
+    if not all(is_stable_chunk_id(chunk_id) for chunk_id in retrieved_chunk_ids):
+        raise ValueError(
+            "Retrieved documents contain legacy or missing chunk IDs. "
+            "Regenerate the chunk corpus and vector index."
+        )
+
     messages = RAG_PROMPT.invoke({
         "question": query,
         "context": format_documents(documents),
     })
+
+    generation_started = perf_counter()
     response = llm.invoke(messages)
-    return response.content
+    generation_latency_ms = (perf_counter() - generation_started) * 1000
+
+    return RAGResult(
+        question=query,
+        answer=response.content,
+        contexts=[document.page_content for document in documents],
+        retrieved_chunk_ids=retrieved_chunk_ids,
+        sources=[dict(document.metadata) for document in documents],
+        retrieval_latency_ms=retrieval_latency_ms,
+        generation_latency_ms=generation_latency_ms,
+        total_latency_ms=retrieval_latency_ms + generation_latency_ms,
+    )
 
 
-def run(embedding_model: EmbeddingModel, chunking_strategy: str, llm_model: LLMModel, query: str):
+def run(
+    embedding_model: EmbeddingModel,
+    chunking_strategy: str,
+    llm_model: LLMModel,
+    query: str,
+) -> RAGResult:
+    """Run one query through the configured Basic RAG pipeline."""
     embedder = get_embedder(embedding_model)
     llm = get_llm_model(llm_model)
     corpus_path = CHUNKED_CORPUS_PATH(chunking_strategy)
@@ -156,12 +209,7 @@ def run(embedding_model: EmbeddingModel, chunking_strategy: str, llm_model: LLMM
     else:
         vector_store = build_vector_store(chunks, embedder, collection_name, persist_dir)
 
-    logger.info(f"\n🔍 Query: {query.strip()}")
-    print("=" * 60)
-
-    answer = answer_query(llm, vector_store, query)
-    print(answer)
-    print("\n" + "=" * 60)
+    return answer_query(llm, vector_store, query)
 
 
 if __name__ == "__main__":
@@ -190,9 +238,14 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    run(
+    result = run(
         embedding_model=EmbeddingModel(args.embedder),
         chunking_strategy=args.chunking_strategy,
         llm_model=LLMModel(args.llm),
         query=args.query
     )
+
+    logger.info(f"\n🔍 Query: {args.query.strip()}")
+    print("=" * 60)
+    print(result.answer)
+    print("\n" + "=" * 60)
