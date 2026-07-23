@@ -5,6 +5,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain_ollama import OllamaEmbeddings
 from config.settings import CHUNKING_STRATEGY_MAPPING
+from helpers.chunk_ids import CHUNK_ID_SCHEME, create_chunk_id
 
 DATA_DIR = "data"
 INPUT_FILE = os.path.join(DATA_DIR, "corpus_snapshot.json")
@@ -23,6 +24,7 @@ def save_chunked_corpus(file_path: str, chunks: list[dict], strategy: str, sourc
     output = {
         "metadata": {
             "strategy": strategy,
+            "chunk_id_scheme": CHUNK_ID_SCHEME,
             "source_file": source_file,
             "total_chunks": len(chunks),
             "generated_at": datetime.now(UTC).isoformat()
@@ -106,7 +108,6 @@ def chunk_semantic(text: str, splitters: dict) -> list[str]:
 def chunk_documents(raw_documents: list[dict], splitter, strategy: str) -> list[dict]:
     """Splits raw pages into chunks using the provided splitter configuration."""
     chunks = []
-    chunk_counter = 0
 
     for doc in raw_documents:
         text = doc.get("content", "")
@@ -124,16 +125,17 @@ def chunk_documents(raw_documents: list[dict], splitter, strategy: str) -> list[
             split_texts = splitter.split_text(text)
 
         for chunk_text in split_texts:
+            chunk_id = create_chunk_id(url, strategy, chunk_text)
             chunks.append({
-                "chunk_id": f"id_{chunk_counter}",
+                "chunk_id": chunk_id,
                 "text": chunk_text,
                 "metadata": {
+                    "chunk_id": chunk_id,
                     "source_url": url,
                     "title": title,
                     "strategy": strategy
                 }
             })
-            chunk_counter += 1
 
     return chunks
 
