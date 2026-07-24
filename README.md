@@ -4,6 +4,9 @@ A domain-specific retrieval-augmented generation (RAG) system built with progres
 
 > **Status:** 🚧 In Progress
 
+Architectural and technical choices, including their rationale and tradeoffs,
+are recorded in [the project decision log](docs/decisions.md).
+
 ---
 
 ## Roadmap
