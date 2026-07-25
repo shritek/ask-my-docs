@@ -34,6 +34,7 @@ are recorded in [the project decision log](docs/decisions.md).
 ### Phase 3 · Evaluation Setup
 
 - [x] Build fixed evaluation test set (50-100 high-quality Q&A pairs from FastAPI docs corpus)
+- [x] Add resumable Basic RAG runner with deterministic retrieval metrics
 - [ ] Implement Ragas evaluation pipeline (`ragas_eval.py`)
 - [ ] Verify scores run end-to-end against basic RAG
 
@@ -305,9 +306,32 @@ uv run python -m basic_rag.basic_rag "What is a Path operation in FastAPI?" --ch
 # Specify custom embedder and chunking strategy
 uv run python -m basic_rag.basic_rag "How does dependency injection work?" --embedder nomic --chunking_strategy recursive-500
 
-# Run evaluation (Phase 3+)
-uv run python -m evaluation.ragas_eval --variant basic --embedder nomic --chunking_strategy recursive-500
+# Run deterministic Basic RAG evaluation (resumes the output file by default)
+uv run python -m evaluation.run_basic_evaluation \
+  --chunking-strategy recursive-500 \
+  --embedder nomic \
+  --llm llama3.1:8b
+
+# Smoke-test the first two questions and write to a temporary result file
+uv run python -m evaluation.run_basic_evaluation \
+  --chunking-strategy semantic \
+  --limit 2 \
+  --output /tmp/ask-my-docs-eval-smoke.json \
+  --no-resume
 ```
+
+The deterministic runner records raw answers, contexts, chunk IDs, source
+metadata, per-stage latency, source hit rate, and mean reciprocal rank. It
+fingerprints the test set and chunk corpus and refuses to resume an output file
+when its configuration or inputs differ. Ragas metrics are added in the next
+evaluation step.
+
+Commit completed raw runs used for official experiments under
+`evaluation/results/`, together with concise interpretations under
+`evaluation/summaries/`. The raw files preserve the answers, retrieved evidence,
+and per-case metrics behind each conclusion; the summaries explain what was
+learned. Keep smoke tests, interrupted runs, and debugging outputs outside the
+repository, such as under `/tmp`.
 
 ---
 

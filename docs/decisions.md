@@ -439,3 +439,95 @@ parameters are unchanged.
   explicitly.
 - Replacing the deprecated semantic chunker is future work and should be its
   own evaluated change.
+
+---
+
+## D016 — Reuse one initialized pipeline and persist deterministic evaluation first
+
+- **Status:** Accepted
+- **Recorded:** 2026-07-23
+
+### Context
+
+Evaluating 50 questions by calling the original `run()` function would recreate
+the embedder and LLM clients, reopen Chroma, and inspect corpus state for every
+question. Starting directly with LLM-judged metrics would also make it harder
+to verify whether the evaluation runner and retrieval behavior were correct.
+Long local runs need to survive interruption without starting over.
+
+### Decision
+
+Initialize one `BasicRAGPipeline` per evaluation configuration and reuse it for
+all questions. Persist a JSON run file atomically after every question and
+resume only when the saved configuration matches. Fingerprint the test set and
+chunk corpus with SHA-256 so regenerated inputs cannot be silently mixed into
+the same run.
+
+Calculate deterministic page-level metrics before adding Ragas:
+
+- source hit at `k`;
+- expected source rank;
+- reciprocal rank and aggregate mean reciprocal rank;
+- retrieval, generation, and combined latency.
+
+### Consequences
+
+- Expensive clients and the vector store are initialized once per run.
+- An interrupted run loses at most the in-flight question.
+- Failed cases are recorded and retried when the run resumes.
+- Configuration or dataset changes require a new output file or an explicit
+  non-resume run.
+- Source metrics are cheap and reproducible, but page-level relevance does not
+  prove that the exact supporting passage was retrieved.
+- Ragas remains a separate next layer for LLM-judged answer and context quality.
+
+### Follow-up
+
+Add Ragas metrics to the persisted raw results without replacing the
+deterministic metrics. Manually audit the synthetic references and add
+supporting passages or expected chunk IDs where stronger retrieval ground
+truth is needed.
+
+---
+
+## D017 — Commit completed official runs together with curated summaries
+
+- **Status:** Accepted
+- **Recorded:** 2026-07-24
+
+### Context
+
+The resumable evaluator stores every generated answer, retrieved context, chunk
+ID, source, and per-case metric. The first 50-case raw result is about 372 KB,
+which is modest at the planned experiment scale. These details let readers
+verify a summary and reproduce a manual audit. Because generated chunk corpora
+are not committed, the raw result is also the most accessible evidence of what
+the retriever supplied during a run.
+
+Temporary and interrupted runs do not provide the same lasting value and would
+create source-control noise if committed indiscriminately.
+
+### Decision
+
+- Commit completed raw runs that serve as official baselines or planned
+  experiment results under `evaluation/results/`.
+- Commit a concise interpretation of each meaningful run or comparison under
+  `evaluation/summaries/`.
+- Do not commit smoke tests, interrupted checkpoints, debugging runs, or
+  duplicate executions. Write those outside the repository, such as under
+  `/tmp`.
+- Treat committed raw results as immutable evidence. A changed configuration,
+  model, benchmark, or corpus produces a distinctly named result rather than
+  overwriting an existing official run.
+- Keep configuration and input fingerprints in raw results and summaries so
+  the evidence remains traceable.
+
+### Consequences
+
+- Readers can inspect both the conclusions and the evidence behind them.
+- Manual audit findings remain independently reviewable at the individual-case
+  level.
+- The repository will grow with official experiments, but the current file size
+  and planned experiment grid make that cost acceptable.
+- Contributors must distinguish intentional experiment evidence from temporary
+  evaluator output before staging files.
