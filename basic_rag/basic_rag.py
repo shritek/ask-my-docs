@@ -122,6 +122,35 @@ def build_vector_store(chunks: list[dict], embedder, collection_name: str, persi
     return vector_store
 
 
+def load_or_build_vector_store(
+    embedding_model: EmbeddingModel,
+    chunking_strategy: str,
+    embedder,
+) -> Chroma:
+    """Open a compatible persisted index, or build it when absent."""
+    collection_name, persist_dir = get_vector_store_identity(
+        chunking_strategy,
+        embedding_model,
+    )
+
+    if os.path.exists(persist_dir) and os.listdir(persist_dir):
+        logger.info(f"Loading existing vector store from {persist_dir}...")
+        return Chroma(
+            collection_name=collection_name,
+            embedding_function=embedder,
+            persist_directory=persist_dir,
+        )
+
+    corpus_path = CHUNKED_CORPUS_PATH(chunking_strategy)
+    chunks = load_chunks(corpus_path)
+    return build_vector_store(
+        chunks,
+        embedder,
+        collection_name,
+        persist_dir,
+    )
+
+
 def retrieve_documents(vector_store, query: str, top_k: int = RETRIEVAL_TOP_K) -> list[Document]:
     """Retrieve a fixed number of documents exactly once for a query."""
     return vector_store.similarity_search(query, k=top_k)
@@ -181,35 +210,55 @@ def answer_query(llm, vector_store, query: str, top_k: int = RETRIEVAL_TOP_K) ->
     )
 
 
+class BasicRAGPipeline:
+    """Reusable Basic RAG runtime initialized once per configuration."""
+
+    def __init__(
+        self,
+        embedding_model: EmbeddingModel,
+        chunking_strategy: str,
+        llm_model: LLMModel,
+        top_k: int = RETRIEVAL_TOP_K,
+    ):
+        if top_k < 1:
+            raise ValueError("top_k must be at least 1")
+
+        self.embedding_model = embedding_model
+        self.chunking_strategy = chunking_strategy
+        self.llm_model = llm_model
+        self.top_k = top_k
+
+        self.embedder = get_embedder(embedding_model)
+        self.llm = get_llm_model(llm_model)
+        self.vector_store = load_or_build_vector_store(
+            embedding_model,
+            chunking_strategy,
+            self.embedder,
+        )
+
+    def query(self, question: str) -> RAGResult:
+        """Evaluate one question using the initialized runtime."""
+        return answer_query(
+            self.llm,
+            self.vector_store,
+            question,
+            self.top_k,
+        )
+
+
 def run(
     embedding_model: EmbeddingModel,
     chunking_strategy: str,
     llm_model: LLMModel,
     query: str,
 ) -> RAGResult:
-    """Run one query through the configured Basic RAG pipeline."""
-    embedder = get_embedder(embedding_model)
-    llm = get_llm_model(llm_model)
-    corpus_path = CHUNKED_CORPUS_PATH(chunking_strategy)
-    chunks = load_chunks(corpus_path)
-
-    collection_name, persist_dir = get_vector_store_identity(
-        chunking_strategy,
-        embedding_model,
+    """Run one query through a newly initialized Basic RAG pipeline."""
+    pipeline = BasicRAGPipeline(
+        embedding_model=embedding_model,
+        chunking_strategy=chunking_strategy,
+        llm_model=llm_model,
     )
-
-    # Use the vector store if it exists, otherwise build it
-    if os.path.exists(persist_dir) and os.listdir(persist_dir):
-        logger.info(f"Loading existing vector store from {persist_dir}...")
-        vector_store = Chroma(
-            collection_name=collection_name,
-            embedding_function=embedder,
-            persist_directory=persist_dir
-        )
-    else:
-        vector_store = build_vector_store(chunks, embedder, collection_name, persist_dir)
-
-    return answer_query(llm, vector_store, query)
+    return pipeline.query(query)
 
 
 if __name__ == "__main__":

@@ -5,7 +5,11 @@ from unittest.mock import patch
 from langchain_core.documents import Document
 from langchain_core.messages import AIMessage
 
-from basic_rag.basic_rag import answer_query, get_vector_store_identity
+from basic_rag.basic_rag import (
+    BasicRAGPipeline,
+    answer_query,
+    get_vector_store_identity,
+)
 from config.settings import EmbeddingModel, LLMModel
 from helpers.chunk_ids import create_chunk_id
 from helpers.llm_factory import get_llm_model
@@ -138,6 +142,51 @@ class DeterministicRagTests(unittest.TestCase):
                 llm=object(),
                 vector_store=FakeVectorStore(),
                 query="question",
+            )
+
+    @patch("basic_rag.basic_rag.answer_query")
+    @patch("basic_rag.basic_rag.load_or_build_vector_store")
+    @patch("basic_rag.basic_rag.get_llm_model")
+    @patch("basic_rag.basic_rag.get_embedder")
+    def test_pipeline_initializes_dependencies_once_for_multiple_queries(
+        self,
+        get_embedder,
+        get_llm_model,
+        load_or_build_vector_store,
+        answer_query,
+    ):
+        pipeline = BasicRAGPipeline(
+            embedding_model=EmbeddingModel.NOMIC,
+            chunking_strategy="semantic",
+            llm_model=LLMModel.LLAMA3_8B,
+            top_k=5,
+        )
+
+        pipeline.query("first question")
+        pipeline.query("second question")
+
+        get_embedder.assert_called_once_with(EmbeddingModel.NOMIC)
+        get_llm_model.assert_called_once_with(LLMModel.LLAMA3_8B)
+        load_or_build_vector_store.assert_called_once_with(
+            EmbeddingModel.NOMIC,
+            "semantic",
+            get_embedder.return_value,
+        )
+        self.assertEqual(answer_query.call_count, 2)
+        answer_query.assert_any_call(
+            get_llm_model.return_value,
+            load_or_build_vector_store.return_value,
+            "first question",
+            5,
+        )
+
+    def test_pipeline_rejects_invalid_top_k(self):
+        with self.assertRaisesRegex(ValueError, "top_k"):
+            BasicRAGPipeline(
+                embedding_model=EmbeddingModel.NOMIC,
+                chunking_strategy="semantic",
+                llm_model=LLMModel.LLAMA3_8B,
+                top_k=0,
             )
 
 
