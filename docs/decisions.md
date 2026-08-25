@@ -531,3 +531,216 @@ create source-control noise if committed indiscriminately.
   and planned experiment grid make that cost acceptable.
 - Contributors must distinguish intentional experiment evidence from temporary
   evaluator output before staging files.
+
+---
+
+## D018 — Evaluate immutable RAG runs with resumable Ragas sidecars
+
+- **Status:** Accepted
+- **Recorded:** 2026-07-29
+
+### Context
+
+Ragas evaluation is substantially more expensive and less deterministic than
+page-level source metrics because it makes several judge-model calls per case.
+Re-running retrieval and answer generation while adding judge scores would mix
+two sources of variation and waste the completed Basic RAG run. Updating that
+committed run in place would also conflict with D017, which treats official raw
+runs as immutable evidence.
+
+Ragas 0.4 replaces its legacy dataset metrics with a collections API that can
+score individual cases. Its scores depend on the evaluator LLM, evaluator
+embeddings, prompts, and library version, so those are part of the experiment
+configuration rather than universal ground truth.
+
+### Decision
+
+- Score the four planned metrics: faithfulness, answer relevancy, context
+  precision with the reference answer, and context recall with the reference
+  answer.
+- Read answers and retrieved contexts from a completed deterministic result;
+  do not rerun the RAG pipeline.
+- Write a separate Ragas sidecar containing the source-result SHA-256, evaluator
+  configuration, per-case scores, optional judge reasoning, metric latency, and
+  aggregate means.
+- Persist atomically after every metric. On resume, retry only failed or missing
+  case/metric pairs and reject configuration mismatches.
+- Use Ragas 0.4.3 collections metrics through Ollama's OpenAI-compatible API.
+  Default to `llama3.1:8b` as the local judge and `nomic-embed-text` for answer
+  relevancy, while keeping both explicit in the result configuration.
+- Set and record a 4,096-token evaluator output limit. The Ragas default of
+  1,024 truncated structured context-recall results on real benchmark cases;
+  changing this limit requires a new sidecar rather than mixing evaluator
+  configurations on resume.
+- Disable Ragas telemetry for this local evaluation workflow.
+- Isolate the Ragas 0.4.3 compatibility shim for its import of the removed
+  `langchain_community.chat_models.vertexai` module. The sentinel type is safe
+  here because this project uses Ollama, not Vertex AI. Remove the shim when an
+  upgraded Ragas release fixes the upstream import.
+
+### Consequences
+
+- The same generated answers can be rescored by a different judge without
+  changing or duplicating the source run.
+- Interruptions lose at most the in-flight metric call, which matters because a
+  full run requires several hundred local model operations.
+- Comparisons are valid only when the evaluator configuration is held constant.
+- A local 8B judge is accessible and reproducible enough for the first learning
+  baseline, but it may misunderstand rubric prompts or favor its own style.
+  Scores require manual spot checks and should later be calibrated against a
+  stronger judge or human labels.
+- Ragas metrics complement deterministic source rank and manual audit; they do
+  not replace either.
+
+---
+
+## D019 — Calibrate LLM judges against a provenance-tracked challenge set
+
+- **Status:** Accepted
+- **Recorded:** 2026-08-21
+
+### Context
+
+The first complete Ragas run was operationally successful but produced results
+that contradicted direct inspection. Context precision was effectively 1.0 for
+all 50 cases, including known irrelevant retrievals, while clearly grounded
+answers sometimes received zero faithfulness. A metric implementation does not
+make its LLM judge reliable automatically.
+
+Judge calibration requires examples that distinguish concepts that aggregate
+scores can hide. In particular, an answer may be faithful to retrieved text but
+irrelevant to the question, and retrieved contexts may rank one useful chunk
+first while still omitting most required reference claims.
+
+### Decision
+
+- Maintain a small judge-calibration challenge set separate from RAG tuning and
+  release holdout datasets.
+- Select deliberately varied cases rather than a representative random sample:
+  clear positives, partial evidence, redundant evidence, alternate sources,
+  wrong-topic grounded answers, retrieval misses, and appropriate or
+  inappropriate abstentions.
+- Label atomic generated-answer claims for faithfulness, answer-relevancy bands,
+  per-context relevance for average precision, and atomic reference claims for
+  context recall.
+- Allow AI review against the immutable source evidence without seeing candidate
+  judge scores. Record the reviewer, acceptance, review method, and whether human
+  verification actually occurred.
+- For this straightforward documentation corpus, use Codex-reviewed labels
+  accepted by the project owner as `silver` project reference labels. Do not
+  describe them as human-authored gold labels or an external benchmark.
+- Compare candidate judges with the approved labels using agreement, absolute
+  error, catastrophic disagreements, and repeated-run stability. Freeze the
+  chosen judge configuration before comparing RAG architectures.
+
+### Consequences
+
+- Ragas scores cannot be used for chunking or retrieval decisions until judge
+  calibration is complete.
+- Label review is focused on 13 diagnostic cases instead of all 50 cases.
+- AI-reviewed silver labels make calibration practical for this learning
+  project, but comparison against them measures agreement with the trusted
+  reviewer rather than independent human judgment.
+- The challenge set tests judge correctness, not expected production query
+  distribution, so it must not be reported as an end-user quality estimate.
+- The calibration set may evolve when a new metric, judge family, or failure
+  mode is introduced, but changes require renewed review and versioning. Human
+  verification can promote the label quality tier later without obscuring the
+  original provenance.
+
+---
+
+## D020 — Reject `llama3.1:8b` as the frozen Ragas judge
+
+- **Status:** Accepted
+- **Recorded:** 2026-08-24
+
+### Context
+
+The complete Ragas sidecar used `llama3.1:8b` as its evaluator. Comparing its
+scores with the 13 approved calibration cases produced 18 catastrophic
+metric-level disagreements across 9 cases. Numeric disagreements are called
+catastrophic when absolute error is at least 0.5. For answer relevancy, a
+reviewed high-relevancy answer scoring at most 0.4 or a low-relevancy answer
+scoring at least 0.7 is catastrophic.
+
+Context precision was effectively 1.0 for all 13 cases even though the approved
+labels range from 0.0 to 1.0. Context recall had mean absolute error 0.5362 and
+gave several genuine retrieval misses scores between 0.75 and 1.0.
+Faithfulness had mean absolute error 0.4595 and assigned a fully supported
+FieldInfo answer a score of 0.0. Answer relevancy separated most high and low
+cases, but scored one grounded wrong-topic answer 0.9369 despite its low label.
+
+### Decision
+
+- Do not freeze `llama3.1:8b` or use its Ragas scores to select chunking,
+  retrieval, or generation architectures.
+- Keep the complete Ragas sidecar and deterministic calibration report as
+  diagnostic evidence; an operationally complete evaluation is not the same as
+  a trustworthy evaluation.
+- Compare future candidate judges on the same 13 cases before paying to score
+  all 50 cases. Reuse the immutable Basic RAG answers and contexts rather than
+  rerunning the RAG pipeline.
+- Link every comparison to both input files by SHA-256 and reject source-run
+  mismatches. Report numeric bias, mean and maximum absolute error, score range,
+  catastrophic disagreements, and answer-relevancy pairwise band ordering.
+- Treat the catastrophic thresholds as triage signals, not acceptance criteria.
+  Judge selection still requires inspecting the failure types and repeated-run
+  stability.
+
+### Consequences
+
+- The first full Ragas run remains useful for learning and debugging, but its
+  aggregate means are not RAG quality baselines.
+- A stronger judge must be evaluated next. Only the 13 calibration cases need
+  scoring during candidate selection, reducing local runtime substantially.
+- Answer relevancy appears more promising than the other three metrics, but the
+  wrong-topic failure prevents using it independently without further
+  calibration.
+- No chunking experiment should begin until a candidate judge passes calibration
+  and its complete evaluator configuration is frozen.
+
+---
+
+## D021 — Score candidate judges on exact calibration case IDs
+
+- **Status:** Accepted
+- **Recorded:** 2026-08-24
+
+### Context
+
+Judge selection should use the 13 deliberately chosen calibration cases before
+running another 50-case evaluation. The existing Ragas runner's `--limit`
+option selects a prefix of the Basic RAG results, but the calibration cases are
+distributed throughout that run. `--limit 13` would therefore evaluate the
+wrong sample. The runner also restricted evaluator names to application LLM
+enum values, preventing locally available experimental judges such as
+`gemma4:31b-mlx` and `qwen3.6:27b-mlx`.
+
+### Decision
+
+- Accept any non-empty evaluator model name and pass it to the local
+  Ollama-compatible endpoint. Application generator enums do not define the
+  judge-experiment search space.
+- Add `--calibration-set` as mutually exclusive with `--limit`. Load only an
+  approved calibration set and select its exact case IDs in calibration order.
+- Reject missing or duplicate selected IDs rather than silently shrinking or
+  changing the sample.
+- Record the ordered IDs, calibration path, and calibration SHA-256 in the
+  resumable Ragas configuration.
+- Add the selected case count and short calibration fingerprint to the default
+  filename so calibration sidecars cannot collide with full-run sidecars.
+- Omit selection-only configuration fields for ordinary full or prefix runs,
+  preserving compatibility with existing sidecars.
+
+### Consequences
+
+- Candidate judges can be compared using 13 × 4 metric calls instead of 50 × 4
+  calls, while reusing the same generated answers and contexts.
+- Calibration changes produce a new filename and configuration mismatch instead
+  of accidentally resuming an older sample.
+- Model-name validation occurs at the local inference endpoint; a typo fails at
+  scoring time and remains resumable after correction only when written to a
+  correctly configured sidecar.
+- A candidate that passes this challenge set still requires repeated-run
+  stability checks before its evaluator configuration is frozen.

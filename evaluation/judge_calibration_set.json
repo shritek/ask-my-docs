@@ -1,0 +1,590 @@
+{
+  "schema_version": 1,
+  "name": "basic_semantic_judge_calibration_v1",
+  "purpose": "Calibrate candidate Ragas judge models against reviewed claim and context labels before using their scores for RAG architecture decisions.",
+  "source_result": {
+    "path": "evaluation/results/basic__semantic__nomic__llama3.1-8b__k3.json",
+    "sha256": "72e93b90bef51a2566887c958152ef7ca611bb804c5c3f1fcd417d1e2176439f"
+  },
+  "labeling": {
+    "label_source": "codex_reviewed",
+    "quality_tier": "silver",
+    "review_status": "approved_for_project_calibration",
+    "reviewed_by": "OpenAI Codex",
+    "reviewed_at": "2026-08-21",
+    "accepted_by": "project_owner",
+    "accepted_at": "2026-08-21",
+    "human_verified": false,
+    "method": "Each label was checked against the immutable generated answer, reference answer, and retrieved contexts without consulting the Ragas scores. The project owner accepted AI-reviewed labels for this straightforward documentation corpus.",
+    "usage": "Treat these as trusted project reference labels for comparing candidate judges, not as human-authored gold labels or an external benchmark."
+  },
+  "rubric": {
+    "context_indices": "One-based positions in the retrieved context list.",
+    "faithfulness": "Break the generated answer into atomic factual or verifiable meta-claims. A claim is supported only when it can be inferred from the retrieved contexts. Score = supported_claims / total_claims.",
+    "answer_relevancy": {
+      "high": "Directly answers all important parts of the question with little irrelevant material.",
+      "medium": "Answers a meaningful part but is incomplete, imprecise, or substantially verbose.",
+      "low": "Does not answer the question, answers a different question, or only abstains. Abstention appropriateness is recorded separately."
+    },
+    "context_precision": "Mark each retrieved context relevant only when it contains evidence for at least one required reference-answer claim. Average precision preserves retrieval order and is zero when no context is relevant.",
+    "context_recall": "Break the reference answer into atomic required claims. A claim is supported only when the combined retrieved contexts contain its evidence. Score = supported_claims / total_claims."
+  },
+  "cases": [
+    {
+      "case_id": "61bbe83675590aff3b3bb589b6d594faca6e2698e4958c8d8c3b005a703bb2ae",
+      "question": "Why is comparing the raw benchmark performance of FastAPI directly against Starlette potentially misleading when considering real-world API development?",
+      "selection_reason": "Clear positive example with relevant evidence ranked first and a complete grounded answer.",
+      "review_status": "approved",
+      "judgment": {
+        "faithfulness": {
+          "supported_claims": 5,
+          "total_claims": 5,
+          "score": 1.0,
+          "claims": [
+            {"claim": "Tools that solve simpler problems tend to perform better in raw benchmarks.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "Most benchmarks omit the additional features a framework provides.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "FastAPI uses Starlette and adds validation, serialization, and automatic documentation.", "supported": true, "evidence_contexts": [1, 2]},
+            {"claim": "Using Starlette directly would require implementing validation and serialization and would produce similar overhead.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "FastAPI should be compared with frameworks that also provide validation, serialization, and documentation.", "supported": true, "evidence_contexts": [2]}
+          ]
+        },
+        "answer_relevancy": {
+          "band": "high",
+          "abstention_present": false,
+          "abstention_appropriate": null,
+          "notes": "Directly explains why the raw comparison is unfair and identifies the appropriate comparison class."
+        },
+        "context_precision": {
+          "context_relevance": [true, true, false],
+          "average_precision": 1.0,
+          "notes": ["Direct benchmark hierarchy and feature evidence.", "Direct Starlette comparison and real-world overhead evidence.", "Only a generic statement about FastAPI performance through Starlette."]
+        },
+        "context_recall": {
+          "supported_claims": 7,
+          "total_claims": 7,
+          "score": 1.0,
+          "claims": [
+            {"claim": "FastAPI uses Starlette and therefore cannot be faster than Starlette itself.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "FastAPI adds API features such as data validation and serialization.", "supported": true, "evidence_contexts": [1, 2]},
+            {"claim": "A direct Starlette implementation would need to implement those features manually.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "The final manual implementation would incur similar overhead.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "Validation and serialization are often a large portion of application code.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "FastAPI saves development time and reduces bugs.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "A complete manual implementation would probably have the same or worse performance.", "supported": true, "evidence_contexts": [2]}
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "ff8738442805fa52a4b8982779958e8c8ffd68cc98128ee931f709c8fbeeb4b3",
+      "question": "What is the technical relationship between Pydantic's Field and FastAPI's Query, Path, and Body tools in terms of their class hierarchy?",
+      "selection_reason": "Clearly grounded positive example that the llama3.1:8b judge incorrectly scored as unfaithful.",
+      "review_status": "approved",
+      "judgment": {
+        "faithfulness": {
+          "supported_claims": 4,
+          "total_claims": 4,
+          "score": 1.0,
+          "claims": [
+            {"claim": "Pydantic Field returns an instance of FieldInfo.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "FastAPI Query and Path create objects of Param subclasses.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "Param is a subclass of FieldInfo.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "FastAPI Body returns an object of a direct FieldInfo subclass.", "supported": true, "evidence_contexts": [1]}
+          ]
+        },
+        "answer_relevancy": {
+          "band": "high",
+          "abstention_present": false,
+          "abstention_appropriate": null,
+          "notes": "Direct and complete description of the requested hierarchy."
+        },
+        "context_precision": {
+          "context_relevance": [true, false, false],
+          "average_precision": 1.0,
+          "notes": ["Contains the exact hierarchy.", "General Pydantic features without the hierarchy.", "Pydantic migration material without the hierarchy."]
+        },
+        "context_recall": {
+          "supported_claims": 4,
+          "total_claims": 4,
+          "score": 1.0,
+          "claims": [
+            {"claim": "Field returns FieldInfo.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "Query and Path objects are Param subclasses.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "Param is a FieldInfo subclass.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "Body objects are direct FieldInfo subclasses.", "supported": true, "evidence_contexts": [1]}
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "d0f46c10aaa7e35fbc2732145db487c2f4faa8759f1596a21a3d45af9a710f31",
+      "question": "Why is it not possible to declare both Form parameters and JSON Body fields within a single FastAPI path operation, and what is the technical reason for this limitation?",
+      "selection_reason": "Concise positive example supported by two complementary contexts.",
+      "review_status": "approved",
+      "judgment": {
+        "faithfulness": {
+          "supported_claims": 3,
+          "total_claims": 3,
+          "score": 1.0,
+          "claims": [
+            {"claim": "Form data makes the request body application/x-www-form-urlencoded rather than JSON.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "File and Form parameters make the body multipart/form-data rather than JSON.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "The restriction comes from the HTTP protocol rather than FastAPI.", "supported": true, "evidence_contexts": [1, 2]}
+          ]
+        },
+        "answer_relevancy": {
+          "band": "high",
+          "abstention_present": false,
+          "abstention_appropriate": null,
+          "notes": "Answers both the behavior and protocol-level reason."
+        },
+        "context_precision": {
+          "context_relevance": [true, true, false],
+          "average_precision": 1.0,
+          "notes": ["Direct Form-versus-JSON evidence.", "Direct multipart-versus-JSON evidence.", "Describes Body embedding, not mutually exclusive encodings."]
+        },
+        "context_recall": {
+          "supported_claims": 5,
+          "total_claims": 5,
+          "score": 1.0,
+          "claims": [
+            {"claim": "A request body uses one encoding/media type.", "supported": true, "evidence_contexts": [1, 2]},
+            {"claim": "Form data normally uses application/x-www-form-urlencoded.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "Forms with files use multipart/form-data.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "JSON Body fields require a JSON-encoded body.", "supported": true, "evidence_contexts": [1, 2]},
+            {"claim": "The inability to combine these encodings is an HTTP protocol constraint, not a FastAPI limitation.", "supported": true, "evidence_contexts": [1, 2]}
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "d4c5e6adb6484e771045a9e3a513e61f9622af38ebf45d1dde6a33e12d5c396d",
+      "question": "How does FastAPI handle request bodies declared as dictionaries with non-string keys (such as int), given that JSON only supports strings as keys?",
+      "selection_reason": "Retriever supplied complete evidence, but the generator incorrectly abstained.",
+      "review_status": "approved",
+      "judgment": {
+        "faithfulness": {
+          "supported_claims": 0,
+          "total_claims": 1,
+          "score": 0.0,
+          "claims": [
+            {"claim": "The documentation contexts do not explain how FastAPI handles dictionary bodies with non-string keys.", "supported": false, "evidence_contexts": [], "notes": "Context 1 explains the behavior directly."}
+          ]
+        },
+        "answer_relevancy": {
+          "band": "low",
+          "abstention_present": true,
+          "abstention_appropriate": false,
+          "notes": "The answer refuses despite complete evidence in the first context."
+        },
+        "context_precision": {
+          "context_relevance": [true, false, false],
+          "average_precision": 1.0,
+          "notes": ["Contains the complete dictionary-key conversion behavior.", "Discusses embedding a Pydantic model under a key.", "Discusses custom responses."]
+        },
+        "context_recall": {
+          "supported_claims": 5,
+          "total_claims": 5,
+          "score": 1.0,
+          "claims": [
+            {"claim": "JSON supports only string keys.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "A body may be declared as dict[int, float].", "supported": true, "evidence_contexts": [1]},
+            {"claim": "Pydantic converts incoming pure-integer string keys to integers.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "Pydantic validates the converted keys and values.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "The function receives integer keys and float values.", "supported": true, "evidence_contexts": [1]}
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "00592e5d6a6b50cd205ec9afdbf38610a4f7c8355e1a30e3ac43cd218111f05d",
+      "question": "How does FastAPI's `lifespan` parameter manage application resources, and what are its critical limitations regarding deprecated event handlers and sub-applications?",
+      "selection_reason": "Faithful but incomplete answer from repetitive contexts that cover only one required fact.",
+      "review_status": "approved",
+      "judgment": {
+        "faithfulness": {
+          "supported_claims": 4,
+          "total_claims": 4,
+          "score": 1.0,
+          "claims": [
+            {"claim": "Lifespan provides application-lifecycle event handling.", "supported": true, "evidence_contexts": [1, 2, 3]},
+            {"claim": "Lifespan handlers are recommended instead of on_event handlers.", "supported": true, "evidence_contexts": [1, 2, 3]},
+            {"claim": "on_event is deprecated.", "supported": true, "evidence_contexts": [1, 2, 3]},
+            {"claim": "The retrieved contexts provide no sub-application lifespan information.", "supported": true, "evidence_contexts": [1, 2, 3]}
+          ]
+        },
+        "answer_relevancy": {
+          "band": "medium",
+          "abstention_present": true,
+          "abstention_appropriate": true,
+          "notes": "Correctly reports the deprecation evidence but omits resource management, handler exclusivity, and sub-application scope because retrieval did not supply them."
+        },
+        "context_precision": {
+          "context_relevance": [true, true, true],
+          "average_precision": 1.0,
+          "notes": ["Supports on_event deprecation.", "Duplicate evidence for on_event deprecation.", "Duplicate evidence for on_event deprecation."]
+        },
+        "context_recall": {
+          "supported_claims": 1,
+          "total_claims": 8,
+          "score": 0.125,
+          "claims": [
+            {"claim": "The lifespan parameter accepts an async context manager.", "supported": false, "evidence_contexts": []},
+            {"claim": "Code before yield runs once at startup.", "supported": false, "evidence_contexts": []},
+            {"claim": "Code after yield runs once at shutdown.", "supported": false, "evidence_contexts": []},
+            {"claim": "Lifespan is useful for shared resources such as models and database pools.", "supported": false, "evidence_contexts": []},
+            {"claim": "Lifespan avoids loading expensive resources at module import during independent tests.", "supported": false, "evidence_contexts": []},
+            {"claim": "on_event startup and shutdown handlers are deprecated.", "supported": true, "evidence_contexts": [1, 2, 3]},
+            {"claim": "When lifespan is supplied, on_event handlers are not called and the two mechanisms cannot be mixed.", "supported": false, "evidence_contexts": []},
+            {"claim": "Lifespan events apply only to the main application and not mounted sub-applications.", "supported": false, "evidence_contexts": []}
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "2063af3d2ac44bd5d276dc6ee3441720767635fb79a79efa8cc872320c3c6580",
+      "question": "In FastAPI, where should the 'status_code' parameter be declared when defining a path operation, what data types can it accept, and how does this affect the generated OpenAPI documentation?",
+      "selection_reason": "Useful alternate page retrieves most, but not all, required facts.",
+      "review_status": "approved",
+      "judgment": {
+        "faithfulness": {
+          "supported_claims": 3,
+          "total_claims": 3,
+          "score": 1.0,
+          "claims": [
+            {"claim": "status_code belongs in the path operation decorator, not the function.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "status_code accepts an integer or FastAPI status shortcut constant.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "The chosen status code is added to the OpenAPI schema.", "supported": true, "evidence_contexts": [1]}
+          ]
+        },
+        "answer_relevancy": {
+          "band": "medium",
+          "abstention_present": false,
+          "abstention_appropriate": null,
+          "notes": "Addresses every high-level part but omits explicit IntEnum support, response behavior, and no-response-body documentation."
+        },
+        "context_precision": {
+          "context_relevance": [true, true, true],
+          "average_precision": 1.0,
+          "notes": ["Direct decorator, integer, response, and OpenAPI evidence.", "Reference documentation for the parameter type and behavior.", "Duplicate reference documentation for the parameter type and behavior."]
+        },
+        "context_recall": {
+          "supported_claims": 4,
+          "total_claims": 6,
+          "score": 0.6666666666666666,
+          "claims": [
+            {"claim": "status_code is declared on the path operation decorator.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "It accepts a numeric HTTP status code.", "supported": true, "evidence_contexts": [1, 2, 3]},
+            {"claim": "It accepts an IntEnum such as http.HTTPStatus.", "supported": false, "evidence_contexts": []},
+            {"claim": "FastAPI uses the configured status code in the response.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "FastAPI documents the status code in OpenAPI.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "For status codes that prohibit a response body, FastAPI documents that no body exists.", "supported": false, "evidence_contexts": []}
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "9c2c3aed381e923a092f8a861ae6281f2d1e376e19f4ebbc5745edd3e2e26739",
+      "question": "How does the `get_swagger_ui_html` function determine the final configuration parameters used to initialize the Swagger UI bundle, and what are the specific default settings utilized?",
+      "selection_reason": "Alternate source contains the defaults, while the retrieved evidence only partially exposes the exact copy/update implementation.",
+      "review_status": "approved",
+      "judgment": {
+        "faithfulness": {
+          "supported_claims": 8,
+          "total_claims": 8,
+          "score": 1.0,
+          "claims": [
+            {"claim": "The final Swagger UI configuration combines FastAPI defaults with custom parameters.", "supported": true, "evidence_contexts": [1, 2]},
+            {"claim": "The defaults are dom_id, layout, deepLinking, showExtensions, and showCommonExtensions with the stated values.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "A custom parameter dictionary can override defaults.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "The OpenAPI URL is normally /openapi.json.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "A typical title uses the application title followed by ' - Swagger UI'.", "supported": true, "evidence_contexts": [3]},
+            {"claim": "The JavaScript and CSS assets default to CDN URLs.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "The favicon has a default FastAPI URL.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "The OAuth2 redirect URL is normally handled by FastAPI.", "supported": true, "evidence_contexts": [2, 3]}
+          ]
+        },
+        "answer_relevancy": {
+          "band": "high",
+          "abstention_present": false,
+          "abstention_appropriate": null,
+          "notes": "Answers the merge behavior and all requested dictionary defaults; additional function-argument defaults are relevant but not necessary."
+        },
+        "context_precision": {
+          "context_relevance": [true, true, false],
+          "average_precision": 1.0,
+          "notes": ["Explains passing custom parameters and changing defaults.", "Contains the complete default dictionary.", "Shows a custom self-hosted docs call but does not support the reference's dictionary merge/default claims."]
+        },
+        "context_recall": {
+          "supported_claims": 5,
+          "total_claims": 7,
+          "score": 0.7142857142857143,
+          "claims": [
+            {"claim": "get_swagger_ui_html first copies swagger_ui_default_parameters.", "supported": false, "evidence_contexts": []},
+            {"claim": "When swagger_ui_parameters is present, the function updates the copy with its values.", "supported": false, "evidence_contexts": [], "notes": "Customization is described, but the exact update operation is not present in the retrieved excerpts."},
+            {"claim": "dom_id defaults to #swagger-ui.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "layout defaults to BaseLayout.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "deepLinking defaults to true.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "showExtensions defaults to true.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "showCommonExtensions defaults to true.", "supported": true, "evidence_contexts": [2]}
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "a678325c7a8d727d007d391d6c733117230e3c16c0778a4514fc76d4b0cb02d7",
+      "question": "How does FastAPI handle the mapping of request data when dealing with singular values versus Pydantic models, and what specific mechanism is used to wrap a single Pydantic model within a JSON key?",
+      "selection_reason": "Generated answer is grounded in retrieved text but answers the wrong topic, separating faithfulness from relevancy.",
+      "review_status": "approved",
+      "judgment": {
+        "faithfulness": {
+          "supported_claims": 4,
+          "total_claims": 4,
+          "score": 1.0,
+          "claims": [
+            {"claim": "FastAPI uses Pydantic for data serialization and conversion.", "supported": true, "evidence_contexts": [2, 3]},
+            {"claim": "A response model is used to generate JSON Schema in OpenAPI.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "OpenAPI response schemas are nested under content, media type, and schema keys.", "supported": true, "evidence_contexts": [1]},
+            {"claim": "The Item model is referenced from the OpenAPI response schema.", "supported": true, "evidence_contexts": [1]}
+          ]
+        },
+        "answer_relevancy": {
+          "band": "low",
+          "abstention_present": false,
+          "abstention_appropriate": null,
+          "notes": "Answers response-schema generation instead of request-parameter mapping and Body(embed=True)."
+        },
+        "context_precision": {
+          "context_relevance": [false, false, false],
+          "average_precision": 0.0,
+          "notes": ["Additional response OpenAPI schemas, not request-body mapping.", "Returning responses directly, not request-body mapping.", "Dataclass support, not request-body mapping."]
+        },
+        "context_recall": {
+          "supported_claims": 0,
+          "total_claims": 5,
+          "score": 0.0,
+          "claims": [
+            {"claim": "Singular values default to query parameters unless Body is used.", "supported": false, "evidence_contexts": []},
+            {"claim": "Body can place a singular value in the request body.", "supported": false, "evidence_contexts": []},
+            {"claim": "Multiple Pydantic models are nested under function-parameter-name keys.", "supported": false, "evidence_contexts": []},
+            {"claim": "A single Pydantic model normally maps directly to the root request body.", "supported": false, "evidence_contexts": []},
+            {"claim": "Body(embed=True) wraps a single model under a JSON key.", "supported": false, "evidence_contexts": []}
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "fb18f9b4198060d3feb262d04248da0c56a918df9d47c874f885a80bc1ca2a1c",
+      "question": "How did the specific limitations of APISpec and NestJS influence the design and implementation goals of FastAPI?",
+      "selection_reason": "Genuine entity-heavy retrieval miss with a mostly appropriate abstention.",
+      "review_status": "approved",
+      "judgment": {
+        "faithfulness": {
+          "supported_claims": 2,
+          "total_claims": 3,
+          "score": 0.6666666666666666,
+          "claims": [
+            {"claim": "The contexts do not contain the specific limitations of APISpec and NestJS.", "supported": true, "evidence_contexts": [1, 2, 3]},
+            {"claim": "The contexts discuss FastAPI design and implementation goals.", "supported": true, "evidence_contexts": [1, 2, 3]},
+            {"claim": "The contexts do not mention APISpec or NestJS by name.", "supported": false, "evidence_contexts": [], "notes": "Context 3 names NestJS but does not describe its limitations."}
+          ]
+        },
+        "answer_relevancy": {
+          "band": "low",
+          "abstention_present": true,
+          "abstention_appropriate": true,
+          "notes": "Does not answer the requested comparison, but abstaining is safer than inventing the missing limitations."
+        },
+        "context_precision": {
+          "context_relevance": [false, false, false],
+          "average_precision": 0.0,
+          "notes": ["General predecessor/design history without the named limitations.", "General FastAPI features.", "Names NestJS only as a comparison category and provides no limitation evidence."]
+        },
+        "context_recall": {
+          "supported_claims": 0,
+          "total_claims": 9,
+          "score": 0.0,
+          "claims": [
+            {"claim": "APISpec required YAML schemas inside Python docstrings.", "supported": false, "evidence_contexts": []},
+            {"claim": "That micro-syntax harmed editor support.", "supported": false, "evidence_contexts": []},
+            {"claim": "Separate YAML could become obsolete when code changed.", "supported": false, "evidence_contexts": []},
+            {"claim": "FastAPI therefore generates OpenAPI from validation and serialization code.", "supported": false, "evidence_contexts": []},
+            {"claim": "NestJS TypeScript types disappear after JavaScript compilation.", "supported": false, "evidence_contexts": []},
+            {"claim": "NestJS therefore requires repetitive decorators for validation, serialization, and schemas.", "supported": false, "evidence_contexts": []},
+            {"claim": "NestJS struggled with nested JSON documentation and validation.", "supported": false, "evidence_contexts": []},
+            {"claim": "FastAPI uses Python types to preserve editor support.", "supported": false, "evidence_contexts": [], "notes": "Context 1 mentions standard Python type hints generally but does not establish this APISpec/NestJS causal claim."},
+            {"claim": "FastAPI dependency injection was designed to reduce repetition.", "supported": false, "evidence_contexts": []}
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "3fc3f0074d24cfd0c79f781bc264de25956e44686a774ea4fb211cab13884216",
+      "question": "How does the recommended approach for process replication differ when deploying FastAPI applications using a custom deployment system versus using Kubernetes, and what mechanism is used to achieve this in a custom setup?",
+      "selection_reason": "Genuine retrieval miss with an appropriate abstention and broad but insufficient topical contexts.",
+      "review_status": "approved",
+      "judgment": {
+        "faithfulness": {
+          "supported_claims": 4,
+          "total_claims": 4,
+          "score": 1.0,
+          "claims": [
+            {"claim": "The custom-deployment replication mechanism is absent from the contexts.", "supported": true, "evidence_contexts": [1, 2, 3]},
+            {"claim": "The Kubernetes replication recommendation is not explicit in the contexts.", "supported": true, "evidence_contexts": [1, 2, 3]},
+            {"claim": "Containers simplify application building and deployment.", "supported": true, "evidence_contexts": [3]},
+            {"claim": "The requested exact comparison cannot be answered from these contexts.", "supported": true, "evidence_contexts": [1, 2, 3]}
+          ]
+        },
+        "answer_relevancy": {
+          "band": "low",
+          "abstention_present": true,
+          "abstention_appropriate": true,
+          "notes": "Does not provide the requested mechanism, but the contexts lack --workers and one-process-per-container evidence."
+        },
+        "context_precision": {
+          "context_relevance": [false, false, false],
+          "average_precision": 0.0,
+          "notes": ["Generic deployment overview.", "Lists replication as a concept without the mechanism or contrast.", "Generic container deployment concepts without the requested recommendation."]
+        },
+        "context_recall": {
+          "supported_claims": 0,
+          "total_claims": 5,
+          "score": 0.0,
+          "claims": [
+            {"claim": "A custom deployment can use the --workers option.", "supported": false, "evidence_contexts": []},
+            {"claim": "The option is available on fastapi or uvicorn commands.", "supported": false, "evidence_contexts": []},
+            {"claim": "Workers run multiple processes to use multiple CPU cores and handle more requests.", "supported": false, "evidence_contexts": []},
+            {"claim": "Kubernetes deployments should generally avoid internal workers.", "supported": false, "evidence_contexts": []},
+            {"claim": "Kubernetes should generally run one Uvicorn process per container.", "supported": false, "evidence_contexts": []}
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "cbc42bd98716df6aab854c1d92f0d3c8fb0b127890e8840c638a113fb4780daa",
+      "question": "What is the complete process for self-hosting the API documentation assets in a FastAPI application, and what are the benefits of doing so?",
+      "selection_reason": "Retrieval miss followed by a justified abstention plus faithful but irrelevant generic filler.",
+      "review_status": "approved",
+      "judgment": {
+        "faithfulness": {
+          "supported_claims": 6,
+          "total_claims": 6,
+          "score": 1.0,
+          "claims": [
+            {"claim": "The contexts do not explain the self-hosting process.", "supported": true, "evidence_contexts": [1, 2, 3]},
+            {"claim": "OpenAPI powers interactive documentation included with FastAPI.", "supported": true, "evidence_contexts": [3]},
+            {"claim": "OpenAPI supports automatic data-model documentation through JSON Schema.", "supported": true, "evidence_contexts": [2]},
+            {"claim": "OpenAPI supports interactive documentation systems.", "supported": true, "evidence_contexts": [3]},
+            {"claim": "OpenAPI can be used to generate client code.", "supported": true, "evidence_contexts": [3]},
+            {"claim": "More information is required to describe the self-hosting procedure.", "supported": true, "evidence_contexts": [1, 2, 3]}
+          ]
+        },
+        "answer_relevancy": {
+          "band": "low",
+          "abstention_present": true,
+          "abstention_appropriate": true,
+          "notes": "Correctly refuses the missing procedure, but substitutes generic OpenAPI benefits for the requested benefits of self-hosting."
+        },
+        "context_precision": {
+          "context_relevance": [false, false, false],
+          "average_precision": 0.0,
+          "notes": ["Generic deployment concepts.", "General OpenAPI features, not self-hosting benefits or procedure.", "General OpenAPI usage, not self-hosting assets."]
+        },
+        "context_recall": {
+          "supported_claims": 0,
+          "total_claims": 8,
+          "score": 0.0,
+          "claims": [
+            {"claim": "Self-hosting supports offline, closed-network, or no-internet operation.", "supported": false, "evidence_contexts": []},
+            {"claim": "Default docs routes should be disabled with docs_url=None and redoc_url=None.", "supported": false, "evidence_contexts": []},
+            {"claim": "Swagger UI and ReDoc JavaScript/CSS files should be downloaded locally.", "supported": false, "evidence_contexts": []},
+            {"claim": "StaticFiles should mount the asset directory.", "supported": false, "evidence_contexts": []},
+            {"claim": "get_swagger_ui_html should create Swagger UI using local asset URLs.", "supported": false, "evidence_contexts": []},
+            {"claim": "get_redoc_html should create ReDoc using a local JavaScript URL.", "supported": false, "evidence_contexts": []},
+            {"claim": "get_swagger_ui_oauth2_redirect_html should provide the OAuth2 redirect route.", "supported": false, "evidence_contexts": []},
+            {"claim": "The helpers require values such as app.openapi_url, title, and the OAuth2 redirect URL.", "supported": false, "evidence_contexts": []}
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "508a42f0beeda954d00b8e1f98ab5bce285432d0b52563d181cd28d6e23680b0",
+      "question": "How can you configure dependencies in FastAPI such that they are automatically applied to every single path operation in an application, and what is the effect of this configuration?",
+      "selection_reason": "Genuine retrieval miss with a concise appropriate abstention; link and topic mentions are not sufficient evidence.",
+      "review_status": "approved",
+      "judgment": {
+        "faithfulness": {
+          "supported_claims": 1,
+          "total_claims": 1,
+          "score": 1.0,
+          "claims": [
+            {"claim": "The retrieved contexts do not contain the global dependency configuration requested.", "supported": true, "evidence_contexts": [1, 2, 3]}
+          ]
+        },
+        "answer_relevancy": {
+          "band": "low",
+          "abstention_present": true,
+          "abstention_appropriate": true,
+          "notes": "Does not answer, but correctly refuses because the retrieved text contains no global configuration syntax or scope behavior."
+        },
+        "context_precision": {
+          "context_relevance": [false, false, false],
+          "average_precision": 0.0,
+          "notes": ["Dependency ordering fragment only.", "General dependency injection behavior without global configuration.", "Only a release-note link title for global dependencies."]
+        },
+        "context_recall": {
+          "supported_claims": 0,
+          "total_claims": 4,
+          "score": 0.0,
+          "claims": [
+            {"claim": "Global dependencies are passed to FastAPI's dependencies constructor parameter.", "supported": false, "evidence_contexts": []},
+            {"claim": "The parameter receives a list of Depends declarations such as verify_token and verify_key.", "supported": false, "evidence_contexts": []},
+            {"claim": "Those dependencies apply to every path operation.", "supported": false, "evidence_contexts": []},
+            {"claim": "They follow the same logic as decorator-level dependencies but with application-wide scope.", "supported": false, "evidence_contexts": []}
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "4767e7a5ec832b6c014546d2b5837e653aa208a5bb6e16753e814e436dfa1edd",
+      "question": "When using `APIRouter` to organize a larger FastAPI application, what is the exact sequence of execution for dependencies defined at different levels, and how are tags and responses handled when they are declared in both the `APIRouter` and a specific path operation?",
+      "selection_reason": "Rank-sensitive context-precision example with an irrelevant first chunk and partially useful later chunks.",
+      "review_status": "approved",
+      "judgment": {
+        "faithfulness": {
+          "supported_claims": 2,
+          "total_claims": 3,
+          "score": 0.6666666666666666,
+          "claims": [
+            {"claim": "The exact dependency execution sequence is absent from the retrieved contexts.", "supported": true, "evidence_contexts": [1, 2, 3]},
+            {"claim": "APIRouter-level tags and responses are applied to path operations in that router.", "supported": true, "evidence_contexts": [2, 3]},
+            {"claim": "include_router parameters override values declared on the router or its path operations.", "supported": false, "evidence_contexts": [], "notes": "The excerpts show include_router adding configuration without modifying the original router; they do not establish replacement of path-operation values."}
+          ]
+        },
+        "answer_relevancy": {
+          "band": "low",
+          "abstention_present": true,
+          "abstention_appropriate": true,
+          "notes": "Appropriately abstains on the missing dependency sequence but incorrectly claims replacement instead of combination for tags and responses."
+        },
+        "context_precision": {
+          "context_relevance": [false, true, true],
+          "average_precision": 0.5833333333333333,
+          "notes": ["Only explains path operation decorators in general.", "Shows router-level tags, dependencies, and responses applying to its path operations.", "Shows include_router adding tags, dependencies, and responses to all included path operations."]
+        },
+        "context_recall": {
+          "supported_claims": 0,
+          "total_claims": 5,
+          "score": 0.0,
+          "claims": [
+            {"claim": "Router-level dependencies execute first.", "supported": false, "evidence_contexts": []},
+            {"claim": "Path-operation-decorator dependencies execute second.", "supported": false, "evidence_contexts": []},
+            {"claim": "Normal parameter dependencies execute third.", "supported": false, "evidence_contexts": []},
+            {"claim": "Router-level and path-operation-level tags are combined.", "supported": false, "evidence_contexts": [], "notes": "The excerpts show router-level tags applying to operations but do not show both levels present or explicitly state combination."},
+            {"claim": "Router-level and path-operation-level responses are combined.", "supported": false, "evidence_contexts": [], "notes": "The excerpts show router responses applying to operations but do not show a path-specific response being retained alongside them."}
+          ]
+        }
+      }
+    }
+  ]
+}
