@@ -35,7 +35,9 @@ are recorded in [the project decision log](docs/decisions.md).
 
 - [x] Build fixed evaluation test set (50-100 high-quality Q&A pairs from FastAPI docs corpus)
 - [x] Add resumable Basic RAG runner with deterministic retrieval metrics
-- [ ] Implement Ragas evaluation pipeline (`ragas_eval.py`)
+- [x] Implement resumable Ragas evaluation pipeline
+- [x] Create an approved judge-calibration reference set with explicit label provenance
+- [ ] Calibrate and freeze the Ragas judge against the approved reference labels
 - [ ] Verify scores run end-to-end against basic RAG
 
 
@@ -109,11 +111,12 @@ ask-my-docs/
 │
 ├── evaluation/
 │   ├── test_set.json                     # Fixed — never modified after creation
-│   ├── ragas_eval.py                     # Ragas evaluation pipeline
-│   └── results/
-│       ├── exp0_chunking.json            # Experiment 0 — chunking strategy comparison
-│       ├── exp1_architecture.json        # Experiment 1 — retrieval architecture comparison
-│       └── exp2_embedder.json            # Experiment 2 — embedding model comparison
+│   ├── judge_calibration_set.json        # Approved judge-reference labels
+│   ├── run_basic_evaluation.py           # Deterministic RAG runner
+│   ├── run_ragas_evaluation.py           # LLM-judged metrics over a completed run
+│   ├── compare_judge_calibration.py      # Judge/reference agreement report
+│   ├── results/                          # Official raw runs and Ragas sidecars
+│   └── summaries/                        # Curated experiment interpretations
 │
 ├── basic_rag/
 │   └── basic_rag.py
@@ -323,8 +326,110 @@ uv run python -m evaluation.run_basic_evaluation \
 The deterministic runner records raw answers, contexts, chunk IDs, source
 metadata, per-stage latency, source hit rate, and mean reciprocal rank. It
 fingerprints the test set and chunk corpus and refuses to resume an output file
-when its configuration or inputs differ. Ragas metrics are added in the next
-evaluation step.
+when its configuration or inputs differ. Its completed result becomes the
+immutable input to the separate Ragas evaluation step.
+
+```bash
+# Add Ragas scores to the completed run without rerunning Basic RAG
+uv run python -m evaluation.run_ragas_evaluation \
+  --source-result evaluation/results/basic__semantic__nomic__llama3.1-8b__k3.json
+
+# Smoke-test all four metrics on one case using a temporary sidecar
+uv run python -m evaluation.run_ragas_evaluation \
+  --source-result evaluation/results/basic__semantic__nomic__llama3.1-8b__k3.json \
+  --limit 1 \
+  --output /tmp/ask-my-docs-ragas-smoke.json \
+  --no-resume
+```
+
+The Ragas runner measures faithfulness, answer relevancy, context precision,
+and context recall. It writes a separate sidecar linked to the source run by
+SHA-256, preserving the original answers and evidence. Progress is saved after
+each metric, and a compatible run resumes only the missing or failed scores.
+Keep the evaluator LLM, evaluator embedding model, and answer-relevancy
+strictness fixed when comparing RAG configurations. The evaluator output limit
+defaults to 4,096 tokens because Ragas structured responses can exceed its
+library default of 1,024; it is recorded as part of the sidecar configuration.
+
+### Inspect the judge calibration reference labels
+
+`evaluation/judge_calibration_set.json` contains 13 deliberately varied cases
+whose labels were reviewed by Codex against the immutable source result without
+consulting the Ragas scores, then accepted by the project owner. The file records
+these as `silver` reference labels with `human_verified: false`: they are suitable
+for this project's candidate-judge comparison, but they are not human-authored
+gold labels or an external benchmark. To spot-check a case:
+
+```bash
+CASE_ID=ff873844
+
+jq --arg id "$CASE_ID" \
+  '.results[] | select(.case_id | startswith($id)) | {
+    case_id,
+    question: .rag_result.question,
+    generated_answer: .rag_result.answer,
+    reference_answer: .reference.answer,
+    contexts: .rag_result.contexts,
+    sources: .rag_result.sources
+  }' \
+  evaluation/results/basic__semantic__nomic__llama3.1-8b__k3.json
+
+jq --arg id "$CASE_ID" \
+  '.cases[] | select(.case_id | startswith($id))' \
+  evaluation/judge_calibration_set.json
+```
+
+The first command shows the evidence; the second shows the approved atomic
+claims, support labels, context relevance, answer-relevancy band, and abstention
+judgment. Candidate judges should be compared with these labels before their
+scores are used to choose a RAG architecture. A later human audit should update
+the provenance and quality tier rather than silently presenting these labels as
+human-created.
+
+Compare a completed Ragas sidecar with the approved labels without rerunning
+retrieval, generation, or Ragas:
+
+```bash
+uv run python -m evaluation.compare_judge_calibration \
+  --ragas-result evaluation/results/ragas__basic__semantic__nomic__llama3.1-8b__k3__judge-llama3.1-8b__emb-nomic-embed-text__max-tokens-4096.json
+```
+
+The report verifies that both inputs point to the same immutable Basic RAG run,
+then records per-case errors, aggregate mean absolute error, score ranges, and
+answer-relevancy band ordering. A numeric absolute error of at least `0.5` is
+flagged as catastrophic. For answer relevancy, a reviewed `high` case scoring at
+most `0.4`, or a reviewed `low` case scoring at least `0.7`, is catastrophic.
+These flags expose large failures; they are diagnostic thresholds, not a claim
+that smaller errors are acceptable.
+
+### Score candidate judges on calibration cases only
+
+Use `--calibration-set` to score the exact approved 13 cases. This is different
+from `--limit 13`, which would merely select the first 13 cases in the source
+run. Candidate model names are passed through to the local Ollama-compatible
+endpoint and do not need to be application-generator enum values.
+
+```bash
+# Candidate 1
+uv run python -m evaluation.run_ragas_evaluation \
+  --source-result evaluation/results/basic__semantic__nomic__llama3.1-8b__k3.json \
+  --calibration-set evaluation/judge_calibration_set.json \
+  --evaluator-llm gemma4:31b-mlx
+
+# Candidate 2
+uv run python -m evaluation.run_ragas_evaluation \
+  --source-result evaluation/results/basic__semantic__nomic__llama3.1-8b__k3.json \
+  --calibration-set evaluation/judge_calibration_set.json \
+  --evaluator-llm qwen3.6:27b-mlx
+```
+
+The generated sidecar configuration records the ordered case IDs, calibration
+path, and calibration SHA-256. Its filename also contains the case count and a
+short selection fingerprint, preventing a 13-case calibration run from being
+confused with a later 50-case run. Runs remain resumable at individual
+case/metric granularity. After each run completes, pass its printed sidecar path
+to `evaluation.compare_judge_calibration`; no RAG or judge calls are made during
+that comparison step.
 
 Commit completed raw runs used for official experiments under
 `evaluation/results/`, together with concise interpretations under
