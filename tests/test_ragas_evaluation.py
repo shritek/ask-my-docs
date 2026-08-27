@@ -6,9 +6,12 @@ from types import SimpleNamespace
 import unittest
 
 from evaluation.run_ragas_evaluation import (
+    DEFAULT_EVALUATOR_LLM_MODEL,
+    DEFAULT_EVALUATOR_REASONING_EFFORT,
     RagasEvaluationConfig,
     RagasScorerSuite,
     default_output_path,
+    evaluator_llm_options,
     evaluate_ragas,
     load_source_run,
     select_source_cases,
@@ -316,6 +319,30 @@ class RagasEvaluationTests(unittest.TestCase):
                 "cases-13-abcdef12.json"
             ),
         )
+
+    def test_reasoning_effort_is_explicit_model_configuration(self):
+        self.assertEqual(DEFAULT_EVALUATOR_LLM_MODEL, "gemma4:31b-mlx")
+        self.assertEqual(DEFAULT_EVALUATOR_REASONING_EFFORT, "none")
+        self.assertEqual(
+            evaluator_llm_options(4096, "none"),
+            {"max_tokens": 4096, "reasoning_effort": "none"},
+        )
+        self.assertEqual(
+            evaluator_llm_options(4096, None),
+            {"max_tokens": 4096},
+        )
+
+        config = replace(self.config, evaluator_reasoning_effort="none")
+        self.assertEqual(config.to_dict()["evaluator_reasoning_effort"], "none")
+
+        output_path = default_output_path(
+            Path("evaluation/results/basic.json"),
+            "qwen3.6:27b-mlx",
+            "nomic-embed-text",
+            4096,
+            evaluator_reasoning_effort="none",
+        )
+        self.assertIn("reasoning-none", output_path.name)
 
 
 if __name__ == "__main__":

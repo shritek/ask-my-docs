@@ -11,15 +11,16 @@ from typing import Any
 
 from openai import AsyncOpenAI
 
-from config.settings import DEFAULT_LLM
 from evaluation.compare_judge_calibration import load_calibration
 from evaluation.ragas_compat import load_ragas_components
 from evaluation.run_basic_evaluation import sha256_file, utc_now, write_run_file
 
 
 DEFAULT_RESULTS_DIR = Path("evaluation/results")
+DEFAULT_EVALUATOR_LLM_MODEL = "gemma4:31b-mlx"
 DEFAULT_EVALUATOR_EMBEDDING_MODEL = "nomic-embed-text"
 DEFAULT_EVALUATOR_MAX_TOKENS = 4096
+DEFAULT_EVALUATOR_REASONING_EFFORT = "none"
 DEFAULT_OLLAMA_BASE_URL = "http://localhost:11434/v1"
 METRIC_NAMES = (
     "faithfulness",
@@ -30,6 +31,16 @@ METRIC_NAMES = (
 RESULT_SCHEMA_VERSION = 1
 
 logger = logging.getLogger(__name__)
+
+
+def evaluator_llm_options(
+    evaluator_max_tokens: int,
+    evaluator_reasoning_effort: str | None,
+) -> dict[str, Any]:
+    options: dict[str, Any] = {"max_tokens": evaluator_max_tokens}
+    if evaluator_reasoning_effort is not None:
+        options["reasoning_effort"] = evaluator_reasoning_effort
+    return options
 
 
 @dataclass(frozen=True)
@@ -49,6 +60,7 @@ class RagasEvaluationConfig:
     case_ids: tuple[str, ...] | None = None
     case_selection_path: str | None = None
     case_selection_sha256: str | None = None
+    evaluator_reasoning_effort: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)
@@ -59,6 +71,8 @@ class RagasEvaluationConfig:
             data.pop("case_selection_sha256")
         else:
             data["case_ids"] = list(self.case_ids)
+        if self.evaluator_reasoning_effort is None:
+            data.pop("evaluator_reasoning_effort")
         return data
 
 
@@ -72,17 +86,22 @@ class RagasScorerSuite:
         evaluator_max_tokens: int,
         ollama_base_url: str,
         answer_relevancy_strictness: int,
+        evaluator_reasoning_effort: str | None = None,
     ):
         components = load_ragas_components()
         client = AsyncOpenAI(
             api_key="ollama",
             base_url=ollama_base_url,
         )
+        llm_options = evaluator_llm_options(
+            evaluator_max_tokens,
+            evaluator_reasoning_effort,
+        )
         evaluator_llm = components["llm_factory"](
             evaluator_llm_model,
             provider="openai",
             client=client,
-            max_tokens=evaluator_max_tokens,
+            **llm_options,
         )
         evaluator_embeddings = components["embedding_factory"](
             "openai",
@@ -389,6 +408,7 @@ def default_output_path(
     evaluator_max_tokens: int,
     case_selection_sha256: str | None = None,
     case_count: int | None = None,
+    evaluator_reasoning_effort: str | None = None,
 ) -> Path:
     filename_parts = [
         "ragas",
@@ -397,6 +417,8 @@ def default_output_path(
         f"emb-{evaluator_embedding_model}",
         f"max-tokens-{evaluator_max_tokens}",
     ]
+    if evaluator_reasoning_effort is not None:
+        filename_parts.append(f"reasoning-{evaluator_reasoning_effort}")
     if case_selection_sha256 is not None:
         if case_count is None:
             raise ValueError("Selected-case output requires a case count")
@@ -415,7 +437,7 @@ def main() -> None:
     parser.add_argument("--source-result", type=Path, required=True)
     parser.add_argument(
         "--evaluator-llm",
-        default=DEFAULT_LLM.value,
+        default=DEFAULT_EVALUATOR_LLM_MODEL,
         help="Local evaluator model name exposed by Ollama",
     )
     parser.add_argument(
@@ -429,6 +451,12 @@ def main() -> None:
     )
     parser.add_argument("--ollama-base-url", default=DEFAULT_OLLAMA_BASE_URL)
     parser.add_argument("--answer-relevancy-strictness", type=int, default=3)
+    parser.add_argument(
+        "--evaluator-reasoning-effort",
+        choices=("none", "low", "medium", "high", "max"),
+        default=DEFAULT_EVALUATOR_REASONING_EFFORT,
+        help="Reasoning effort sent to Ollama's OpenAI-compatible chat endpoint",
+    )
     parser.add_argument("--output", type=Path)
     case_selection = parser.add_mutually_exclusive_group()
     case_selection.add_argument("--limit", type=int)
@@ -485,14 +513,16 @@ def main() -> None:
             else None
         ),
         case_selection_sha256=case_selection_sha256,
+        evaluator_reasoning_effort=args.evaluator_reasoning_effort,
     )
     output_path = args.output or default_output_path(
         args.source_result,
         args.evaluator_llm,
         args.evaluator_embedding_model,
         args.evaluator_max_tokens,
-        case_selection_sha256,
-        len(case_ids) if case_ids is not None else None,
+        case_selection_sha256=case_selection_sha256,
+        case_count=len(case_ids) if case_ids is not None else None,
+        evaluator_reasoning_effort=args.evaluator_reasoning_effort,
     )
     scorer_suite = RagasScorerSuite(
         evaluator_llm_model=args.evaluator_llm,
@@ -500,6 +530,7 @@ def main() -> None:
         evaluator_max_tokens=args.evaluator_max_tokens,
         ollama_base_url=args.ollama_base_url,
         answer_relevancy_strictness=args.answer_relevancy_strictness,
+        evaluator_reasoning_effort=args.evaluator_reasoning_effort,
     )
     run_data = evaluate_ragas(
         scorer_suite=scorer_suite,

@@ -37,7 +37,7 @@ are recorded in [the project decision log](docs/decisions.md).
 - [x] Add resumable Basic RAG runner with deterministic retrieval metrics
 - [x] Implement resumable Ragas evaluation pipeline
 - [x] Create an approved judge-calibration reference set with explicit label provenance
-- [ ] Calibrate and freeze the Ragas judge against the approved reference labels
+- [x] Calibrate and freeze the Ragas judge against the approved reference labels
 - [ ] Verify scores run end-to-end against basic RAG
 
 
@@ -115,6 +115,7 @@ ask-my-docs/
 │   ├── run_basic_evaluation.py           # Deterministic RAG runner
 │   ├── run_ragas_evaluation.py           # LLM-judged metrics over a completed run
 │   ├── compare_judge_calibration.py      # Judge/reference agreement report
+│   ├── compare_judge_stability.py        # Repeated-run judge stability report
 │   ├── results/                          # Official raw runs and Ragas sidecars
 │   └── summaries/                        # Curated experiment interpretations
 │
@@ -346,10 +347,16 @@ The Ragas runner measures faithfulness, answer relevancy, context precision,
 and context recall. It writes a separate sidecar linked to the source run by
 SHA-256, preserving the original answers and evidence. Progress is saved after
 each metric, and a compatible run resumes only the missing or failed scores.
+The calibrated defaults are `gemma4:31b-mlx` with reasoning effort `none` and
+`nomic-embed-text` evaluator embeddings.
 Keep the evaluator LLM, evaluator embedding model, and answer-relevancy
 strictness fixed when comparing RAG configurations. The evaluator output limit
 defaults to 4,096 tokens because Ragas structured responses can exceed its
 library default of 1,024; it is recorded as part of the sidecar configuration.
+The CLI deliberately defaults `--evaluator-reasoning-effort` to `none` as part
+of the frozen Gemma configuration. An override is recorded and represents a
+different evaluator configuration; programmatic callers that pass no value
+delegate to the model server's default.
 
 ### Inspect the judge calibration reference labels
 
@@ -414,13 +421,15 @@ endpoint and do not need to be application-generator enum values.
 uv run python -m evaluation.run_ragas_evaluation \
   --source-result evaluation/results/basic__semantic__nomic__llama3.1-8b__k3.json \
   --calibration-set evaluation/judge_calibration_set.json \
-  --evaluator-llm gemma4:31b-mlx
+  --evaluator-llm gemma4:31b-mlx \
+  --evaluator-reasoning-effort none
 
 # Candidate 2
 uv run python -m evaluation.run_ragas_evaluation \
   --source-result evaluation/results/basic__semantic__nomic__llama3.1-8b__k3.json \
   --calibration-set evaluation/judge_calibration_set.json \
-  --evaluator-llm qwen3.6:27b-mlx
+  --evaluator-llm qwen3.6:27b-mlx \
+  --evaluator-reasoning-effort none
 ```
 
 The generated sidecar configuration records the ordered case IDs, calibration
@@ -430,6 +439,37 @@ confused with a later 50-case run. Runs remain resumable at individual
 case/metric granularity. After each run completes, pass its printed sidecar path
 to `evaluation.compare_judge_calibration`; no RAG or judge calls are made during
 that comparison step.
+
+Before freezing a candidate, make a second independent run with `--no-resume`
+and a different output path, then compare the two completed sidecars:
+
+```bash
+uv run python -m evaluation.compare_judge_stability \
+  --baseline evaluation/results/<first-ragas-sidecar>.json \
+  --repeat evaluation/results/<repeated-ragas-sidecar>.json
+```
+
+The stability report requires identical evaluator configurations and case IDs.
+It records per-case score deltas and summarizes each metric's mean and maximum
+absolute drift, exact matches, and changes of at least `0.25`. That threshold is
+a diagnostic flag, not a universal judge-acceptance criterion.
+
+### Selected local judge
+
+`gemma4:31b-mlx` is the frozen local evaluator for controlled project
+experiments. It outperformed `qwen3.6:27b-mlx` on faithfulness, context
+precision, and answer-relevancy ordering while matching its context recall.
+An independent Gemma repeat reproduced 50 of 52 metric scores exactly; one
+answer-relevancy score changed by 0.0176 and one faithfulness score changed by
+0.3333. See the candidate-selection summary under `evaluation/summaries/` and
+D022–D023 in the decision log for the evidence and tradeoffs.
+
+This selection does not make Ragas ground truth. Context recall was the most
+reliable calibrated metric. Faithfulness and context precision retain documented
+edge cases, and answer relevancy failed to identify one semantically adjacent
+wrong-topic answer with every judge tested. Architecture decisions must inspect
+per-case evidence and deterministic retrieval metrics alongside aggregate Ragas
+scores.
 
 Commit completed raw runs used for official experiments under
 `evaluation/results/`, together with concise interpretations under
