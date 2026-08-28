@@ -14,6 +14,7 @@ from evaluation.run_ragas_evaluation import (
     evaluator_llm_options,
     evaluate_ragas,
     load_source_run,
+    normalize_evaluator_reasoning_effort,
     select_source_cases,
 )
 
@@ -330,6 +331,13 @@ class RagasEvaluationTests(unittest.TestCase):
         self.assertEqual(
             evaluator_llm_options(4096, None),
             {"max_tokens": 4096},
+        )
+        self.assertIsNone(
+            normalize_evaluator_reasoning_effort("server-default")
+        )
+        self.assertEqual(
+            normalize_evaluator_reasoning_effort("none"),
+            "none",
         )
 
         config = replace(self.config, evaluator_reasoning_effort="none")

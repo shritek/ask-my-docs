@@ -772,7 +772,9 @@ can change what appears to be the same evaluator configuration.
   This is a calibrated judge setting, not a general claim that reasoning should
   always be disabled.
 - Continue omitting the field when no value is supplied so existing Ragas
-  sidecars retain their original serialized configuration.
+  sidecars retain their original serialized configuration. Expose this behavior
+  as `--evaluator-reasoning-effort server-default` after `none` becomes the CLI
+  default, allowing legacy sidecars to remain resumable.
 
 ### Consequences
 

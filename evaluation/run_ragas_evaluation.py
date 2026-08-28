@@ -21,6 +21,7 @@ DEFAULT_EVALUATOR_LLM_MODEL = "gemma4:31b-mlx"
 DEFAULT_EVALUATOR_EMBEDDING_MODEL = "nomic-embed-text"
 DEFAULT_EVALUATOR_MAX_TOKENS = 4096
 DEFAULT_EVALUATOR_REASONING_EFFORT = "none"
+SERVER_DEFAULT_REASONING_EFFORT = "server-default"
 DEFAULT_OLLAMA_BASE_URL = "http://localhost:11434/v1"
 METRIC_NAMES = (
     "faithfulness",
@@ -41,6 +42,12 @@ def evaluator_llm_options(
     if evaluator_reasoning_effort is not None:
         options["reasoning_effort"] = evaluator_reasoning_effort
     return options
+
+
+def normalize_evaluator_reasoning_effort(value: str) -> str | None:
+    if value == SERVER_DEFAULT_REASONING_EFFORT:
+        return None
+    return value
 
 
 @dataclass(frozen=True)
@@ -453,9 +460,19 @@ def main() -> None:
     parser.add_argument("--answer-relevancy-strictness", type=int, default=3)
     parser.add_argument(
         "--evaluator-reasoning-effort",
-        choices=("none", "low", "medium", "high", "max"),
+        choices=(
+            SERVER_DEFAULT_REASONING_EFFORT,
+            "none",
+            "low",
+            "medium",
+            "high",
+            "max",
+        ),
         default=DEFAULT_EVALUATOR_REASONING_EFFORT,
-        help="Reasoning effort sent to Ollama's OpenAI-compatible chat endpoint",
+        help=(
+            "Reasoning effort sent to Ollama's OpenAI-compatible chat endpoint; "
+            "server-default omits the option for legacy sidecar compatibility"
+        ),
     )
     parser.add_argument("--output", type=Path)
     case_selection = parser.add_mutually_exclusive_group()
@@ -475,6 +492,9 @@ def main() -> None:
         parser.error("--evaluator-llm must not be empty")
     if args.evaluator_max_tokens < 1:
         parser.error("--evaluator-max-tokens must be at least 1")
+    args.evaluator_reasoning_effort = normalize_evaluator_reasoning_effort(
+        args.evaluator_reasoning_effort
+    )
     if args.limit is not None and args.limit < 1:
         parser.error("--limit must be at least 1")
 

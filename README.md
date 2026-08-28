@@ -355,8 +355,8 @@ defaults to 4,096 tokens because Ragas structured responses can exceed its
 library default of 1,024; it is recorded as part of the sidecar configuration.
 The CLI deliberately defaults `--evaluator-reasoning-effort` to `none` as part
 of the frozen Gemma configuration. An override is recorded and represents a
-different evaluator configuration; programmatic callers that pass no value
-delegate to the model server's default.
+different evaluator configuration. Use `server-default` to omit the option and
+resume a legacy sidecar created before reasoning effort was recorded.
 
 ### Inspect the judge calibration reference labels
 
