@@ -744,3 +744,108 @@ enum values, preventing locally available experimental judges such as
   correctly configured sidecar.
 - A candidate that passes this challenge set still requires repeated-run
   stability checks before its evaluator configuration is frozen.
+
+---
+
+## D022 — Make evaluator reasoning effort explicit
+
+- **Status:** Accepted
+- **Recorded:** 2026-08-25
+
+### Context
+
+The first `gemma4:31b-mlx` calibration case ran with the Ollama server's default
+thinking behavior. Four metric calls took about 23 minutes, or 347 seconds per
+metric on average. Repeating that case with reasoning effort set to `none`
+produced the same four scores while reducing average metric latency to about 49
+seconds. Leaving thinking behavior implicit also means a server or model default
+can change what appears to be the same evaluator configuration.
+
+### Decision
+
+- Add an optional `--evaluator-reasoning-effort` setting with the values
+  supported by Ollama's OpenAI-compatible endpoint: `none`, `low`, `medium`,
+  `high`, and `max`.
+- Pass an explicitly selected value through the Ragas LLM adapter and record it
+  in both the sidecar configuration and generated filename.
+- Use `reasoning_effort=none` for the Gemma and Qwen calibration experiments.
+  This is a calibrated judge setting, not a general claim that reasoning should
+  always be disabled.
+- Continue omitting the field when no value is supplied so existing Ragas
+  sidecars retain their original serialized configuration. Expose this behavior
+  as `--evaluator-reasoning-effort server-default` after `none` becomes the CLI
+  default, allowing legacy sidecars to remain resumable.
+
+### Consequences
+
+- Candidate comparisons no longer accidentally mix different thinking modes.
+- The observed one-case Gemma speedup makes independent repeated runs feasible
+  on local hardware, but the repeated full calibration set must still establish
+  score stability.
+- A future evaluator model or Ragas prompt change requires recalibration even if
+  `reasoning_effort=none` remains fixed.
+
+---
+
+## D023 — Freeze Gemma as a qualified local Ragas judge
+
+- **Status:** Accepted
+- **Recorded:** 2026-08-25
+
+### Context
+
+The approved 13-case challenge set was scored with `gemma4:31b-mlx` and
+`qwen3.6:27b-mlx` under the same Ragas configuration. Gemma had lower
+faithfulness MAE (0.1809 versus 0.2314), lower context-precision MAE (0.1603
+versus 0.2756), and better answer-relevancy band ordering (0.92 versus 0.89).
+Both had context-recall MAE 0.0517. Gemma produced 5 catastrophic metric
+disagreements across 5 cases; Qwen produced 7 across 6 cases. Qwen was about
+20% faster but had one transient structured-output schema failure that required
+resuming the failed metric.
+
+An independent second Gemma pass reproduced all 13 context-precision and
+context-recall scores exactly. Twelve of 13 answer-relevancy scores were exact;
+the other changed by 0.0176. Twelve of 13 faithfulness scores were exact; case
+`4767e7a5` changed from 0.3333 to 0.0. Faithfulness therefore had mean absolute
+repeat drift 0.0256 and one material change under the 0.25 diagnostic threshold.
+
+Manual failure analysis also showed that the remaining flags are not
+interchangeable. They include a clear lifespan context-precision error,
+debatable partial-context boundaries, difficulty scoring an abstention's
+absence claim, and a wrong-topic answer that all three tested judges rated as
+answer-relevant. The last failure is a Ragas answer-relevancy design limitation,
+not evidence that Gemma alone is defective.
+
+### Decision
+
+- Freeze `gemma4:31b-mlx` as the project's local Ragas judge with Ragas 0.4.3,
+  `reasoning_effort=none`, `nomic-embed-text` evaluator embeddings, a 4,096-token
+  output limit, and answer-relevancy strictness 3.
+- Make that judge and reasoning setting the Ragas runner defaults. Keep every
+  setting serialized in result sidecars so an explicit CLI override forms a
+  distinct evaluator configuration.
+- Treat Gemma as the best calibrated candidate available for controlled
+  architecture comparisons, not as ground truth and not as a production
+  quality gate.
+- Interpret context recall as the strongest calibrated metric. Use
+  faithfulness and context precision with their documented failure cases.
+  Never use answer relevancy alone to detect wrong-topic answers.
+- Retain deterministic source metrics, raw evidence, and manual audit alongside
+  Ragas scores. Do not relabel the silver challenge cases after observing
+  candidate outputs merely to improve agreement.
+- Measure repeated-run stability with a deterministic report that rejects
+  configuration or case-set mismatches and flags score deltas of at least 0.25.
+
+### Consequences
+
+- Phase 3 judge calibration is complete, so full Basic RAG scoring and chunking
+  experiments can proceed with a fixed evaluator configuration.
+- Full 50-case Ragas evaluation will be slower than Qwen by roughly 20% on the
+  measured local hardware, a deliberate trade for better reference agreement
+  and cleaner structured-output behavior.
+- Aggregate score changes must be traced back to per-case results before making
+  architecture decisions, especially for answer relevancy and partial-context
+  cases.
+- Judge, Ragas, prompt, embedding, reasoning, strictness, or output-limit
+  changes create a new calibration regime and require a fresh comparison before
+  results are placed on the same chart.

@@ -1,0 +1,664 @@
+{
+  "schema_version": 1,
+  "calibration": {
+    "path": "evaluation/judge_calibration_set.json",
+    "sha256": "ff02dc992005ad34f6acbdcea0218fc6588f44d81c25c7d71230da634d73ec20",
+    "name": "basic_semantic_judge_calibration_v1",
+    "labeling": {
+      "label_source": "codex_reviewed",
+      "quality_tier": "silver",
+      "review_status": "approved_for_project_calibration",
+      "reviewed_by": "OpenAI Codex",
+      "reviewed_at": "2026-08-21",
+      "accepted_by": "project_owner",
+      "accepted_at": "2026-08-21",
+      "human_verified": false,
+      "method": "Each label was checked against the immutable generated answer, reference answer, and retrieved contexts without consulting the Ragas scores. The project owner accepted AI-reviewed labels for this straightforward documentation corpus.",
+      "usage": "Treat these as trusted project reference labels for comparing candidate judges, not as human-authored gold labels or an external benchmark."
+    },
+    "source_result_sha256": "72e93b90bef51a2566887c958152ef7ca611bb804c5c3f1fcd417d1e2176439f"
+  },
+  "ragas_result": {
+    "path": "evaluation/results/ragas__basic__semantic__nomic__llama3.1-8b__k3__judge-gemma4-31b-mlx__emb-nomic-embed-text__max-tokens-4096__reasoning-none__cases-13-ff02dc99__repeat-2.json",
+    "sha256": "f09b17c80e8a7eea25ed7ac80d1b4ad1fe78cc6990e95856ea23205ab6716d12",
+    "config": {
+      "source_result_path": "evaluation/results/basic__semantic__nomic__llama3.1-8b__k3.json",
+      "source_result_sha256": "72e93b90bef51a2566887c958152ef7ca611bb804c5c3f1fcd417d1e2176439f",
+      "evaluator_llm_model": "gemma4:31b-mlx",
+      "evaluator_embedding_model": "nomic-embed-text",
+      "evaluator_max_tokens": 4096,
+      "ollama_base_url": "http://localhost:11434/v1",
+      "answer_relevancy_strictness": 3,
+      "metric_names": [
+        "faithfulness",
+        "answer_relevancy",
+        "context_precision",
+        "context_recall"
+      ],
+      "ragas_version": "0.4.3",
+      "case_limit": null,
+      "case_ids": [
+        "61bbe83675590aff3b3bb589b6d594faca6e2698e4958c8d8c3b005a703bb2ae",
+        "ff8738442805fa52a4b8982779958e8c8ffd68cc98128ee931f709c8fbeeb4b3",
+        "d0f46c10aaa7e35fbc2732145db487c2f4faa8759f1596a21a3d45af9a710f31",
+        "d4c5e6adb6484e771045a9e3a513e61f9622af38ebf45d1dde6a33e12d5c396d",
+        "00592e5d6a6b50cd205ec9afdbf38610a4f7c8355e1a30e3ac43cd218111f05d",
+        "2063af3d2ac44bd5d276dc6ee3441720767635fb79a79efa8cc872320c3c6580",
+        "9c2c3aed381e923a092f8a861ae6281f2d1e376e19f4ebbc5745edd3e2e26739",
+        "a678325c7a8d727d007d391d6c733117230e3c16c0778a4514fc76d4b0cb02d7",
+        "fb18f9b4198060d3feb262d04248da0c56a918df9d47c874f885a80bc1ca2a1c",
+        "3fc3f0074d24cfd0c79f781bc264de25956e44686a774ea4fb211cab13884216",
+        "cbc42bd98716df6aab854c1d92f0d3c8fb0b127890e8840c638a113fb4780daa",
+        "508a42f0beeda954d00b8e1f98ab5bce285432d0b52563d181cd28d6e23680b0",
+        "4767e7a5ec832b6c014546d2b5837e653aa208a5bb6e16753e814e436dfa1edd"
+      ],
+      "case_selection_path": "evaluation/judge_calibration_set.json",
+      "case_selection_sha256": "ff02dc992005ad34f6acbdcea0218fc6588f44d81c25c7d71230da634d73ec20",
+      "evaluator_reasoning_effort": "none"
+    }
+  },
+  "thresholds": {
+    "numeric_catastrophic_absolute_error": 0.5,
+    "answer_relevancy_high_case_max_score": 0.4,
+    "answer_relevancy_low_case_min_score": 0.7
+  },
+  "summary": {
+    "compared_cases": 13,
+    "numeric_metrics": {
+      "faithfulness": {
+        "reference_mean": 0.8717948717948718,
+        "judge_mean": 0.7165750915750915,
+        "mean_signed_error": -0.15521978021978022,
+        "mean_absolute_error": 0.2065018315018315,
+        "max_absolute_error": 0.6666666666666666,
+        "reference_range": [
+          0.0,
+          1.0
+        ],
+        "judge_range": [
+          0.0,
+          1.0
+        ],
+        "catastrophic_disagreements": 2
+      },
+      "context_precision": {
+        "reference_mean": 0.5833333333333333,
+        "judge_mean": 0.4230769230423077,
+        "mean_signed_error": -0.1602564102910256,
+        "mean_absolute_error": 0.1602564102910256,
+        "max_absolute_error": 1.0,
+        "reference_range": [
+          0.0,
+          1.0
+        ],
+        "judge_range": [
+          0.0,
+          0.99999999995
+        ],
+        "catastrophic_disagreements": 3
+      },
+      "context_recall": {
+        "reference_mean": 0.4235347985347986,
+        "judge_mean": 0.37179487179487175,
+        "mean_signed_error": -0.05173992673992674,
+        "mean_absolute_error": 0.05173992673992674,
+        "max_absolute_error": 0.380952380952381,
+        "reference_range": [
+          0.0,
+          1.0
+        ],
+        "judge_range": [
+          0.0,
+          1.0
+        ],
+        "catastrophic_disagreements": 0
+      }
+    },
+    "answer_relevancy": {
+      "by_reference_band": {
+        "low": {
+          "count": 7,
+          "judge_mean": 0.14135234005591232,
+          "judge_range": [
+            0.0,
+            0.9894663803913862
+          ]
+        },
+        "medium": {
+          "count": 2,
+          "judge_mean": 0.884133446325599,
+          "judge_range": [
+            0.8310605418439193,
+            0.9372063508072787
+          ]
+        },
+        "high": {
+          "count": 4,
+          "judge_mean": 0.9862298817756245,
+          "judge_range": [
+            0.9636429262159604,
+            0.9999999999999994
+          ]
+        }
+      },
+      "pairwise_band_ordering": {
+        "pairs": 50,
+        "ordered": 46,
+        "tied": 0,
+        "reversed": 4,
+        "accuracy": 0.92
+      },
+      "catastrophic_disagreements": 1
+    },
+    "total_catastrophic_disagreements": 6,
+    "cases_with_catastrophic_disagreement": 5,
+    "catastrophic_case_ids": [
+      "00592e5d6a6b50cd205ec9afdbf38610a4f7c8355e1a30e3ac43cd218111f05d",
+      "4767e7a5ec832b6c014546d2b5837e653aa208a5bb6e16753e814e436dfa1edd",
+      "508a42f0beeda954d00b8e1f98ab5bce285432d0b52563d181cd28d6e23680b0",
+      "9c2c3aed381e923a092f8a861ae6281f2d1e376e19f4ebbc5745edd3e2e26739",
+      "a678325c7a8d727d007d391d6c733117230e3c16c0778a4514fc76d4b0cb02d7"
+    ],
+    "catastrophic_disagreements": [
+      {
+        "case_id": "00592e5d6a6b50cd205ec9afdbf38610a4f7c8355e1a30e3ac43cd218111f05d",
+        "metric": "context_precision",
+        "reference": 1.0,
+        "judge": 0.0,
+        "severity": 1.0
+      },
+      {
+        "case_id": "a678325c7a8d727d007d391d6c733117230e3c16c0778a4514fc76d4b0cb02d7",
+        "metric": "answer_relevancy",
+        "reference": "low",
+        "judge": 0.9894663803913862,
+        "severity": 0.9894663803913862
+      },
+      {
+        "case_id": "4767e7a5ec832b6c014546d2b5837e653aa208a5bb6e16753e814e436dfa1edd",
+        "metric": "faithfulness",
+        "reference": 0.6666666666666666,
+        "judge": 0.0,
+        "severity": 0.6666666666666666
+      },
+      {
+        "case_id": "4767e7a5ec832b6c014546d2b5837e653aa208a5bb6e16753e814e436dfa1edd",
+        "metric": "context_precision",
+        "reference": 0.5833333333333333,
+        "judge": 0.0,
+        "severity": 0.5833333333333333
+      },
+      {
+        "case_id": "9c2c3aed381e923a092f8a861ae6281f2d1e376e19f4ebbc5745edd3e2e26739",
+        "metric": "context_precision",
+        "reference": 1.0,
+        "judge": 0.49999999995,
+        "severity": 0.50000000005
+      },
+      {
+        "case_id": "508a42f0beeda954d00b8e1f98ab5bce285432d0b52563d181cd28d6e23680b0",
+        "metric": "faithfulness",
+        "reference": 1.0,
+        "judge": 0.5,
+        "severity": 0.5
+      }
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "61bbe83675590aff3b3bb589b6d594faca6e2698e4958c8d8c3b005a703bb2ae",
+      "question": "Why is comparing the raw benchmark performance of FastAPI directly against Starlette potentially misleading when considering real-world API development?",
+      "selection_reason": "Clear positive example with relevant evidence ranked first and a complete grounded answer.",
+      "metrics": {
+        "faithfulness": {
+          "reference": 1.0,
+          "judge": 1.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "context_precision": {
+          "reference": 1.0,
+          "judge": 0.99999999995,
+          "signed_error": -5.000000413701855e-11,
+          "absolute_error": 5.000000413701855e-11,
+          "catastrophic": false
+        },
+        "context_recall": {
+          "reference": 1.0,
+          "judge": 1.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "answer_relevancy": {
+          "reference_band": "high",
+          "judge": 0.9636429262159604,
+          "abstention_present": false,
+          "abstention_appropriate": null,
+          "catastrophic": false
+        }
+      }
+    },
+    {
+      "case_id": "ff8738442805fa52a4b8982779958e8c8ffd68cc98128ee931f709c8fbeeb4b3",
+      "question": "What is the technical relationship between Pydantic's Field and FastAPI's Query, Path, and Body tools in terms of their class hierarchy?",
+      "selection_reason": "Clearly grounded positive example that the llama3.1:8b judge incorrectly scored as unfaithful.",
+      "metrics": {
+        "faithfulness": {
+          "reference": 1.0,
+          "judge": 1.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "context_precision": {
+          "reference": 1.0,
+          "judge": 0.9999999999,
+          "signed_error": -1.000000082740371e-10,
+          "absolute_error": 1.000000082740371e-10,
+          "catastrophic": false
+        },
+        "context_recall": {
+          "reference": 1.0,
+          "judge": 1.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "answer_relevancy": {
+          "reference_band": "high",
+          "judge": 0.9999999999999994,
+          "abstention_present": false,
+          "abstention_appropriate": null,
+          "catastrophic": false
+        }
+      }
+    },
+    {
+      "case_id": "d0f46c10aaa7e35fbc2732145db487c2f4faa8759f1596a21a3d45af9a710f31",
+      "question": "Why is it not possible to declare both Form parameters and JSON Body fields within a single FastAPI path operation, and what is the technical reason for this limitation?",
+      "selection_reason": "Concise positive example supported by two complementary contexts.",
+      "metrics": {
+        "faithfulness": {
+          "reference": 1.0,
+          "judge": 1.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "context_precision": {
+          "reference": 1.0,
+          "judge": 0.99999999995,
+          "signed_error": -5.000000413701855e-11,
+          "absolute_error": 5.000000413701855e-11,
+          "catastrophic": false
+        },
+        "context_recall": {
+          "reference": 1.0,
+          "judge": 1.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "answer_relevancy": {
+          "reference_band": "high",
+          "judge": 0.9870814462221101,
+          "abstention_present": false,
+          "abstention_appropriate": null,
+          "catastrophic": false
+        }
+      }
+    },
+    {
+      "case_id": "d4c5e6adb6484e771045a9e3a513e61f9622af38ebf45d1dde6a33e12d5c396d",
+      "question": "How does FastAPI handle request bodies declared as dictionaries with non-string keys (such as int), given that JSON only supports strings as keys?",
+      "selection_reason": "Retriever supplied complete evidence, but the generator incorrectly abstained.",
+      "metrics": {
+        "faithfulness": {
+          "reference": 0.0,
+          "judge": 0.3333333333333333,
+          "signed_error": 0.3333333333333333,
+          "absolute_error": 0.3333333333333333,
+          "catastrophic": false
+        },
+        "context_precision": {
+          "reference": 1.0,
+          "judge": 0.9999999999,
+          "signed_error": -1.000000082740371e-10,
+          "absolute_error": 1.000000082740371e-10,
+          "catastrophic": false
+        },
+        "context_recall": {
+          "reference": 1.0,
+          "judge": 1.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "answer_relevancy": {
+          "reference_band": "low",
+          "judge": 0.0,
+          "abstention_present": true,
+          "abstention_appropriate": false,
+          "catastrophic": false
+        }
+      }
+    },
+    {
+      "case_id": "00592e5d6a6b50cd205ec9afdbf38610a4f7c8355e1a30e3ac43cd218111f05d",
+      "question": "How does FastAPI's `lifespan` parameter manage application resources, and what are its critical limitations regarding deprecated event handlers and sub-applications?",
+      "selection_reason": "Faithful but incomplete answer from repetitive contexts that cover only one required fact.",
+      "metrics": {
+        "faithfulness": {
+          "reference": 1.0,
+          "judge": 0.7142857142857143,
+          "signed_error": -0.2857142857142857,
+          "absolute_error": 0.2857142857142857,
+          "catastrophic": false
+        },
+        "context_precision": {
+          "reference": 1.0,
+          "judge": 0.0,
+          "signed_error": -1.0,
+          "absolute_error": 1.0,
+          "catastrophic": true
+        },
+        "context_recall": {
+          "reference": 0.125,
+          "judge": 0.0,
+          "signed_error": -0.125,
+          "absolute_error": 0.125,
+          "catastrophic": false
+        },
+        "answer_relevancy": {
+          "reference_band": "medium",
+          "judge": 0.8310605418439193,
+          "abstention_present": true,
+          "abstention_appropriate": true,
+          "catastrophic": false
+        }
+      }
+    },
+    {
+      "case_id": "2063af3d2ac44bd5d276dc6ee3441720767635fb79a79efa8cc872320c3c6580",
+      "question": "In FastAPI, where should the 'status_code' parameter be declared when defining a path operation, what data types can it accept, and how does this affect the generated OpenAPI documentation?",
+      "selection_reason": "Useful alternate page retrieves most, but not all, required facts.",
+      "metrics": {
+        "faithfulness": {
+          "reference": 1.0,
+          "judge": 1.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "context_precision": {
+          "reference": 1.0,
+          "judge": 0.9999999999,
+          "signed_error": -1.000000082740371e-10,
+          "absolute_error": 1.000000082740371e-10,
+          "catastrophic": false
+        },
+        "context_recall": {
+          "reference": 0.6666666666666666,
+          "judge": 0.5,
+          "signed_error": -0.16666666666666663,
+          "absolute_error": 0.16666666666666663,
+          "catastrophic": false
+        },
+        "answer_relevancy": {
+          "reference_band": "medium",
+          "judge": 0.9372063508072787,
+          "abstention_present": false,
+          "abstention_appropriate": null,
+          "catastrophic": false
+        }
+      }
+    },
+    {
+      "case_id": "9c2c3aed381e923a092f8a861ae6281f2d1e376e19f4ebbc5745edd3e2e26739",
+      "question": "How does the `get_swagger_ui_html` function determine the final configuration parameters used to initialize the Swagger UI bundle, and what are the specific default settings utilized?",
+      "selection_reason": "Alternate source contains the defaults, while the retrieved evidence only partially exposes the exact copy/update implementation.",
+      "metrics": {
+        "faithfulness": {
+          "reference": 1.0,
+          "judge": 0.9285714285714286,
+          "signed_error": -0.0714285714285714,
+          "absolute_error": 0.0714285714285714,
+          "catastrophic": false
+        },
+        "context_precision": {
+          "reference": 1.0,
+          "judge": 0.49999999995,
+          "signed_error": -0.50000000005,
+          "absolute_error": 0.50000000005,
+          "catastrophic": true
+        },
+        "context_recall": {
+          "reference": 0.7142857142857143,
+          "judge": 0.3333333333333333,
+          "signed_error": -0.380952380952381,
+          "absolute_error": 0.380952380952381,
+          "catastrophic": false
+        },
+        "answer_relevancy": {
+          "reference_band": "high",
+          "judge": 0.9941951546644283,
+          "abstention_present": false,
+          "abstention_appropriate": null,
+          "catastrophic": false
+        }
+      }
+    },
+    {
+      "case_id": "a678325c7a8d727d007d391d6c733117230e3c16c0778a4514fc76d4b0cb02d7",
+      "question": "How does FastAPI handle the mapping of request data when dealing with singular values versus Pydantic models, and what specific mechanism is used to wrap a single Pydantic model within a JSON key?",
+      "selection_reason": "Generated answer is grounded in retrieved text but answers the wrong topic, separating faithfulness from relevancy.",
+      "metrics": {
+        "faithfulness": {
+          "reference": 1.0,
+          "judge": 1.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "context_precision": {
+          "reference": 0.0,
+          "judge": 0.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "context_recall": {
+          "reference": 0.0,
+          "judge": 0.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "answer_relevancy": {
+          "reference_band": "low",
+          "judge": 0.9894663803913862,
+          "abstention_present": false,
+          "abstention_appropriate": null,
+          "catastrophic": true
+        }
+      }
+    },
+    {
+      "case_id": "fb18f9b4198060d3feb262d04248da0c56a918df9d47c874f885a80bc1ca2a1c",
+      "question": "How did the specific limitations of APISpec and NestJS influence the design and implementation goals of FastAPI?",
+      "selection_reason": "Genuine entity-heavy retrieval miss with a mostly appropriate abstention.",
+      "metrics": {
+        "faithfulness": {
+          "reference": 0.6666666666666666,
+          "judge": 0.25,
+          "signed_error": -0.41666666666666663,
+          "absolute_error": 0.41666666666666663,
+          "catastrophic": false
+        },
+        "context_precision": {
+          "reference": 0.0,
+          "judge": 0.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "context_recall": {
+          "reference": 0.0,
+          "judge": 0.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "answer_relevancy": {
+          "reference_band": "low",
+          "judge": 0.0,
+          "abstention_present": true,
+          "abstention_appropriate": true,
+          "catastrophic": false
+        }
+      }
+    },
+    {
+      "case_id": "3fc3f0074d24cfd0c79f781bc264de25956e44686a774ea4fb211cab13884216",
+      "question": "How does the recommended approach for process replication differ when deploying FastAPI applications using a custom deployment system versus using Kubernetes, and what mechanism is used to achieve this in a custom setup?",
+      "selection_reason": "Genuine retrieval miss with an appropriate abstention and broad but insufficient topical contexts.",
+      "metrics": {
+        "faithfulness": {
+          "reference": 1.0,
+          "judge": 0.875,
+          "signed_error": -0.125,
+          "absolute_error": 0.125,
+          "catastrophic": false
+        },
+        "context_precision": {
+          "reference": 0.0,
+          "judge": 0.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "context_recall": {
+          "reference": 0.0,
+          "judge": 0.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "answer_relevancy": {
+          "reference_band": "low",
+          "judge": 0.0,
+          "abstention_present": true,
+          "abstention_appropriate": true,
+          "catastrophic": false
+        }
+      }
+    },
+    {
+      "case_id": "cbc42bd98716df6aab854c1d92f0d3c8fb0b127890e8840c638a113fb4780daa",
+      "question": "What is the complete process for self-hosting the API documentation assets in a FastAPI application, and what are the benefits of doing so?",
+      "selection_reason": "Retrieval miss followed by a justified abstention plus faithful but irrelevant generic filler.",
+      "metrics": {
+        "faithfulness": {
+          "reference": 1.0,
+          "judge": 0.7142857142857143,
+          "signed_error": -0.2857142857142857,
+          "absolute_error": 0.2857142857142857,
+          "catastrophic": false
+        },
+        "context_precision": {
+          "reference": 0.0,
+          "judge": 0.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "context_recall": {
+          "reference": 0.0,
+          "judge": 0.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "answer_relevancy": {
+          "reference_band": "low",
+          "judge": 0.0,
+          "abstention_present": true,
+          "abstention_appropriate": true,
+          "catastrophic": false
+        }
+      }
+    },
+    {
+      "case_id": "508a42f0beeda954d00b8e1f98ab5bce285432d0b52563d181cd28d6e23680b0",
+      "question": "How can you configure dependencies in FastAPI such that they are automatically applied to every single path operation in an application, and what is the effect of this configuration?",
+      "selection_reason": "Genuine retrieval miss with a concise appropriate abstention; link and topic mentions are not sufficient evidence.",
+      "metrics": {
+        "faithfulness": {
+          "reference": 1.0,
+          "judge": 0.5,
+          "signed_error": -0.5,
+          "absolute_error": 0.5,
+          "catastrophic": true
+        },
+        "context_precision": {
+          "reference": 0.0,
+          "judge": 0.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "context_recall": {
+          "reference": 0.0,
+          "judge": 0.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "answer_relevancy": {
+          "reference_band": "low",
+          "judge": 0.0,
+          "abstention_present": true,
+          "abstention_appropriate": true,
+          "catastrophic": false
+        }
+      }
+    },
+    {
+      "case_id": "4767e7a5ec832b6c014546d2b5837e653aa208a5bb6e16753e814e436dfa1edd",
+      "question": "When using `APIRouter` to organize a larger FastAPI application, what is the exact sequence of execution for dependencies defined at different levels, and how are tags and responses handled when they are declared in both the `APIRouter` and a specific path operation?",
+      "selection_reason": "Rank-sensitive context-precision example with an irrelevant first chunk and partially useful later chunks.",
+      "metrics": {
+        "faithfulness": {
+          "reference": 0.6666666666666666,
+          "judge": 0.0,
+          "signed_error": -0.6666666666666666,
+          "absolute_error": 0.6666666666666666,
+          "catastrophic": true
+        },
+        "context_precision": {
+          "reference": 0.5833333333333333,
+          "judge": 0.0,
+          "signed_error": -0.5833333333333333,
+          "absolute_error": 0.5833333333333333,
+          "catastrophic": true
+        },
+        "context_recall": {
+          "reference": 0.0,
+          "judge": 0.0,
+          "signed_error": 0.0,
+          "absolute_error": 0.0,
+          "catastrophic": false
+        },
+        "answer_relevancy": {
+          "reference_band": "low",
+          "judge": 0.0,
+          "abstention_present": true,
+          "abstention_appropriate": true,
+          "catastrophic": false
+        }
+      }
+    }
+  ]
+}
