@@ -38,6 +38,8 @@ are recorded in [the project decision log](docs/decisions.md).
 - [x] Implement resumable Ragas evaluation pipeline
 - [x] Create an approved judge-calibration reference set with explicit label provenance
 - [x] Calibrate and freeze the Ragas judge against the approved reference labels
+- [x] Add pooled chunk-level retrieval evaluation infrastructure
+- [x] Build and approve frozen chunk-level retrieval judgments
 - [ ] Verify scores run end-to-end against basic RAG
 
 
@@ -114,8 +116,14 @@ ask-my-docs/
 │   ├── judge_calibration_set.json        # Approved judge-reference labels
 │   ├── run_basic_evaluation.py           # Deterministic RAG runner
 │   ├── run_ragas_evaluation.py           # LLM-judged metrics over a completed run
+│   ├── generate_retrieval_pool.py        # Top-N candidates across chunking strategies
+│   ├── initialize_retrieval_qrels.py     # Auditable chunk-judgment template
+│   ├── propose_retrieval_qrels.py        # Resumable local-model label proposals
+│   ├── finalize_retrieval_qrels.py       # Apply reviewed corrections and approval
+│   ├── score_ranked_retrieval.py         # Deterministic chunk-ranking metrics
 │   ├── compare_judge_calibration.py      # Judge/reference agreement report
 │   ├── compare_judge_stability.py        # Repeated-run judge stability report
+│   ├── retrieval_pools/                  # Official pooled retrieval candidates
 │   ├── results/                          # Official raw runs and Ragas sidecars
 │   └── summaries/                        # Curated experiment interpretations
 │
@@ -357,6 +365,86 @@ The CLI deliberately defaults `--evaluator-reasoning-effort` to `none` as part
 of the frozen Gemma configuration. An override is recorded and represents a
 different evaluator configuration. Use `server-default` to omit the option and
 resume a legacy sidecar created before reasoning effort was recorded.
+
+### Evaluate chunk ranking with frozen relevance judgments
+
+The source hit rate in a Basic RAG run only checks whether the expected page
+appears. It cannot tell whether each retrieved chunk contains useful evidence,
+whether relevant chunks were ranked early, or whether the retrieved set covers
+all claims required by the reference answer. The workflow below creates and
+scores chunk-level relevance judgments (qrels).
+
+The committed pool and approved labels are already available: run step 4 alone
+to reproduce the scores without Ollama. Steps 1–3 document how the artifacts
+were created. For a new labeling run, use new output paths throughout; the
+generation commands overwrite their outputs, and the existing review manifest
+is valid only for its fingerprinted proposal.
+
+```bash
+# 1. Retrieve the top 10 chunks from every chunking strategy without generation
+uv run python -m evaluation.generate_retrieval_pool \
+  --embedder nomic \
+  --pool-depth 10
+
+# 2. Generate resumable Gemma proposals for later review
+uv run python -m evaluation.propose_retrieval_qrels \
+  --pool evaluation/retrieval_pools/all-strategies__nomic__pool-k10.json \
+  --output evaluation/retrieval_qrels__all-strategies__nomic__pool-k10__proposed-gemma4-31b-mlx.json
+
+# 3. Apply the recorded review without overwriting the raw proposals
+uv run python -m evaluation.finalize_retrieval_qrels \
+  --pool evaluation/retrieval_pools/all-strategies__nomic__pool-k10.json \
+  --proposal evaluation/retrieval_qrels__all-strategies__nomic__pool-k10__proposed-gemma4-31b-mlx.json \
+  --review evaluation/retrieval_qrels_review.json \
+  --output evaluation/retrieval_qrels__all-strategies__nomic__pool-k10.json
+
+# 4. Calculate fixed metrics from the approved qrels
+uv run python -m evaluation.score_ranked_retrieval \
+  --pool evaluation/retrieval_pools/all-strategies__nomic__pool-k10.json \
+  --qrels evaluation/retrieval_qrels__all-strategies__nomic__pool-k10.json \
+  --cutoff 1 --cutoff 3 --cutoff 5 --cutoff 10 \
+  --output evaluation/results/ranked-retrieval__all-strategies__nomic__pool-k10.json
+```
+
+For manual labeling instead of model proposals, initialize a separate template:
+
+```bash
+uv run python -m evaluation.initialize_retrieval_qrels \
+  --pool evaluation/retrieval_pools/all-strategies__nomic__pool-k10.json \
+  --output /tmp/ask-my-docs-retrieval-qrels-template.json
+```
+
+Complete all claims, judgments, and labeling provenance in that template before
+using it as the scorer's `--qrels` input. The proposal finalizer applies only to
+the model-proposal workflow above.
+
+The pool records each strategy's ranked chunk IDs plus chunk text and
+provenance, deduplicating only repeated stable chunk IDs. The qrels file splits
+each reference answer into required claims and marks a chunk relevant exactly
+when it supports at least one of those claims. Keeping the pool, raw proposals,
+review manifest, and approved judgments separate makes corrections auditable
+and prevents labels from changing when the scorer changes.
+
+The proposal runner uses the frozen Gemma model with reasoning disabled and
+temperature zero, but a task-specific labeling prompt and an 8,192-token output
+limit (Ragas uses 4,096). Ragas calibration does not independently validate this
+labeling task. The runner checkpoints every case and retries failed cases on resume.
+It removes strategy names, ranks, source URLs, and stable chunk IDs from the
+model prompt, using short opaque aliases in a stable shuffled order to reduce
+strategy-selection bias and long-ID transcription failures. Model output is
+recorded as `generated_pending_review`, not approved qrels. The finalizer
+requires an exact proposal fingerprint and applies the review manifest; the
+scorer rejects artifacts that have not crossed that review boundary.
+
+The deterministic report contains Hit@K, Precision@K, MRR@K, binary nDCG@K,
+claim coverage@K, and pooled Recall@K. Because chunk boundaries differ between
+strategies, pooled recall uses the relevant chunks found in that strategy's
+top-10 labeled pool as its denominator. It measures recall within the judged
+pool, not exhaustive recall over the entire corpus. Claim coverage uses the
+same reference claims for every strategy and is the more direct context-
+sufficiency measure. These metrics complement rather than replace Ragas.
+The first ranked report is interpreted in
+`evaluation/summaries/ranked-retrieval__all-strategies__nomic__pool-k10.md`.
 
 ### Inspect the judge calibration reference labels
 

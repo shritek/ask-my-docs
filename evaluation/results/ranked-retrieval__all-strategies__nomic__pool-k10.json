@@ -1,0 +1,5480 @@
+{
+  "schema_version": 1,
+  "config": {
+    "chunking_strategies": [
+      "recursive-500",
+      "recursive-1000",
+      "semantic"
+    ],
+    "pool_depth": 10,
+    "cutoffs": [
+      1,
+      3,
+      5,
+      10
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "61bbe83675590aff3b3bb589b6d594faca6e2698e4958c8d8c3b005a703bb2ae",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.2,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.2
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.4,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 0.4
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.6,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6992148198508501,
+            "claim_coverage_at_k": 0.4
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.5,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9143656167316337,
+            "claim_coverage_at_k": 0.8
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.2,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.4
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.6,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.6,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7227265726449519,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.5,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9378773695257354,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.2,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.4
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.4,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.6,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6992148198508501,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.5,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9103075074400793,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "21bb85ad84debcd73f2f7dc775438345600b4cccd8293af268c2e513cd7f0780",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.3333333333333333
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.7777777777777778
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.7777777777777778
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.7777777777777778
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.7777777777777778
+          }
+        }
+      }
+    },
+    {
+      "case_id": "4f92c25c6a11ef7f6ae03d5999963ef92ee769e0c5b1e9ef3b60167f713c67fa",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.2857142857142857
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 0.5714285714285714
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9469024295259745,
+            "claim_coverage_at_k": 0.7142857142857143
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9469024295259745,
+            "claim_coverage_at_k": 0.7142857142857143
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.2,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.5714285714285714
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.6,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.8571428571428571
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 0.8,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8687949224876582,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.5,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.975788054854922,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.7142857142857143
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.7142857142857143
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.7142857142857143
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.7142857142857143
+          }
+        }
+      }
+    },
+    {
+      "case_id": "1b92ae6c0669f5d2804d0afe506ca90c559b1e06e338d3304f7a6713feee95ef",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.3065735963827292,
+            "claim_coverage_at_k": 0.2
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.3065735963827292,
+            "claim_coverage_at_k": 0.2
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.4911492931622974,
+            "claim_coverage_at_k": 0.2
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.2960819109658652,
+            "claim_coverage_at_k": 0.2
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.4776237035032179,
+            "claim_coverage_at_k": 0.8
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6340499455108034,
+            "claim_coverage_at_k": 0.8
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.2960819109658652,
+            "claim_coverage_at_k": 0.2
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.49818925746641285,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6653497124326151,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "2a08d401b16b2b025b37ef46c06f08989b5ffafc7bcefd8f6cbc54eeed979369",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          }
+        }
+      }
+    },
+    {
+      "case_id": "d4c5e6adb6484e771045a9e3a513e61f9622af38ebf45d1dde6a33e12d5c396d",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "9d7e745cbfe5f59421b67e4b2d81d0cc616de6395e53dcf389346e34d914c8b6",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.23463936301137822,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.34620964322385606,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.6084170171049967,
+            "claim_coverage_at_k": 0.6666666666666666
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.46927872602275644,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.5585075862632192,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.815079870530422,
+            "claim_coverage_at_k": 0.6666666666666666
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.75,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9828920819566879,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9828920819566879,
+            "claim_coverage_at_k": 0.6666666666666666
+          }
+        }
+      }
+    },
+    {
+      "case_id": "fb18f9b4198060d3feb262d04248da0c56a918df9d47c874f885a80bc1ca2a1c",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.125
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.125
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.125
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.125
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.1,
+            "ndcg_at_k": 0.2890648263178879,
+            "claim_coverage_at_k": 0.375
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.2,
+            "ndcg_at_k": 0.38685280723454163,
+            "claim_coverage_at_k": 0.375
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.2,
+            "ndcg_at_k": 0.38685280723454163,
+            "claim_coverage_at_k": 0.375
+          }
+        }
+      }
+    },
+    {
+      "case_id": "096187d50063394b95bb2094d3772700698fa3047db7b90d7b8764aaa496955a",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.2960819109658652,
+            "claim_coverage_at_k": 0.4
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.4776237035032179,
+            "claim_coverage_at_k": 0.6
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6447841584694202,
+            "claim_coverage_at_k": 0.8
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.2,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.6,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 0.8,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8539316501572937,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.5,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9560290452802052,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9674679834891693,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9674679834891693,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "dca68ac927542db83ed1ee39e600b8ad83d45f72ba0d0a522727868c5f9743aa",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.25,
+            "ndcg_at_k": 0.3191471544989227,
+            "claim_coverage_at_k": 0.2857142857142857
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.25,
+            "ndcg_at_k": 0.5495084006042852,
+            "claim_coverage_at_k": 0.5714285714285714
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 0.2,
+            "ndcg_at_k": 0.18154179253735267,
+            "claim_coverage_at_k": 0.2857142857142857
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.2,
+            "ndcg_at_k": 0.4843542209360027,
+            "claim_coverage_at_k": 0.5714285714285714
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.2,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.2960819109658652,
+            "claim_coverage_at_k": 0.14285714285714285
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.6,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.4912596920895758,
+            "claim_coverage_at_k": 0.5714285714285714
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.5,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.725124396546942,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "03b26e7ebe47d61523b5a3e38d45f827bcfe67ee6adce45777c609c1ebb86484",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6666666666666666
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8772153153380493,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8772153153380493,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7977228895450266,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "deb397876fdb23450f5b9d14bdecbd730410dbe7a2c7384e06bf2c98f68e6a2a",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.14285714285714285,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.4
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.42857142857142855,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.8
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.7142857142857143,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.7,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9911205770005563,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.16666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.4
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8687949224876582,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9783978399515039,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.4
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9558295932317544,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9558295932317544,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "00592e5d6a6b50cd205ec9afdbf38610a4f7c8355e1a30e3ac43cd218111f05d",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.125
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 0.25
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.75,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8048099750039491,
+            "claim_coverage_at_k": 0.25
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9349366583346496,
+            "claim_coverage_at_k": 0.25
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.125
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 0.125
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.75,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.787702056960637,
+            "claim_coverage_at_k": 0.25
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9052181617170639,
+            "claim_coverage_at_k": 0.25
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.16666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.125
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.125
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7227265726449519,
+            "claim_coverage_at_k": 0.125
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9391664772645913,
+            "claim_coverage_at_k": 0.75
+          }
+        }
+      }
+    },
+    {
+      "case_id": "4767e7a5ec832b6c014546d2b5837e653aa208a5bb6e16753e814e436dfa1edd",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.125,
+            "ndcg_at_k": 0.31546487678572877,
+            "claim_coverage_at_k": 0.6
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.14285714285714285,
+            "ndcg_at_k": 0.3333333333333333,
+            "claim_coverage_at_k": 0.4
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "9cb0e5e237f2cd0f2bcddabc0a32afe2495dc11f7972731800759ba19b7ec9bc",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.46927872602275644,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6713860725233041,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8385465274895063,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9674679834891693,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9674679834891693,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          }
+        }
+      }
+    },
+    {
+      "case_id": "1bdf0375d89643567edab5cdf3fb05b3970038b5b1dd61815565876c44647b72",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.5307212739772434,
+            "claim_coverage_at_k": 0.5
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.38356636737133565,
+            "claim_coverage_at_k": 0.5
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.7338108458099991,
+            "claim_coverage_at_k": 0.5
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.4,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.5307212739772434,
+            "claim_coverage_at_k": 0.375
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 0.8,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6608397947263839,
+            "claim_coverage_at_k": 0.625
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.5,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.7678329270936477,
+            "claim_coverage_at_k": 0.75
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.125,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.125
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7039180890341347,
+            "claim_coverage_at_k": 0.375
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7860137352654724,
+            "claim_coverage_at_k": 0.375
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9053568677805114,
+            "claim_coverage_at_k": 0.75
+          }
+        }
+      }
+    },
+    {
+      "case_id": "5e2526f3b8631cf1bae0d8a0f57f81ba7ccecad6bc24c7e03267b7ebd01c00af",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.125,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.5714285714285714
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.375,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.8571428571428571
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.625,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.8571428571428571
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9918291064614978,
+            "claim_coverage_at_k": 0.8571428571428571
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.5307212739772434,
+            "claim_coverage_at_k": 0.8571428571428571
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6608397947263839,
+            "claim_coverage_at_k": 0.8571428571428571
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.7928580195906539,
+            "claim_coverage_at_k": 0.8571428571428571
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.8571428571428571
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.75,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.8571428571428571
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9828920819566879,
+            "claim_coverage_at_k": 0.8571428571428571
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9828920819566879,
+            "claim_coverage_at_k": 0.8571428571428571
+          }
+        }
+      }
+    },
+    {
+      "case_id": "70843f06fb7a852ddbf69d143b8a811a25348621752701ca08d4e3ea941db68e",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.4,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.5307212739772434,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.6,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.5296347172140421,
+            "claim_coverage_at_k": 0.5
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.5,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.7346671354126629,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.2,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.6,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.8333333333333334
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 0.8,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8539316501572937,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.5,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9560290452802052,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.46927872602275644,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6713860725233041,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8070380459557518,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "8d5383be2b50cee9d396bbf238b3d3476d116e86199d5b5c29612a46f35e1b00",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.2
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7039180890341347,
+            "claim_coverage_at_k": 0.4
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.5855700749881525,
+            "claim_coverage_at_k": 0.4
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8547529378296287,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.25,
+            "ndcg_at_k": 0.2640681225725909,
+            "claim_coverage_at_k": 0.4
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.25,
+            "ndcg_at_k": 0.46845052016107697,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "33c90d024a691c30d74d88a8789c429d1d411ff8775a675ff6031db24855bcaa",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8175295903539445,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8065735963827293,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8503449055347546,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8503449055347546,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "ff8738442805fa52a4b8982779958e8c8ffd68cc98128ee931f709c8fbeeb4b3",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.5,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.5,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.5,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "2063af3d2ac44bd5d276dc6ee3441720767635fb79a79efa8cc872320c3c6580",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.25
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 0.25
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.75,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8048099750039491,
+            "claim_coverage_at_k": 0.25
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9349366583346496,
+            "claim_coverage_at_k": 0.25
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.1111111111111111,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.2222222222222222,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 0.75
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 0.4444444444444444,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.830419897363192,
+            "claim_coverage_at_k": 0.75
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.9,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9504206262110482,
+            "claim_coverage_at_k": 0.75
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.2,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.6,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 0.8,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8539316501572937,
+            "claim_coverage_at_k": 0.75
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.5,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9519709359886506,
+            "claim_coverage_at_k": 0.75
+          }
+        }
+      }
+    },
+    {
+      "case_id": "440398395ca7f3fda010425bc3907a0735d4bbe2f4f101b63001807b22cd6e4c",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.25
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.25
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7039180890341347,
+            "claim_coverage_at_k": 0.5
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8854598815714874,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8854598815714874,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "0e73223952255f47ef334f1b187f45c1d8b5397820b4ca3758f967f09809126b",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.25,
+            "ndcg_at_k": 0.3191471544989227,
+            "claim_coverage_at_k": 0.375
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.25,
+            "ndcg_at_k": 0.555143490218223,
+            "claim_coverage_at_k": 0.875
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.5307212739772434,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.44149241373678083,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6891352018239085,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.5307212739772434,
+            "claim_coverage_at_k": 0.25
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.7328286204777911,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.7328286204777911,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "bda1b0ade2be237ad974541e2d606f61d22e5ed213366f13ce1adb1f9cc158a7",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.625
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.75,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.75,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8318724637288826,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9709286432396581,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.2,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.375
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.6,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.625
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.6,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7227265726449519,
+            "claim_coverage_at_k": 0.625
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.5,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9338192602341809,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6366824387328317,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8932547230000344,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "fd4b367f8fd2211fd9181f8bf21209af132f7366fdffbe14417ca5ee7290f199",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.2
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 0.2
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8772153153380493,
+            "claim_coverage_at_k": 0.6
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8772153153380493,
+            "claim_coverage_at_k": 0.6
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "7eab5843a69a84d53e32cb2824c099f4c1ee5eff850e57d48b804271f9f026cc",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.14285714285714285,
+            "ndcg_at_k": 0.44573417035034707,
+            "claim_coverage_at_k": 0.6666666666666666
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.16666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.5
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6992148198508501,
+            "claim_coverage_at_k": 0.8333333333333334
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9102003174374961,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.46927872602275644,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6713860725233041,
+            "claim_coverage_at_k": 0.5
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8194270280062366,
+            "claim_coverage_at_k": 0.6666666666666666
+          }
+        }
+      }
+    },
+    {
+      "case_id": "ca99a2f16dae30f0001e3775a8c318cf0ca4f824e9129f0badc869fbd22e0f46",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.3333333333333333
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.3333333333333333
+          }
+        }
+      }
+    },
+    {
+      "case_id": "3fc3f0074d24cfd0c79f781bc264de25956e44686a774ea4fb211cab13884216",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8315546295836225,
+            "claim_coverage_at_k": 0.6666666666666666
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.5307212739772434,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.44149241373678083,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.7036997876179215,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.4,
+            "reciprocal_rank_at_k": 0.25,
+            "ndcg_at_k": 0.27727342735504823,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.5,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.25,
+            "ndcg_at_k": 0.6071752575447178,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "7de1ba491233586143854219a606292bf30291ab9852e24f044a20e6c5427487",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.16666666666666666
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9197207891481876,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9197207891481876,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9197207891481876,
+            "claim_coverage_at_k": 0.3333333333333333
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9134015924715543,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "a678325c7a8d727d007d391d6c733117230e3c16c0778a4514fc76d4b0cb02d7",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.125,
+            "ndcg_at_k": 0.31546487678572877,
+            "claim_coverage_at_k": 0.2
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.25,
+            "ndcg_at_k": 0.2640681225725909,
+            "claim_coverage_at_k": 0.4
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.25,
+            "ndcg_at_k": 0.48247555939075504,
+            "claim_coverage_at_k": 0.6
+          }
+        }
+      }
+    },
+    {
+      "case_id": "70dbe278a79d8f633456690345de9253744767d2d648cf9e8c3de8439191dac6",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.2960819109658652,
+            "claim_coverage_at_k": 0.25
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.49818925746641285,
+            "claim_coverage_at_k": 0.25
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6338412308988606,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9469024295259745,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9469024295259745,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "f3903cf19a84bd09fd3a3b2231ce532f4c4fdba55d0b24c908a1a53b80c4f046",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8772153153380493,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8772153153380493,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.46927872602275644,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6508205185601091,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8179809735263114,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8772153153380493,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8772153153380493,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "396914d2c7227b1ad3e3be1b656d7efc35c6106014b1698ef08058c964aa81d3",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9197207891481876,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9197207891481876,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9197207891481876,
+            "claim_coverage_at_k": 0.3333333333333333
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 0.8333333333333334
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9469024295259745,
+            "claim_coverage_at_k": 0.8333333333333334
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9469024295259745,
+            "claim_coverage_at_k": 0.8333333333333334
+          }
+        }
+      }
+    },
+    {
+      "case_id": "e38f2180279f26fb6f78f18511b5a5b72d652cedab98ad39909b8ca363622d24",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.05555555555555555
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.46927872602275644,
+            "claim_coverage_at_k": 0.05555555555555555
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.46927872602275644,
+            "claim_coverage_at_k": 0.05555555555555555
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7613569414627896,
+            "claim_coverage_at_k": 0.16666666666666666
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.05555555555555555
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.05555555555555555
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.05555555555555555
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.05555555555555555
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.2960819109658652,
+            "claim_coverage_at_k": 0.05555555555555555
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.2960819109658652,
+            "claim_coverage_at_k": 0.05555555555555555
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6196686079396531,
+            "claim_coverage_at_k": 0.16666666666666666
+          }
+        }
+      }
+    },
+    {
+      "case_id": "9c2c3aed381e923a092f8a861ae6281f2d1e376e19f4ebbc5745edd3e2e26739",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.7142857142857143
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7039180890341347,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7039180890341347,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.86034433104172,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.7142857142857143
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.2960819109658652,
+            "claim_coverage_at_k": 0.7142857142857143
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.2960819109658652,
+            "claim_coverage_at_k": 0.7142857142857143
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6045093387918965,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "d0f46c10aaa7e35fbc2732145db487c2f4faa8759f1596a21a3d45af9a710f31",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.8
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.75,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.8
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.75,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8318724637288826,
+            "claim_coverage_at_k": 0.8
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9493885684853096,
+            "claim_coverage_at_k": 0.8
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.2,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.8
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.4,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 0.8
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 0.6,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6843515475204855,
+            "claim_coverage_at_k": 0.8
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.5,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9121559825872435,
+            "claim_coverage_at_k": 0.8
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.8
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 0.8
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9674679834891693,
+            "claim_coverage_at_k": 0.8
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9674679834891693,
+            "claim_coverage_at_k": 0.8
+          }
+        }
+      }
+    },
+    {
+      "case_id": "2a67aa42199dd6d495a6ac07db1d93308fd6a5e57d63c3abc9e6c4a403d51d9b",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "13dc16fa5b83971b72160de2519f935a26b07339f79efc59bd71c57cdb81b4ae",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 0.75
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 0.75
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8315546295836225,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.25
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "cbc42bd98716df6aab854c1d92f0d3c8fb0b127890e8840c638a113fb4780daa",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.125
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.125
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 0.125
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.16666666666666666,
+            "ndcg_at_k": 0.3562071871080222,
+            "claim_coverage_at_k": 0.125
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.1,
+            "ndcg_at_k": 0.2890648263178879,
+            "claim_coverage_at_k": 0.5
+          }
+        }
+      }
+    },
+    {
+      "case_id": "aedf3d446ad65a4fa69c1d6f3694648ffa5c7afb90aa6dcf38e1f24b8e6b9282",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.25,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.75,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.8,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9828920819566879,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9828920819566879,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.4166666666666667
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7039180890341347,
+            "claim_coverage_at_k": 0.8333333333333334
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7039180890341347,
+            "claim_coverage_at_k": 0.8333333333333334
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.86034433104172,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9197207891481876,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9197207891481876,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9197207891481876,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "af3db1ee39b2da13ad0dd880f6a7872d8be51ba375c10c060f609227eea013ec",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.5
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "198d2ef5a3532cb2f1d33ea476fea158324ee11dfde42b98b36d2da1ca59ca37",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.5
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.5
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.5
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.5
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 0.75
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8503449055347546,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8503449055347546,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.75
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "16ac5f0ce82af1ec0ebcafab5c47df6d4e3e5af50e0c761cfaf5898038c5fd92",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.2,
+            "ndcg_at_k": 0.23719771276929622,
+            "claim_coverage_at_k": 0.6666666666666666
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.2,
+            "ndcg_at_k": 0.4415801103577823,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.46927872602275644,
+            "claim_coverage_at_k": 0.3333333333333333
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6508205185601091,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7988614740430418,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8175295903539445,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "eb72793090b86fef6cf2750b5cd5c3078b703c06b3535f8da29874631d2075da",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.5
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "0b805936339c390bbb3194aa8df6593ee47619e6d338fd16245199ccb140d557",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.25,
+            "ndcg_at_k": 0.2640681225725909,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.25,
+            "ndcg_at_k": 0.45749452618986164,
+            "claim_coverage_at_k": 0.3333333333333333
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.5,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.5,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.5,
+            "claim_coverage_at_k": 0.16666666666666666
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 0.16666666666666666
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8315546295836225,
+            "claim_coverage_at_k": 0.3333333333333333
+          }
+        }
+      }
+    },
+    {
+      "case_id": "508a42f0beeda954d00b8e1f98ab5bce285432d0b52563d181cd28d6e23680b0",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.125,
+            "ndcg_at_k": 0.37800210039683896,
+            "claim_coverage_at_k": 0.6666666666666666
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.3065735963827292,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.3065735963827292,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.3333333333333333,
+            "ndcg_at_k": 0.5,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "d599a76289df37c601525ed4f5482cfda4ad1a5dfd53d0be927159a02697d13d",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.5
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.6131471927654584,
+            "claim_coverage_at_k": 0.5
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8772153153380493,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.8772153153380493,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3333333333333333,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.1,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 0.5,
+            "ndcg_at_k": 0.6309297535714575,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "d3f8b8934319b7ab212076fdf47556db2cde31bdbac0c15c34b6811b33bf84bf",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.3333333333333333,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.7142857142857143
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 0.6666666666666666,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.7653606369886217,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9469024295259745,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.3,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 0.9469024295259745,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.7142857142857143
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": true,
+            "precision_at_k": 1.0,
+            "pooled_recall_at_k": 0.5,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 0.8571428571428571
+          },
+          "3": {
+            "hit_at_k": true,
+            "precision_at_k": 0.6666666666666666,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "5": {
+            "hit_at_k": true,
+            "precision_at_k": 0.4,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          },
+          "10": {
+            "hit_at_k": true,
+            "precision_at_k": 0.2,
+            "pooled_recall_at_k": 1.0,
+            "reciprocal_rank_at_k": 1.0,
+            "ndcg_at_k": 1.0,
+            "claim_coverage_at_k": 1.0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "05afb479dc65389d50d7a668b601a079d07fdc3e13de637d85189a1ec39e21de",
+      "strategies": {
+        "recursive-500": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          }
+        },
+        "recursive-1000": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          }
+        },
+        "semantic": {
+          "1": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "3": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "5": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          },
+          "10": {
+            "hit_at_k": false,
+            "precision_at_k": 0.0,
+            "pooled_recall_at_k": 0.0,
+            "reciprocal_rank_at_k": 0.0,
+            "ndcg_at_k": 0.0,
+            "claim_coverage_at_k": 0.0
+          }
+        }
+      }
+    }
+  ],
+  "summary": {
+    "recursive-500": {
+      "1": {
+        "hit_at_k": 0.6,
+        "precision_at_k": 0.6,
+        "pooled_recall_at_k": 0.2810238095238095,
+        "reciprocal_rank_at_k": 0.6,
+        "ndcg_at_k": 0.6,
+        "claim_coverage_at_k": 0.3049920634920635
+      },
+      "3": {
+        "hit_at_k": 0.8,
+        "precision_at_k": 0.44,
+        "pooled_recall_at_k": 0.545404761904762,
+        "reciprocal_rank_at_k": 0.6933333333333332,
+        "ndcg_at_k": 0.595728420306597,
+        "claim_coverage_at_k": 0.44601587301587303
+      },
+      "5": {
+        "hit_at_k": 0.88,
+        "precision_at_k": 0.36,
+        "pooled_recall_at_k": 0.6874523809523809,
+        "reciprocal_rank_at_k": 0.7123333333333334,
+        "ndcg_at_k": 0.6457948856630243,
+        "claim_coverage_at_k": 0.5247539682539683
+      },
+      "10": {
+        "hit_at_k": 0.96,
+        "precision_at_k": 0.264,
+        "pooled_recall_at_k": 0.96,
+        "reciprocal_rank_at_k": 0.7226904761904762,
+        "ndcg_at_k": 0.7577047480221399,
+        "claim_coverage_at_k": 0.6573571428571428
+      }
+    },
+    "recursive-1000": {
+      "1": {
+        "hit_at_k": 0.68,
+        "precision_at_k": 0.68,
+        "pooled_recall_at_k": 0.3045555555555556,
+        "reciprocal_rank_at_k": 0.68,
+        "ndcg_at_k": 0.68,
+        "claim_coverage_at_k": 0.3914444444444445
+      },
+      "3": {
+        "hit_at_k": 0.88,
+        "precision_at_k": 0.52,
+        "pooled_recall_at_k": 0.6087777777777778,
+        "reciprocal_rank_at_k": 0.77,
+        "ndcg_at_k": 0.6830879731182662,
+        "claim_coverage_at_k": 0.664563492063492
+      },
+      "5": {
+        "hit_at_k": 0.9,
+        "precision_at_k": 0.4,
+        "pooled_recall_at_k": 0.7205555555555556,
+        "reciprocal_rank_at_k": 0.774,
+        "ndcg_at_k": 0.6929858606394967,
+        "claim_coverage_at_k": 0.7243015873015872
+      },
+      "10": {
+        "hit_at_k": 0.96,
+        "precision_at_k": 0.284,
+        "pooled_recall_at_k": 0.96,
+        "reciprocal_rank_at_k": 0.7821904761904761,
+        "ndcg_at_k": 0.7948715053188938,
+        "claim_coverage_at_k": 0.7833492063492064
+      }
+    },
+    "semantic": {
+      "1": {
+        "hit_at_k": 0.7,
+        "precision_at_k": 0.7,
+        "pooled_recall_at_k": 0.3671666666666667,
+        "reciprocal_rank_at_k": 0.7,
+        "ndcg_at_k": 0.7,
+        "claim_coverage_at_k": 0.4867936507936508
+      },
+      "3": {
+        "hit_at_k": 0.84,
+        "precision_at_k": 0.44666666666666666,
+        "pooled_recall_at_k": 0.5923333333333334,
+        "reciprocal_rank_at_k": 0.77,
+        "ndcg_at_k": 0.6533256653398647,
+        "claim_coverage_at_k": 0.6205714285714286
+      },
+      "5": {
+        "hit_at_k": 0.92,
+        "precision_at_k": 0.36800000000000005,
+        "pooled_recall_at_k": 0.7546666666666667,
+        "reciprocal_rank_at_k": 0.789,
+        "ndcg_at_k": 0.7150180000213625,
+        "claim_coverage_at_k": 0.7136428571428571
+      },
+      "10": {
+        "hit_at_k": 0.94,
+        "precision_at_k": 0.24600000000000002,
+        "pooled_recall_at_k": 0.94,
+        "reciprocal_rank_at_k": 0.7909999999999999,
+        "ndcg_at_k": 0.7953256497322543,
+        "claim_coverage_at_k": 0.7961507936507937
+      }
+    }
+  },
+  "created_at": "2026-09-01T05:28:45.544629+00:00",
+  "inputs": {
+    "pool_path": "evaluation/retrieval_pools/all-strategies__nomic__pool-k10.json",
+    "pool_sha256": "297c5d3b8bd5cf8c26f6b0e158529691daa3d9fd5c02bb99446954d2716f96f6",
+    "qrels_path": "evaluation/retrieval_qrels__all-strategies__nomic__pool-k10.json",
+    "qrels_sha256": "7809970454786b530a9298c65cdc6a02c1d9f5dc0561a9ac7b23d8bebf847288"
+  }
+}
