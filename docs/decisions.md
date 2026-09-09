@@ -940,3 +940,51 @@ one layer of the final decision.
   claim-level evidence rather than its broader context-precision labels.
 - Approved the result as AI-generated, Codex-reviewed silver project labels
   with `human_verified: false`.
+
+---
+
+## D025 — Use recursive-1000 as the Experiment 0 chunking baseline
+
+- **Status:** Provisional
+- **Recorded:** 2026-09-09
+
+### Context
+
+Experiment 0 compares the three chunking strategies while holding the Basic RAG
+architecture, `nomic-embed-text`, `llama3.1:8b`, K=3, test set, and frozen Gemma
+judge constant. The comparison needs one strategy fixed before retrieval
+architecture experiments begin.
+
+### Decision
+
+Use `recursive-1000` as the provisional baseline for subsequent experiments.
+It leads at K=3 on source hit rate (0.940), source MRR (0.807), chunk claim
+coverage (0.665), and the main Ragas metrics: faithfulness (0.834), context
+precision (0.633), and context recall (0.710). Its mean total latency is 3.717 s.
+
+Semantic remains a meaningful alternative: it has the highest answer relevancy
+(0.787), but its retrieval metrics are lower and mean total latency is 4.341 s.
+Recursive-500 trails both on answer quality despite a comparable source hit rate.
+
+### Consequences
+
+- The next retrieval-architecture experiment can vary hybrid search or reranking
+  while holding chunking at `recursive-1000`.
+- The baseline favors answer faithfulness and evidence coverage over the small
+  semantic answer-relevancy advantage.
+- Results are specific to this 50-question synthetic FastAPI workload and the
+  frozen local judge. They do not establish a universal chunk-size rule.
+- The baseline remains provisional because qrels are silver labels with targeted
+  review and the test questions do not represent the full variation of user
+  traffic.
+
+### Follow-up
+
+Run the retrieval-architecture comparison using `recursive-1000`, then revisit
+the choice if real-user queries, a human-verified holdout, or a changed corpus
+materially alters the evidence.
+
+### Evidence
+
+See `evaluation/summaries/experiment-0-chunking-strategy.md` and the three Basic
+RAG plus three frozen-Gemma Ragas result sidecars under `evaluation/results/`.

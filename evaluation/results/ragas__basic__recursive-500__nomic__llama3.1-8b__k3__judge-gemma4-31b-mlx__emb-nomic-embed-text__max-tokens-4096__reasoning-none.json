@@ -1,0 +1,1101 @@
+{
+  "schema_version": 1,
+  "config": {
+    "source_result_path": "evaluation/results/basic__recursive-500__nomic__llama3.1-8b__k3.json",
+    "source_result_sha256": "c8f5b83bab8c6793bc98380733a11477c3e23a765a8f72d65b5303ce572dcd38",
+    "evaluator_llm_model": "gemma4:31b-mlx",
+    "evaluator_embedding_model": "nomic-embed-text",
+    "evaluator_max_tokens": 4096,
+    "ollama_base_url": "http://localhost:11434/v1",
+    "answer_relevancy_strictness": 3,
+    "metric_names": [
+      "faithfulness",
+      "answer_relevancy",
+      "context_precision",
+      "context_recall"
+    ],
+    "ragas_version": "0.4.3",
+    "case_limit": null,
+    "evaluator_reasoning_effort": "none"
+  },
+  "started_at": "2026-09-08T00:25:24.486490+00:00",
+  "updated_at": "2026-09-08T04:05:54.293864+00:00",
+  "completed_at": "2026-09-08T04:05:54.293864+00:00",
+  "status": "completed",
+  "results": [
+    {
+      "case_id": "61bbe83675590aff3b3bb589b6d594faca6e2698e4958c8d8c3b005a703bb2ae",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.75,
+          "latency_ms": 51024.66408300097
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 14545.894291979494
+        },
+        "context_precision": {
+          "value": 0.99999999995,
+          "latency_ms": 37650.804333999986
+        },
+        "context_recall": {
+          "value": 0.25,
+          "latency_ms": 42313.65308398381
+        }
+      }
+    },
+    {
+      "case_id": "21bb85ad84debcd73f2f7dc775438345600b4cccd8293af268c2e513cd7f0780",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.875,
+          "latency_ms": 72723.13066700008
+        },
+        "answer_relevancy": {
+          "value": 0.9591955198901129,
+          "latency_ms": 15029.596542008221
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 34812.519917002646
+        },
+        "context_recall": {
+          "value": 0.3333333333333333,
+          "latency_ms": 32998.84637500509
+        }
+      }
+    },
+    {
+      "case_id": "4f92c25c6a11ef7f6ae03d5999963ef92ee769e0c5b1e9ef3b60167f713c67fa",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.6363636363636364,
+          "latency_ms": 114642.29837499443
+        },
+        "answer_relevancy": {
+          "value": 0.9140411566734027,
+          "latency_ms": 15197.05275000888
+        },
+        "context_precision": {
+          "value": 0.49999999995,
+          "latency_ms": 41326.050167001085
+        },
+        "context_recall": {
+          "value": 0.5714285714285714,
+          "latency_ms": 66612.56916698767
+        }
+      }
+    },
+    {
+      "case_id": "1b92ae6c0669f5d2804d0afe506ca90c559b1e06e338d3304f7a6713feee95ef",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.42857142857142855,
+          "latency_ms": 71849.26387498854
+        },
+        "answer_relevancy": {
+          "value": 0.9623071327113845,
+          "latency_ms": 14203.262666007504
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 37691.32320798235
+        },
+        "context_recall": {
+          "value": 0.0,
+          "latency_ms": 44679.43533300422
+        }
+      }
+    },
+    {
+      "case_id": "2a08d401b16b2b025b37ef46c06f08989b5ffafc7bcefd8f6cbc54eeed979369",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.42857142857142855,
+          "latency_ms": 61916.67033301201
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 13920.583833998535
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 40111.27187497914
+        },
+        "context_recall": {
+          "value": 0.3333333333333333,
+          "latency_ms": 41722.906499984674
+        }
+      }
+    },
+    {
+      "case_id": "d4c5e6adb6484e771045a9e3a513e61f9622af38ebf45d1dde6a33e12d5c396d",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.6,
+          "latency_ms": 49411.17366598337
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 10706.500792002771
+        },
+        "context_precision": {
+          "value": 0.99999999995,
+          "latency_ms": 35137.4672499951
+        },
+        "context_recall": {
+          "value": 1.0,
+          "latency_ms": 28426.783832983347
+        }
+      }
+    },
+    {
+      "case_id": "9d7e745cbfe5f59421b67e4b2d81d0cc616de6395e53dcf389346e34d914c8b6",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.6666666666666666,
+          "latency_ms": 90807.22916699597
+        },
+        "answer_relevancy": {
+          "value": 0.9992523295291088,
+          "latency_ms": 12480.136792000849
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 42581.52354200138
+        },
+        "context_recall": {
+          "value": 0.5,
+          "latency_ms": 47845.849042001646
+        }
+      }
+    },
+    {
+      "case_id": "fb18f9b4198060d3feb262d04248da0c56a918df9d47c874f885a80bc1ca2a1c",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.6666666666666666,
+          "latency_ms": 37855.234625021694
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 13387.207958003273
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 36722.16591599863
+        },
+        "context_recall": {
+          "value": 0.14285714285714285,
+          "latency_ms": 58737.00399999507
+        }
+      }
+    },
+    {
+      "case_id": "096187d50063394b95bb2094d3772700698fa3047db7b90d7b8764aaa496955a",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 43178.055750002386
+        },
+        "answer_relevancy": {
+          "value": 0.9335034342065418,
+          "latency_ms": 12933.305834012572
+        },
+        "context_precision": {
+          "value": 0.49999999995,
+          "latency_ms": 40260.25145899621
+        },
+        "context_recall": {
+          "value": 0.5,
+          "latency_ms": 38831.66899997741
+        }
+      }
+    },
+    {
+      "case_id": "dca68ac927542db83ed1ee39e600b8ad83d45f72ba0d0a522727868c5f9743aa",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.5,
+          "latency_ms": 42141.05362497503
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 13859.305542020593
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 38716.1427079991
+        },
+        "context_recall": {
+          "value": 0.0,
+          "latency_ms": 55312.03416700009
+        }
+      }
+    },
+    {
+      "case_id": "03b26e7ebe47d61523b5a3e38d45f827bcfe67ee6adce45777c609c1ebb86484",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.4,
+          "latency_ms": 67090.258790995
+        },
+        "answer_relevancy": {
+          "value": 0.9786401415301963,
+          "latency_ms": 13795.459583983757
+        },
+        "context_precision": {
+          "value": 0.49999999995,
+          "latency_ms": 42851.02912498405
+        },
+        "context_recall": {
+          "value": 0.6666666666666666,
+          "latency_ms": 31463.790875015547
+        }
+      }
+    },
+    {
+      "case_id": "deb397876fdb23450f5b9d14bdecbd730410dbe7a2c7384e06bf2c98f68e6a2a",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 40871.3866660255
+        },
+        "answer_relevancy": {
+          "value": 0.9599812977966153,
+          "latency_ms": 15088.868749997346
+        },
+        "context_precision": {
+          "value": 0.9999999999666667,
+          "latency_ms": 43651.33037499618
+        },
+        "context_recall": {
+          "value": 1.0,
+          "latency_ms": 34866.29083301523
+        }
+      }
+    },
+    {
+      "case_id": "00592e5d6a6b50cd205ec9afdbf38610a4f7c8355e1a30e3ac43cd218111f05d",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.75,
+          "latency_ms": 60174.658333009575
+        },
+        "answer_relevancy": {
+          "value": 0.9490249274980878,
+          "latency_ms": 12076.785999990534
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 43433.36020899005
+        },
+        "context_recall": {
+          "value": 0.2,
+          "latency_ms": 41319.20358398929
+        }
+      }
+    },
+    {
+      "case_id": "4767e7a5ec832b6c014546d2b5837e653aa208a5bb6e16753e814e436dfa1edd",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.6,
+          "latency_ms": 54373.56554198777
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 10514.445665990934
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 39677.219208009774
+        },
+        "context_recall": {
+          "value": 0.0,
+          "latency_ms": 37824.11683301325
+        }
+      }
+    },
+    {
+      "case_id": "9cb0e5e237f2cd0f2bcddabc0a32afe2495dc11f7972731800759ba19b7ec9bc",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.8,
+          "latency_ms": 46944.38866598648
+        },
+        "answer_relevancy": {
+          "value": 0.8462189180856532,
+          "latency_ms": 17813.839582988294
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 41060.86291698739
+        },
+        "context_recall": {
+          "value": 0.0,
+          "latency_ms": 29144.702916993992
+        }
+      }
+    },
+    {
+      "case_id": "1bdf0375d89643567edab5cdf3fb05b3970038b5b1dd61815565876c44647b72",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.7272727272727273,
+          "latency_ms": 83582.59674999863
+        },
+        "answer_relevancy": {
+          "value": 0.9080324184339558,
+          "latency_ms": 13438.732707989402
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 37170.48479200457
+        },
+        "context_recall": {
+          "value": 0.5,
+          "latency_ms": 51200.15395898372
+        }
+      }
+    },
+    {
+      "case_id": "5e2526f3b8631cf1bae0d8a0f57f81ba7ccecad6bc24c7e03267b7ebd01c00af",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 65210.674292000476
+        },
+        "answer_relevancy": {
+          "value": 0.9683683107154432,
+          "latency_ms": 14465.665499999886
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 45789.42291700514
+        },
+        "context_recall": {
+          "value": 1.0,
+          "latency_ms": 45964.132791996235
+        }
+      }
+    },
+    {
+      "case_id": "70843f06fb7a852ddbf69d143b8a811a25348621752701ca08d4e3ea941db68e",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 45080.87458301452
+        },
+        "answer_relevancy": {
+          "value": 0.8639801558603107,
+          "latency_ms": 14083.001541002886
+        },
+        "context_precision": {
+          "value": 0.99999999995,
+          "latency_ms": 52818.24033299927
+        },
+        "context_recall": {
+          "value": 0.75,
+          "latency_ms": 44281.451000017114
+        }
+      }
+    },
+    {
+      "case_id": "8d5383be2b50cee9d396bbf238b3d3476d116e86199d5b5c29612a46f35e1b00",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.0,
+          "latency_ms": 66907.38674998283
+        },
+        "answer_relevancy": {
+          "value": 0.9407570473289626,
+          "latency_ms": 18525.33158301958
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 42085.50283301156
+        },
+        "context_recall": {
+          "value": 0.0,
+          "latency_ms": 35724.08833401278
+        }
+      }
+    },
+    {
+      "case_id": "33c90d024a691c30d74d88a8789c429d1d411ff8775a675ff6031db24855bcaa",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 31513.35900000413
+        },
+        "answer_relevancy": {
+          "value": 0.9769966737804404,
+          "latency_ms": 11573.851916007698
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 36039.88629099331
+        },
+        "context_recall": {
+          "value": 1.0,
+          "latency_ms": 17395.196083001792
+        }
+      }
+    },
+    {
+      "case_id": "ff8738442805fa52a4b8982779958e8c8ffd68cc98128ee931f709c8fbeeb4b3",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.3333333333333333,
+          "latency_ms": 33795.215749996714
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 12763.963000004878
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 38777.44341699872
+        },
+        "context_recall": {
+          "value": 1.0,
+          "latency_ms": 23253.15900001442
+        }
+      }
+    },
+    {
+      "case_id": "2063af3d2ac44bd5d276dc6ee3441720767635fb79a79efa8cc872320c3c6580",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.5,
+          "latency_ms": 56343.72841700679
+        },
+        "answer_relevancy": {
+          "value": 0.9482254866910268,
+          "latency_ms": 14316.509583994048
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 40559.307416988304
+        },
+        "context_recall": {
+          "value": 0.25,
+          "latency_ms": 32784.53704100684
+        }
+      }
+    },
+    {
+      "case_id": "440398395ca7f3fda010425bc3907a0735d4bbe2f4f101b63001807b22cd6e4c",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 46718.464374978794
+        },
+        "answer_relevancy": {
+          "value": 0.9291506994431232,
+          "latency_ms": 11484.986666997429
+        },
+        "context_precision": {
+          "value": 0.5833333333041666,
+          "latency_ms": 36774.66833300423
+        },
+        "context_recall": {
+          "value": 1.0,
+          "latency_ms": 20942.38608397427
+        }
+      }
+    },
+    {
+      "case_id": "0e73223952255f47ef334f1b187f45c1d8b5397820b4ca3758f967f09809126b",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.7777777777777778,
+          "latency_ms": 71164.14908398292
+        },
+        "answer_relevancy": {
+          "value": 0.9021091874017065,
+          "latency_ms": 14546.123000007356
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 39931.48308299715
+        },
+        "context_recall": {
+          "value": 0.0,
+          "latency_ms": 36684.129207977094
+        }
+      }
+    },
+    {
+      "case_id": "bda1b0ade2be237ad974541e2d606f61d22e5ed213366f13ce1adb1f9cc158a7",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.4,
+          "latency_ms": 73517.87354200496
+        },
+        "answer_relevancy": {
+          "value": 0.8459569018909067,
+          "latency_ms": 17457.807625003625
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 53112.102584011154
+        },
+        "context_recall": {
+          "value": 1.0,
+          "latency_ms": 40608.248333999654
+        }
+      }
+    },
+    {
+      "case_id": "fd4b367f8fd2211fd9181f8bf21209af132f7366fdffbe14417ca5ee7290f199",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.625,
+          "latency_ms": 89438.69704200188
+        },
+        "answer_relevancy": {
+          "value": 0.9075063650321603,
+          "latency_ms": 14618.072415993083
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 39175.19379101577
+        },
+        "context_recall": {
+          "value": 0.8,
+          "latency_ms": 44632.35462500597
+        }
+      }
+    },
+    {
+      "case_id": "7eab5843a69a84d53e32cb2824c099f4c1ee5eff850e57d48b804271f9f026cc",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.0,
+          "latency_ms": 82953.17712498945
+        },
+        "answer_relevancy": {
+          "value": 0.8677974198181863,
+          "latency_ms": 14455.482833000133
+        },
+        "context_precision": {
+          "value": 0.5833333333041666,
+          "latency_ms": 44678.21375001222
+        },
+        "context_recall": {
+          "value": 0.0,
+          "latency_ms": 46183.62408300163
+        }
+      }
+    },
+    {
+      "case_id": "ca99a2f16dae30f0001e3775a8c318cf0ca4f824e9129f0badc869fbd22e0f46",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.4,
+          "latency_ms": 49381.93891698029
+        },
+        "answer_relevancy": {
+          "value": 0.9330452152700536,
+          "latency_ms": 12883.410499984166
+        },
+        "context_precision": {
+          "value": 0.49999999995,
+          "latency_ms": 34325.487833993975
+        },
+        "context_recall": {
+          "value": 0.3333333333333333,
+          "latency_ms": 30267.12500001304
+        }
+      }
+    },
+    {
+      "case_id": "3fc3f0074d24cfd0c79f781bc264de25956e44686a774ea4fb211cab13884216",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 29666.60429100739
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 11478.733042022213
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 42660.70212502382
+        },
+        "context_recall": {
+          "value": 0.6666666666666666,
+          "latency_ms": 32368.43458301155
+        }
+      }
+    },
+    {
+      "case_id": "7de1ba491233586143854219a606292bf30291ab9852e24f044a20e6c5427487",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.6,
+          "latency_ms": 52290.800750022754
+        },
+        "answer_relevancy": {
+          "value": 0.9665006379020008,
+          "latency_ms": 15089.761290990282
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 43270.816540985834
+        },
+        "context_recall": {
+          "value": 0.5,
+          "latency_ms": 47469.62729198276
+        }
+      }
+    },
+    {
+      "case_id": "a678325c7a8d727d007d391d6c733117230e3c16c0778a4514fc76d4b0cb02d7",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.8571428571428571,
+          "latency_ms": 62475.02974999952
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 9962.71216700552
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 44460.02450000378
+        },
+        "context_recall": {
+          "value": 0.0,
+          "latency_ms": 43011.94200001191
+        }
+      }
+    },
+    {
+      "case_id": "70dbe278a79d8f633456690345de9253744767d2d648cf9e8c3de8439191dac6",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.6,
+          "latency_ms": 65050.565541983815
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 12018.314583983738
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 49265.73445901158
+        },
+        "context_recall": {
+          "value": 0.25,
+          "latency_ms": 40946.82841698523
+        }
+      }
+    },
+    {
+      "case_id": "f3903cf19a84bd09fd3a3b2231ce532f4c4fdba55d0b24c908a1a53b80c4f046",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 49599.31795799639
+        },
+        "answer_relevancy": {
+          "value": 0.9678615780538055,
+          "latency_ms": 13526.173332997132
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 33922.8310000035
+        },
+        "context_recall": {
+          "value": 1.0,
+          "latency_ms": 16745.847459009383
+        }
+      }
+    },
+    {
+      "case_id": "396914d2c7227b1ad3e3be1b656d7efc35c6106014b1698ef08058c964aa81d3",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.5714285714285714,
+          "latency_ms": 66436.58262499957
+        },
+        "answer_relevancy": {
+          "value": 0.9066570717922517,
+          "latency_ms": 13211.798625008669
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 40926.80529100471
+        },
+        "context_recall": {
+          "value": 0.25,
+          "latency_ms": 66141.6308330081
+        }
+      }
+    },
+    {
+      "case_id": "e38f2180279f26fb6f78f18511b5a5b72d652cedab98ad39909b8ca363622d24",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.7777777777777778,
+          "latency_ms": 85243.0919999897
+        },
+        "answer_relevancy": {
+          "value": 0.9697819479412445,
+          "latency_ms": 16335.846540983766
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 44089.14879200165
+        },
+        "context_recall": {
+          "value": 0.14285714285714285,
+          "latency_ms": 51199.50520899147
+        }
+      }
+    },
+    {
+      "case_id": "9c2c3aed381e923a092f8a861ae6281f2d1e376e19f4ebbc5745edd3e2e26739",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 67635.56812499883
+        },
+        "answer_relevancy": {
+          "value": 0.9800659430791493,
+          "latency_ms": 15193.864959001075
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 41292.27562499
+        },
+        "context_recall": {
+          "value": 1.0,
+          "latency_ms": 30746.102125005564
+        }
+      }
+    },
+    {
+      "case_id": "d0f46c10aaa7e35fbc2732145db487c2f4faa8759f1596a21a3d45af9a710f31",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 48255.376541026635
+        },
+        "answer_relevancy": {
+          "value": 0.944481016069003,
+          "latency_ms": 9721.624416997656
+        },
+        "context_precision": {
+          "value": 0.9999999999666667,
+          "latency_ms": 37684.80487499619
+        },
+        "context_recall": {
+          "value": 1.0,
+          "latency_ms": 29450.007625011494
+        }
+      }
+    },
+    {
+      "case_id": "2a67aa42199dd6d495a6ac07db1d93308fd6a5e57d63c3abc9e6c4a403d51d9b",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.8,
+          "latency_ms": 50391.58624998527
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 10868.906540999888
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 28224.231500003953
+        },
+        "context_recall": {
+          "value": 1.0,
+          "latency_ms": 12327.85691600293
+        }
+      }
+    },
+    {
+      "case_id": "13dc16fa5b83971b72160de2519f935a26b07339f79efc59bd71c57cdb81b4ae",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.8,
+          "latency_ms": 52510.135124990484
+        },
+        "answer_relevancy": {
+          "value": 0.9994936080113882,
+          "latency_ms": 13283.57658299501
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 42119.9931250012
+        },
+        "context_recall": {
+          "value": 0.6666666666666666,
+          "latency_ms": 27548.90595798497
+        }
+      }
+    },
+    {
+      "case_id": "cbc42bd98716df6aab854c1d92f0d3c8fb0b127890e8840c638a113fb4780daa",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.8571428571428571,
+          "latency_ms": 61033.99295799318
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 17480.250332999276
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 38413.543875009054
+        },
+        "context_recall": {
+          "value": 0.16666666666666666,
+          "latency_ms": 57499.52012501308
+        }
+      }
+    },
+    {
+      "case_id": "aedf3d446ad65a4fa69c1d6f3694648ffa5c7afb90aa6dcf38e1f24b8e6b9282",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.8333333333333334,
+          "latency_ms": 51900.473999994574
+        },
+        "answer_relevancy": {
+          "value": 0.9292806024437404,
+          "latency_ms": 14596.84283300885
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 38509.124917007284
+        },
+        "context_recall": {
+          "value": 0.6,
+          "latency_ms": 46026.60424998612
+        }
+      }
+    },
+    {
+      "case_id": "af3db1ee39b2da13ad0dd880f6a7872d8be51ba375c10c060f609227eea013ec",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.8571428571428571,
+          "latency_ms": 59507.32304199482
+        },
+        "answer_relevancy": {
+          "value": 0.9381548889836373,
+          "latency_ms": 16103.423541993834
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 38339.16683300049
+        },
+        "context_recall": {
+          "value": 0.75,
+          "latency_ms": 32098.62949998933
+        }
+      }
+    },
+    {
+      "case_id": "198d2ef5a3532cb2f1d33ea476fea158324ee11dfde42b98b36d2da1ca59ca37",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 44605.8634580113
+        },
+        "answer_relevancy": {
+          "value": 0.8652844064432594,
+          "latency_ms": 12144.290875003207
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 40965.28049997869
+        },
+        "context_recall": {
+          "value": 0.3333333333333333,
+          "latency_ms": 28797.429917001864
+        }
+      }
+    },
+    {
+      "case_id": "16ac5f0ce82af1ec0ebcafab5c47df6d4e3e5af50e0c761cfaf5898038c5fd92",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.4,
+          "latency_ms": 52399.528207984986
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 12040.69837499992
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 34921.59754197928
+        },
+        "context_recall": {
+          "value": 0.0,
+          "latency_ms": 25199.259207991417
+        }
+      }
+    },
+    {
+      "case_id": "eb72793090b86fef6cf2750b5cd5c3078b703c06b3535f8da29874631d2075da",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 41252.20929199713
+        },
+        "answer_relevancy": {
+          "value": 0.984129195880414,
+          "latency_ms": 15643.911999999546
+        },
+        "context_precision": {
+          "value": 0.9999999999666667,
+          "latency_ms": 30087.54283300368
+        },
+        "context_recall": {
+          "value": 1.0,
+          "latency_ms": 19055.947582994122
+        }
+      }
+    },
+    {
+      "case_id": "0b805936339c390bbb3194aa8df6593ee47619e6d338fd16245199ccb140d557",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.36363636363636365,
+          "latency_ms": 104079.19483300066
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 13655.039416975342
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 39607.04337499919
+        },
+        "context_recall": {
+          "value": 0.0,
+          "latency_ms": 42146.723791986005
+        }
+      }
+    },
+    {
+      "case_id": "508a42f0beeda954d00b8e1f98ab5bce285432d0b52563d181cd28d6e23680b0",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.5714285714285714,
+          "latency_ms": 78175.2602919878
+        },
+        "answer_relevancy": {
+          "value": 0.9153782355754186,
+          "latency_ms": 17046.143124985974
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 37541.62620799616
+        },
+        "context_recall": {
+          "value": 0.3333333333333333,
+          "latency_ms": 25342.002791992854
+        }
+      }
+    },
+    {
+      "case_id": "d599a76289df37c601525ed4f5482cfda4ad1a5dfd53d0be927159a02697d13d",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 42748.480000009295
+        },
+        "answer_relevancy": {
+          "value": 0.9576196746737061,
+          "latency_ms": 17628.06625000667
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "latency_ms": 37200.970874982886
+        },
+        "context_recall": {
+          "value": 0.75,
+          "latency_ms": 35839.712374989176
+        }
+      }
+    },
+    {
+      "case_id": "d3f8b8934319b7ab212076fdf47556db2cde31bdbac0c15c34b6811b33bf84bf",
+      "metrics": {
+        "faithfulness": {
+          "value": 1.0,
+          "latency_ms": 41143.72637501219
+        },
+        "answer_relevancy": {
+          "value": 0.9387869778183665,
+          "latency_ms": 11133.183957979782
+        },
+        "context_precision": {
+          "value": 0.99999999995,
+          "latency_ms": 35824.430499982554
+        },
+        "context_recall": {
+          "value": 1.0,
+          "latency_ms": 34319.25491700531
+        }
+      }
+    },
+    {
+      "case_id": "05afb479dc65389d50d7a668b601a079d07fdc3e13de637d85189a1ec39e21de",
+      "metrics": {
+        "faithfulness": {
+          "value": 0.6,
+          "latency_ms": 56869.761040987214
+        },
+        "answer_relevancy": {
+          "value": 0.0,
+          "latency_ms": 12281.184667022899
+        },
+        "context_precision": {
+          "value": 0.0,
+          "latency_ms": 37147.297874995274
+        },
+        "context_recall": {
+          "value": 0.0,
+          "latency_ms": 37024.995957996
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "total_cases": 50,
+    "completed_cases": 50,
+    "metrics": {
+      "faithfulness": {
+        "completed": 50,
+        "mean": 0.7070851370851371
+      },
+      "answer_relevancy": {
+        "completed": 50,
+        "mean": 0.6551513304850952
+      },
+      "context_precision": {
+        "completed": 50,
+        "mean": 0.5233333332901666
+      },
+      "context_recall": {
+        "completed": 50,
+        "mean": 0.4908095238095238
+      }
+    },
+    "mean_metric_latency_ms": 37656.06567916839
+  }
+}

@@ -40,15 +40,15 @@ are recorded in [the project decision log](docs/decisions.md).
 - [x] Calibrate and freeze the Ragas judge against the approved reference labels
 - [x] Add pooled chunk-level retrieval evaluation infrastructure
 - [x] Build and approve frozen chunk-level retrieval judgments
-- [ ] Verify scores run end-to-end against basic RAG
+- [x] Verify scores run end-to-end against basic RAG
 
 
 
 ### Phase 4 · Experiment 0 — Chunking Strategy
 
-- [ ] Evaluate all three chunking strategies using basic RAG + `nomic-embed-text`
-- [ ] Compare Ragas scores across strategies
-- [ ] Lock down winning chunking strategy for all subsequent phases
+- [x] Evaluate all three chunking strategies using basic RAG + `nomic-embed-text`
+- [x] Compare Ragas scores across strategies
+- [x] Lock down `recursive-1000` as the provisional winning strategy for subsequent phases
 
 
 
@@ -202,9 +202,18 @@ Fixed architecture: basic RAG · Fixed embedder: `nomic-embed-text` · Fixed tes
 
 | Strategy            | Chunk Size | Overlap | Faithfulness | Answer Relevancy | Context Precision | Context Recall |
 | ------------------- | ---------- | ------- | ------------ | ---------------- | ----------------- | -------------- |
-| Recursive Character | 500        | 50      | —            | —                | —                 | —              |
-| Recursive Character | 1000       | 100     | —            | —                | —                 | —              |
-| Semantic Chunking   | auto       | auto    | —            | —                | —                 | —              |
+| Recursive Character | 500        | 50      | 0.707        | 0.655            | 0.523             | 0.491          |
+| Recursive Character | 1000       | 100     | **0.834**    | 0.769            | **0.633**         | **0.710**      |
+| Semantic Chunking   | auto       | auto    | 0.768        | **0.787**        | 0.598             | 0.642          |
+
+The completed comparison is reported in
+`evaluation/summaries/experiment-0-chunking-strategy.md`. `recursive-1000` is
+the provisional winner: it leads the deterministic retrieval metrics at the
+application depth and leads faithfulness, context precision, and context recall
+under the frozen Gemma judge. Semantic has the highest answer-relevancy score by
+a small margin. All scores use AI-generated, Codex-reviewed silver labels and
+should be revisited if a human-verified holdout or a materially different
+retrieval workload is introduced.
 
 
 
