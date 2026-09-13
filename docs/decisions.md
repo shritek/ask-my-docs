@@ -849,3 +849,142 @@ not evidence that Gemma alone is defective.
 - Judge, Ragas, prompt, embedding, reasoning, strictness, or output-limit
   changes create a new calibration regime and require a fresh comparison before
   results are placed on the same chart.
+
+---
+
+## D024 — Evaluate retrieval with pooled chunk judgments
+
+- **Status:** Accepted
+- **Recorded:** 2026-08-27
+
+### Context
+
+The deterministic Basic RAG evaluator knows one expected source URL per
+question. Source Hit@K and page-level MRR are useful diagnostics, but a page hit
+does not prove that the retrieved chunk contains supporting evidence. The
+existing data also cannot produce chunk-level Precision@K, Recall@K, nDCG@K,
+or context-sufficiency measurements without relevance judgments.
+
+Chunk IDs are strategy-specific because chunking changes the text boundaries.
+Consequently, treating relevant chunks from all strategies as one global recall
+denominator would unfairly penalize every strategy for chunks it cannot
+retrieve from another strategy's index.
+
+### Decision
+
+- Retrieve the top 10 chunks for every fixed test question from each chunking
+  strategy and store the rankings, chunk text, source metadata, input
+  fingerprints, and configuration in an immutable candidate-pool artifact.
+- Keep chunk-level judgments in a separate qrels artifact linked to the exact
+  pool by SHA-256. Split each reference answer into atomic required claims.
+- Permit the calibrated Gemma model to generate resumable label proposals, but
+  hide retrieval strategy, rank, source URL, and stable chunk ID from its prompt
+  and present candidates through short opaque aliases in a stable shuffled
+  order. Map aliases back to exact stable IDs only after validation.
+- Treat model output as `generated_pending_review`. Require explicit labeling
+  provenance and `approved_for_project_evaluation` status before scoring; a
+  successful structured model response is not automatically a frozen qrels
+  artifact.
+- Define a chunk as relevant exactly when it supports at least one required
+  reference claim. Record the supported claim IDs so retrieval sufficiency can
+  be measured separately from relevance.
+- Reject incomplete judgments, unknown claims or chunks, mismatched pool
+  fingerprints, and cutoffs deeper than the labeled pool.
+- Calculate Hit@K, Precision@K, reciprocal rank@K, binary nDCG@K, claim
+  coverage@K, and strategy-local pooled Recall@K at fixed cutoffs.
+- Define pooled Recall@K using all relevant chunks in that strategy's labeled
+  top-10 ranking as the denominator. Do not report it as exhaustive corpus
+  recall.
+
+### Consequences
+
+- Ranking changes can be scored repeatedly without new LLM calls once qrels
+  are frozen.
+- Precision and nDCG measure context relevance and ordering; claim coverage
+  measures whether the retrieved set contains the required answer evidence.
+- The candidate pool bounds what can be labeled relevant, so pooled recall may
+  overestimate true corpus recall when a strategy misses relevant chunks below
+  depth 10.
+- Binary relevance avoids subjective relevance grades. Claim coverage retains
+  more information about partial versus complete evidence.
+- Creating the qrels is a one-time labeling cost and its provenance and review
+  status must be recorded. AI-assisted silver labels must not be presented as
+  human-authored gold labels.
+- Model proposals reduce repetitive labeling work but introduce model bias.
+  Hiding system identity reduces direct preference bias; it does not replace
+  evidence review or make the labels independent of the proposing model.
+- The proposal task uses a distinct prompt and an 8,192-token output limit;
+  the model's Ragas calibration does not independently validate these labels.
+  Approval follows a targeted audit, not an exhaustive verification of all
+  1,500 judgments, so the comparison remains provisional.
+
+### Follow-up
+
+Run Basic RAG and frozen-judge Ragas evaluation for all three strategies before
+selecting the Experiment 0 chunking winner. The deterministic retrieval report
+currently favors `recursive-1000` at the application's K=3, but that is only
+one layer of the final decision.
+
+### Outcome
+
+- Generated 1,500 candidates: 50 questions × 10 chunks × 3 strategies.
+- Protocol v1 produced 41 valid cases and nine deterministic long-ID
+  transcription failures. Protocol v2 replaced model-facing chunk IDs with
+  `d1`–`d30` aliases and recovered all nine; each case records its protocol.
+- Preserved the complete raw proposals and applied review through a separate
+  fingerprinted manifest and deterministic finalizer.
+- Compared 39 semantic top-3 judgments with the existing calibration set. The
+  raw proposal agreed on 33. All six differences were inspected; one
+  non-atomic lifespan claim was split and corrected, raising agreement to 36.
+  The three remaining label differences follow the calibration set's stricter
+  claim-level evidence rather than its broader context-precision labels.
+- Approved the result as AI-generated, Codex-reviewed silver project labels
+  with `human_verified: false`.
+
+---
+
+## D025 — Use recursive-1000 as the Experiment 0 chunking baseline
+
+- **Status:** Provisional
+- **Recorded:** 2026-09-09
+
+### Context
+
+Experiment 0 compares the three chunking strategies while holding the Basic RAG
+architecture, `nomic-embed-text`, `llama3.1:8b`, K=3, test set, and frozen Gemma
+judge constant. The comparison needs one strategy fixed before retrieval
+architecture experiments begin.
+
+### Decision
+
+Use `recursive-1000` as the provisional baseline for subsequent experiments.
+It leads at K=3 on source hit rate (0.940), source MRR (0.807), chunk claim
+coverage (0.665), and the main Ragas metrics: faithfulness (0.834), context
+precision (0.633), and context recall (0.710). Its mean total latency is 3.717 s.
+
+Semantic remains a meaningful alternative: it has the highest answer relevancy
+(0.787), but its retrieval metrics are lower and mean total latency is 4.341 s.
+Recursive-500 trails both on answer quality despite a comparable source hit rate.
+
+### Consequences
+
+- The next retrieval-architecture experiment can vary hybrid search or reranking
+  while holding chunking at `recursive-1000`.
+- The baseline favors answer faithfulness and evidence coverage over the small
+  semantic answer-relevancy advantage.
+- Results are specific to this 50-question synthetic FastAPI workload and the
+  frozen local judge. They do not establish a universal chunk-size rule.
+- The baseline remains provisional because qrels are silver labels with targeted
+  review and the test questions do not represent the full variation of user
+  traffic.
+
+### Follow-up
+
+Run the retrieval-architecture comparison using `recursive-1000`, then revisit
+the choice if real-user queries, a human-verified holdout, or a changed corpus
+materially alters the evidence.
+
+### Evidence
+
+See `evaluation/summaries/experiment-0-chunking-strategy.md` and the three Basic
+RAG plus three frozen-Gemma Ragas result sidecars under `evaluation/results/`.

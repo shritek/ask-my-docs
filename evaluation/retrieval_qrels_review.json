@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "source_proposal": {
+    "path": "evaluation/retrieval_qrels__all-strategies__nomic__pool-k10__proposed-gemma4-31b-mlx.json",
+    "sha256": "bad79990037eca3e5196d52674fc80323ea95ab0f0ab2bc696aeff76060de0e5"
+  },
+  "labeling": {
+    "label_source": "gemma4_generated_codex_reviewed",
+    "quality_tier": "silver",
+    "review_status": "approved_for_project_evaluation",
+    "reviewed_by": "OpenAI Codex",
+    "reviewed_at": "2026-08-31",
+    "human_verified": false,
+    "method": "All 50 cases passed structural validation. The labels were compared with 39 existing context-relevance labels across the 13-case calibration set; all six disagreements were inspected against the chunks and claim-level calibration evidence. Zero- and high-relevance-count outliers were inspected. One non-atomic lifespan claim was split and its affected judgments corrected. The project owner previously authorized Codex-reviewed labels for this straightforward documentation corpus.",
+    "usage": "Silver project labels for controlled retrieval experiments. They are AI-generated and Codex-reviewed, not human-authored gold labels or an external benchmark."
+  },
+  "audit": {
+    "proposal_cases": 50,
+    "candidate_judgments": 1500,
+    "structurally_valid_cases": 50,
+    "calibration_context_labels_compared": 39,
+    "raw_calibration_agreements": 33,
+    "reviewed_calibration_agreements": 36,
+    "disagreements_inspected": 6,
+    "remaining_calibration_differences": 3,
+    "cases_corrected": 1,
+    "outlier_review": "Inspected the sole zero-relevance case and every case with at most two or at least seventeen relevant candidates. Counts were consistent with retrieval misses or duplicate evidence across chunking strategies.",
+    "known_limitation": "The review was targeted rather than a human verification of every individual judgment. Three remaining differences from calibration context-precision labels agree with the same calibration set's stricter claim-level context-recall evidence."
+  },
+  "case_overrides": [
+    {
+      "review_id": "lifespan-atomic-claims",
+      "case_id": "00592e5d6a6b50cd205ec9afdbf38610a4f7c8355e1a30e3ac43cd218111f05d",
+      "rationale": "The proposal combined on_event deprecation and lifespan/event-handler exclusivity into one claim. They are independently supportable facts; the three semantic baseline chunks support deprecation but not exclusivity.",
+      "reference_claims": [
+        {"claim_id": "c1", "claim": "The lifespan parameter accepts an async context manager."},
+        {"claim_id": "c2", "claim": "Code before yield runs once at startup before requests are received."},
+        {"claim_id": "c3", "claim": "Code after yield runs once at shutdown after requests have been handled."},
+        {"claim_id": "c4", "claim": "Lifespan is useful for shared resources such as machine learning models and database connection pools."},
+        {"claim_id": "c5", "claim": "Lifespan avoids loading expensive shared resources at module import during independent tests."},
+        {"claim_id": "c6", "claim": "on_event startup and shutdown handlers are deprecated."},
+        {"claim_id": "c7", "claim": "When lifespan is supplied, on_event handlers are not called and the two mechanisms cannot be mixed."},
+        {"claim_id": "c8", "claim": "Lifespan events apply only to the main application and not mounted sub-applications."}
+      ],
+      "claim_id_remap": {
+        "c1": ["c1"],
+        "c2": ["c2"],
+        "c3": ["c3"],
+        "c4": ["c4"],
+        "c5": ["c7"],
+        "c6": ["c8"]
+      },
+      "judgment_updates": [
+        {
+          "chunk_id": "chunk_e03bd49d027d7d6d07bd3d36b55c58b11355ab2376fc80b8bc154583daefcbec",
+          "supported_claim_ids": ["c6"],
+          "notes": "Explicitly states that on_event is deprecated and lifespan handlers should be used instead."
+        },
+        {
+          "chunk_id": "chunk_507783922f69a640add12816e0dc76c20a6ef9aa527693188ee56aa937a34065",
+          "supported_claim_ids": ["c6"],
+          "notes": "Explicitly states that on_event is deprecated and lifespan handlers should be used instead."
+        },
+        {
+          "chunk_id": "chunk_2a4ec6865c11559bcf30569440460af35b4882fc6ec85e91a5fdefb1fdbfc359",
+          "supported_claim_ids": ["c6"],
+          "notes": "Explicitly states that on_event is deprecated and lifespan handlers should be used instead."
+        }
+      ]
+    }
+  ]
+}
