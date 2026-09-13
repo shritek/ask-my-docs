@@ -54,8 +54,9 @@ are recorded in [the project decision log](docs/decisions.md).
 
 ### Phase 5 · Hybrid Retrieval
 
-- [ ] Add BM25 retriever alongside vector search
-- [ ] Optimize retrieval fusion using RRF and weighted scoring via LangChain `EnsembleRetriever`
+- [x] Add BM25 retriever alongside vector search
+- [x] Implement weighted RRF with stable chunk-ID deduplication
+- [ ] Evaluate and tune fusion weights and candidate depth
 - [ ] Evaluate against fixed test set and compare to Phase 2
 
 
@@ -327,6 +328,15 @@ uv run python -m basic_rag.basic_rag "What is a Path operation in FastAPI?" --ch
 # Specify custom embedder and chunking strategy
 uv run python -m basic_rag.basic_rag "How does dependency injection work?" --embedder nomic --chunking_strategy recursive-500
 
+# Hybrid RAG: recursive-1000, nomic, llama3.1:8b, final K=3
+uv run python -m hybrid_retrieval.hybrid_rag "How does lifespan work?"
+
+# Same evaluation runner and prompt; different retrieval variant
+uv run python -m evaluation.run_basic_evaluation \
+  --variant hybrid --chunking-strategy recursive-1000 \
+  --embedder nomic --llm llama3.1:8b --top-k 3 \
+  --candidate-k 10 --rrf-c 60 --vector-weight 0.5
+
 # Run deterministic Basic RAG evaluation (resumes the output file by default)
 uv run python -m evaluation.run_basic_evaluation \
   --chunking-strategy recursive-500 \
@@ -374,6 +384,39 @@ The CLI deliberately defaults `--evaluator-reasoning-effort` to `none` as part
 of the frozen Gemma configuration. An override is recorded and represents a
 different evaluator configuration. Use `server-default` to omit the option and
 resume a legacy sidecar created before reasoning effort was recorded.
+
+### Hybrid retrieval baseline
+
+Hybrid retrieval builds an in-memory BM25 index from the existing chunk corpus
+and opens the corresponding Chroma index. No corpus regeneration is required.
+The first baseline retrieves up to 10 candidates from each method, combines
+their ranks, and sends the final 3 unique chunks to the unchanged Basic RAG
+prompt. It is a fixed starting configuration, not tuned weights.
+
+For each chunk, weighted reciprocal-rank fusion adds
+`weight / (60 + rank)` from each method that retrieved it. Vector and BM25
+weights are both 0.5. Scores from the two search algorithms are not directly
+comparable, so fusion uses ranks. Chunk IDs break ties deterministically.
+Lexical preprocessing case-folds words and preserves underscores in Python
+identifiers; chunks without matching query tokens cannot contribute lexical
+votes. Startup builds BM25 once; per-query timings exclude initialization.
+
+Hybrid evaluation files have a `hybrid__` prefix and a retrieval-configuration
+hash suffix. Their configuration records candidate depth, vector weight, RRF
+constant, and algorithm version. Basic result names and resume configurations
+remain compatible. Use the completed hybrid file as `--source-result` for the
+existing Ragas runner; do not run the judge on a partial generation run.
+
+The old chunking qrels cover only the earlier vector candidate pool. Newly
+retrieved hybrid chunks require additional judgments before reporting hybrid
+chunk-level precision or recall; unjudged chunks are not negative labels.
+Page-level source metrics can be compared immediately.
+
+The first completed 50-case hybrid generation comparison is documented in
+[the hybrid baseline summary](evaluation/summaries/hybrid-rrf-baseline.md).
+Source Hit@3 remains 0.94 and source MRR rises from 0.807 to 0.830; answer quality
+is not yet judged. Keep Basic as the comparison baseline pending Ragas and
+failure review.
 
 ### Evaluate chunk ranking with frozen relevance judgments
 

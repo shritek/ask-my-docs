@@ -40,9 +40,13 @@ class EvaluationConfig:
     test_set_sha256: str
     corpus_path: str
     corpus_sha256: str
+    retrieval_config: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        data = asdict(self)
+        if self.retrieval_config is None:
+            data.pop("retrieval_config")
+        return data
 
 
 def utc_now() -> str:
@@ -273,11 +277,20 @@ def default_output_path(config: EvaluationConfig) -> Path:
         f"k{config.top_k}",
     ))
     safe_filename = re.sub(r"[^a-zA-Z0-9_.-]+", "-", filename)
+    if config.retrieval_config is not None:
+        fingerprint = hashlib.sha256(
+            json.dumps(config.retrieval_config, sort_keys=True).encode()
+        ).hexdigest()[:12]
+        safe_filename += f"__retrieval-{fingerprint}"
     return DEFAULT_RESULTS_DIR / f"{safe_filename}.json"
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Evaluate the Basic RAG pipeline")
+    parser = argparse.ArgumentParser(description="Evaluate Basic or Hybrid RAG")
+    parser.add_argument("--variant", choices=["basic", "hybrid"], default="basic")
+    parser.add_argument("--candidate-k", type=int)
+    parser.add_argument("--rrf-c", type=int)
+    parser.add_argument("--vector-weight", type=float)
     parser.add_argument(
         "--chunking-strategy",
         choices=list(CHUNKING_STRATEGY_MAPPING.keys()),
@@ -305,10 +318,27 @@ def main() -> None:
     if args.limit is not None and args.limit < 1:
         parser.error("--limit must be at least 1")
 
+    hybrid_config = None
+    if args.variant == "hybrid":
+        from hybrid_retrieval.hybrid_rag import HybridConfig, HybridRAGPipeline
+        overrides = {
+            name: getattr(args, name)
+            for name in ("candidate_k", "rrf_c", "vector_weight")
+            if getattr(args, name) is not None
+        }
+        try:
+            hybrid_config = HybridConfig(**overrides)
+        except ValueError as error:
+            parser.error(str(error))
+        if args.top_k > hybrid_config.candidate_k:
+            parser.error("--top-k cannot exceed --candidate-k")
+    elif any(value is not None for value in (args.candidate_k, args.rrf_c, args.vector_weight)):
+        parser.error("Hybrid retrieval options require --variant hybrid")
+
     test_set_path = args.test_set
     corpus_path = Path(CHUNKED_CORPUS_PATH(args.chunking_strategy))
     config = EvaluationConfig(
-        variant="basic",
+        variant=args.variant,
         embedding_model=args.embedder,
         chunking_strategy=args.chunking_strategy,
         llm_model=args.llm,
@@ -317,14 +347,20 @@ def main() -> None:
         test_set_sha256=sha256_file(test_set_path),
         corpus_path=str(corpus_path),
         corpus_sha256=sha256_file(corpus_path),
+        retrieval_config=hybrid_config.to_dict() if hybrid_config else None,
     )
     output_path = args.output or default_output_path(config)
 
-    pipeline = BasicRAGPipeline(
+    # Reject incompatible resume files before loading models or touching indices.
+    initialize_run(output_path, config, resume=not args.no_resume)
+    pipeline_class = HybridRAGPipeline if hybrid_config else BasicRAGPipeline
+    extra = {"retrieval_config": hybrid_config} if hybrid_config else {}
+    pipeline = pipeline_class(
         embedding_model=EmbeddingModel(args.embedder),
         chunking_strategy=args.chunking_strategy,
         llm_model=LLMModel(args.llm),
         top_k=args.top_k,
+        **extra,
     )
     test_cases = load_test_set(test_set_path)
     run_data = evaluate_test_set(
