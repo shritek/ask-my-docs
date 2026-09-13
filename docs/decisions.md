@@ -988,3 +988,63 @@ materially alters the evidence.
 
 See `evaluation/summaries/experiment-0-chunking-strategy.md` and the three Basic
 RAG plus three frozen-Gemma Ragas result sidecars under `evaluation/results/`.
+
+---
+
+## D026 — Establish a BM25 and vector rank-fusion baseline
+
+- **Status:** Accepted
+- **Recorded:** 2026-09-10
+
+### Context
+
+The next controlled experiment varies retrieval architecture. The vector-only
+baseline can miss exact technical identifiers. We need a lexical retrieval arm
+without changing chunking, generation, or the test set while PR #14 is reviewed.
+
+### Decision
+
+- Build BM25Okapi (`rank-bm25==0.2.2`, k1=1.5, b=0.75, epsilon=0.25) once in
+  memory from the same recursive-1000 corpus used by the existing Chroma index.
+  Case-fold and tokenize with Unicode word matching, preserving underscores.
+  Do not stem or remove stopwords in this initial baseline.
+- Retrieve up to 10 candidates per arm, use equal-weight reciprocal-rank fusion
+  with c=60, and pass the best 3 unique chunks to the existing generation path.
+  These are initial settings, not measured optima. Scores are not normalized or
+  mixed directly. Deduplicate and break score ties by stable chunk ID.
+- Exclude chunks with no lexical token overlap from the BM25 ranking, even if
+  the library returns a full list of zero-scoring documents. Preserve genuine
+  matches with zero or negative scores, which Okapi can produce in small corpora.
+- Implement a small explicit fusion function instead of the roadmap's proposed
+  `EnsembleRetriever`. This makes ID validation, deterministic ties, duplicate
+  handling, zero-weight behavior, and corpus/index mismatch errors explicit
+  without adding a direct dependency on the legacy LangChain retriever package.
+- Reuse the Basic RAG prompt, result schema, generation model, evaluator, and
+  checkpoint machinery. Add an opt-in hybrid variant and serialize retrieval
+  settings in its configuration; include their hash in default output filenames.
+  Preserve existing Basic RAG configuration serialization and filenames.
+- Validate corpus content-addressed IDs at startup and each vector candidate
+  against the canonical corpus before generation. Do not insert fusion scores
+  into source metadata: doing so would also change the generation prompt.
+
+### Consequences
+
+- Hybrid retrieval requires no vector-index migration or additional service.
+  BM25 startup time and memory scale with corpus size; query timing excludes
+  startup, as in the existing Basic RAG runner.
+- Unknown lexical queries fall back to vector evidence. The default still
+  requires both retrieval components to be available; errors are not silently
+  converted into a different architecture.
+- A small custom fusion function carries a maintenance cost covered by tests
+  for ties, duplicates, weights, candidate limits, and identity conflicts.
+- Old qrels cannot automatically score new hybrid candidates. Preserve the old
+  pool and labels and judge additional candidates for future chunk-level comparisons.
+
+### Follow-up
+
+Compare the first hybrid generation run with the recursive-1000 Basic baseline,
+then use the frozen Gemma judge before claiming a quality improvement. Do not
+tune weights against page hit rate alone. Extend the candidate judgments when
+needed, then proceed to a separately evaluated reranking step. The missing full
+semantic Ragas raw artifact remains an Experiment 0 reproducibility limitation;
+this branch does not reconstruct those lost per-case scores.
